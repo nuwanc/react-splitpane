@@ -3,6 +3,7 @@ import SplitPane from 'react-split-pane';
 import DocumentPane from './components/DocumentPane';
 import BottomPane from './components/BottomPane';
 import TreePane from './components/TreePane';
+import Loading from './components/Loading';
 
 class App extends Component {
 
@@ -12,11 +13,19 @@ class App extends Component {
       node: null,
       segment: null,
       tabIndex: -1,
-      userSelected: false
+      userSelected: false,
+      loading: true
     };
     this.onTreeNodeClick = this.onTreeNodeClick.bind(this);
     this.onViewerClick = this.onViewerClick.bind(this);
     this.onTabUserSelect = this.onTabUserSelect.bind(this);
+    window.setTimeout(()=>{
+      this.setState(()=>{
+        return {
+          loading : false
+        }
+      })
+    },1000)
   }
 
   onTreeNodeClick(node) {
@@ -46,6 +55,11 @@ class App extends Component {
   }
 
   render() {
+    
+    if (this.state.loading) {
+      return <Loading/>
+    } 
+
     let isOuter = false;
     if (window.showOuter && window.showOuter === true) {
       isOuter = true;

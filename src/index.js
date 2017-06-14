@@ -11,12 +11,5 @@ import './index.css';
 //global variable to show outer most pane
 window.showOuter = true;
 
-ReactDOM.render(<App />, document.getElementById('root'),()=>{
-    let content = document.getElementById('content');
-    let outerDiv = document.getElementById('outer');
-    if (content && outerDiv) {
-        outerDiv.innerHTML = content.innerHTML;
-        content.parentNode.removeChild(content);
-    }
-});
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
