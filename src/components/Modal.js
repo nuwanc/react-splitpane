@@ -39,9 +39,11 @@ class Modal extends Component {
                         </div>
                         <div className="modal-body">
                             <ul>
-                                {Object.values(this.props.params).map((v,i)=>{
-                                    return <li>{v}</li>
-                                })}
+                                {
+                                    this.props.params && this.props.params.map((v,i)=>{
+                                        return <li>{v}</li>
+                                    })
+                                }
                             </ul>
                             
                         </div>
