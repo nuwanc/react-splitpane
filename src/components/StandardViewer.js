@@ -16,7 +16,7 @@ class StandardViewer extends Component {
             <div>
                 Standard Viewer <br></br>
                 <button onClick={this.onStandardClick}>Click Me to Update DocumentViewer</button>
-                <button onClick={(e)=>{this.props.openModal(true,['test content','true'])}}>Click to Open Modal</button>
+                <button onClick={(e)=>{this.props.openModal(true,{'tabs': true, 'count': 5})}}>Click to Open Modal</button>
             </div>
         );
     }
