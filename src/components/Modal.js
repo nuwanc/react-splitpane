@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 class Modal extends Component {
@@ -27,8 +28,6 @@ class Modal extends Component {
             display : 'block'
         };
 
-        console.log(this.props.params);
-
         return (
             <div className="modal" tabIndex="-1" role="dialog" style={displayStyle}>
                 <div className={classNames(classObj)} role="document">
@@ -41,7 +40,7 @@ class Modal extends Component {
                             <ul>
                                 {
                                     this.props.params && this.props.params.map((v,i)=>{
-                                        return <li>{v}</li>
+                                        return <li key={i}>{v}</li>
                                     })
                                 }
                             </ul>
@@ -57,5 +56,20 @@ class Modal extends Component {
         )
     }
 }
+
+
+Modal.propTypes = {
+    isOpen : PropTypes.bool.isRequired,
+    onClose : PropTypes.func.isRequired,
+    isLarge : PropTypes.bool.isRequired,
+    params : PropTypes.array.isRequired
+}
+
+Modal.defaultProps = {
+    isOpen : false,
+    isLarge : false,
+    params : []
+}
+
 
 export default Modal;

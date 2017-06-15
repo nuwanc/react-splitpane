@@ -73,6 +73,7 @@ class SimpleTree extends Component {
 
 SimpleTree.propTypes = {
     node: PropTypes.object.isRequired,
+    onTreeNodeSelect : PropTypes.func.isRequired
 }
 
 export default SimpleTree;

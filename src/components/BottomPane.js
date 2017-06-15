@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import StandardViewer from './StandardViewer';
 import ErrorViewer from './ErrorViewer';
@@ -42,6 +43,11 @@ class BottomPane extends Component {
             </Tabs>
         )
     }
+}
+
+BottomPane.propTypes = {
+    onViewerClick : PropTypes.func,
+    openModal : PropTypes.func
 }
 
 export default BottomPane;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SimpleTree from './SimpleTree';
 import Loading from './Loading';
 
@@ -89,6 +90,10 @@ class TreePane extends Component {
             </div>
         )
     }
+}
+
+TreePane.propTypes = {
+    onTreeNodeClick : PropTypes.func.isRequired
 }
 
 export default TreePane;

@@ -18,7 +18,7 @@ class App extends Component {
       loading: true,
       isModalOpen: false,
       isModalLarge: false,
-      params: null
+      params: []
     };
     this.onTreeNodeClick = this.onTreeNodeClick.bind(this);
     this.onViewerClick = this.onViewerClick.bind(this);
