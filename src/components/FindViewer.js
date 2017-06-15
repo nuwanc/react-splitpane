@@ -15,6 +15,7 @@ class FindViewer extends Component {
             <div>
                 Find Viewer<br></br>
                 <button onClick={this.onFindViewerClick}>Click Me to Update DocumentViewer</button>
+                <button onClick={this.props.openModal}>Click to Open Modal</button>
             </div>
         )
     }

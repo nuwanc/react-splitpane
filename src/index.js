@@ -5,6 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import 'normalize.css/normalize.css'
 import 'react-tabs/style/react-tabs.css';
 import 'font-awesome/css/font-awesome.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 

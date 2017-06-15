@@ -42,13 +42,13 @@ class DocumentPane extends Component {
                 </TabList>
 
                 <TabPanel >
-                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment}/>
+                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal}/>
                 </TabPanel>
                 <TabPanel>
-                   <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment}/>
+                   <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal}/>
                 </TabPanel>
                 <TabPanel>
-                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment}/>
+                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal}/>
                 </TabPanel>
             </Tabs>
         )

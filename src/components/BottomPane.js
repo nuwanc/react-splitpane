@@ -31,13 +31,13 @@ class BottomPane extends Component {
                 </TabList>
 
                 <TabPanel forceRender={true}>
-                    <StandardViewer onViewerClick={this.props.onViewerClick}/>
+                    <StandardViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal}/>
                 </TabPanel>
                 <TabPanel>
-                    <ErrorViewer onViewerClick={this.props.onViewerClick}/>
+                    <ErrorViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal}/>
                 </TabPanel>
                 <TabPanel>
-                    <FindViewer onViewerClick={this.props.onViewerClick}/>
+                    <FindViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal}/>
                 </TabPanel>
             </Tabs>
         )

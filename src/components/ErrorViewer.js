@@ -16,6 +16,7 @@ class ErrorViewer extends Component {
             <div>
                 Error Viewer<br></br>
                 <button onClick={this.onErrorViewerClick}>Click Me to Update DocumentViewer</button>
+                <button onClick={this.props.openModal}>Click to Open Modal</button>
             </div>
         );
     }
