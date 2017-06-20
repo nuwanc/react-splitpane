@@ -21,7 +21,7 @@ class App extends Component {
       isModalOpen: false,
       isModalLarge: false,
       params: {},
-      viewerHeight: '70%'
+      viewerHeight: '58vh'
     };
     this.onTreeNodeClick = this.onTreeNodeClick.bind(this);
     this.onViewerClick = this.onViewerClick.bind(this);
@@ -88,12 +88,9 @@ class App extends Component {
   }
 
   resizePane(size) {
-    //let el = document.getElementById("doc");
-    //el.style.maxHeight= size - 40 + 'px';
-    //console.log(size - 40 + 'px');
     this.setState(()=>{
       return {
-        viewerHeight :  size - 40 + 'px'
+        viewerHeight :  size - 44 + 'px'
       };
     });
   }

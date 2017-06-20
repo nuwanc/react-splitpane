@@ -18,7 +18,7 @@ class DocumentViewer extends Component {
         }
 
         let divStyle = {
-           maxHeight : this.props.viewerHeight
+           maxHeight : this.props.viewerHeight 
         }
 
         return (
