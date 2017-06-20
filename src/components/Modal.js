@@ -18,8 +18,8 @@ class Modal extends Component {
         let tabs = [];
         let tabPanels = [];
         for (let i = 0; i < count; i++) {
-            tabs.push(<Tab>{i}</Tab>);
-            tabPanels.push(<TabPanel>This is content for tab panel {i}</TabPanel>);
+            tabs.push(<Tab>{i + 1}</Tab>);
+            tabPanels.push(<TabPanel>This is content for tab panel {i + 1}</TabPanel>);
         }    
 
         return <Tabs><TabList>{tabs}</TabList>{tabPanels}</Tabs>;

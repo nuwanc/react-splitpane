@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 let styles = {
     content: {
-        textAlign: 'left',
+        textAlign: 'center',
         fontSize: '20px',
-        marginLeft : '5px'
+        
     }
 };
 

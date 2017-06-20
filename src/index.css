@@ -42,10 +42,20 @@
 .Resizer.disabled:hover {
     border-color: transparent;
 }
+
+.plus {
+    padding: 2px;
+}
+
 .plus::before {
     content:'+ ';
-    font-size: 18px;
-    cursor: pointer;  
+    font-size: 17px;
+    cursor: pointer;
+    padding: 2px;  
+}
+
+.minus {
+    padding: 2px;
 }
 .minus::before {
     content:'- ';

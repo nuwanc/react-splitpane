@@ -16,19 +16,23 @@ class TreePane extends Component {
             let tree = {
                 childNodes: [
                     {
-                        title: "howdy1",
+                        title: "ZZ/EB009S1",
+                        path : "interchange[0]",
                         icon: "fa fa-envelope-o",
                         childNodes: [
                             {
-                                title: "suzie1",
+                                title: "EB009S1",
+                                path: "interchange[0]/group[0]",
                                 icon: "fa fa-folder-o",
                                 childNodes: [
                                     {
-                                        title: "puppy1",
+                                        title: "850 Ctrl=0001",
+                                        path: "interchange[0]/group[0]/transaction[0]",
                                         icon: "fa fa-file-o"
                                     },
                                     {
-                                        title: "cherry tree1",
+                                        title: "850 Ctrl=0002",
+                                        path: "interchange[0]/group[0]/transaction[1]",
                                         icon: "fa fa-file-o"
                                     }
                                 ]
@@ -36,19 +40,23 @@ class TreePane extends Component {
                         ]
                     },
                     {
-                        title: "howdy2",
+                        title: "ZZ/EB009S2",
+                        path : "interchange[1]",
                         icon: "fa fa-envelope-o",
                         childNodes: [
                             {
-                                title: "suzie2",
+                                title: "EB009S2",
+                                path : "interchange[1]/group[0]",
                                 icon: "fa fa-folder-o",
                                 childNodes: [
                                     {
-                                        title: "puppy2",
+                                        title: "850 Ctrl=0001",
+                                        path : "interchange[1]/group[0]/transaction[0]",
                                         icon: "fa fa-file-o"
                                     },
                                     {
-                                        title: "cherry tree2",
+                                        title: "850 Ctrl=0002",
+                                        path : "interchange[1]/group[0]/transaction[1]",
                                         icon: "fa fa-file-o"
                                     }
                                 ]

@@ -47,7 +47,7 @@ class SimpleTree extends Component {
         selectedObj = {
             "fa": true,
             "node": true,
-            "selected": this.props.selected === this.props.node.title
+            "selected": this.props.selected === this.props.node.path
         }
 
         let root;
@@ -61,7 +61,7 @@ class SimpleTree extends Component {
             <div>
                 {root}
                 <i className={this.props.node.icon} aria-hidden="true">&nbsp;</i>
-                <i className={classNames(selectedObj)} onClick={this.props.onTreeNodeSelect.bind(null,this.props.node.title)}>{this.props.node.title}</i>
+                <i className={classNames(selectedObj)} onClick={this.props.onTreeNodeSelect.bind(null,this.props.node.path)}>{this.props.node.title}</i>
                 <ul className='SimpleTree' style={style}>
                     {childNodes}
                 </ul>
