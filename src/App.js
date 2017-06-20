@@ -5,6 +5,8 @@ import DocumentPane from './components/DocumentPane';
 import BottomPane from './components/BottomPane';
 import TreePane from './components/TreePane';
 import Loading from './components/Loading';
+import * as api from './utils/api';
+import Store from './utils/Store';
 
 class App extends Component {
 
@@ -26,13 +28,18 @@ class App extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.openModal = this.openModal.bind(this);
     
-    window.setTimeout(() => {
-      this.setState(() => {
+  }
+
+  componentDidMount() {
+    api.fetchMessageData().then((message)=>{
+      console.log(message);
+      Store.message = message;
+      this.setState(()=>{
         return {
-          loading: false
+          loading : false
         }
-      })
-    }, 1000)
+      });
+    })
   }
 
   onTreeNodeClick(node) {
