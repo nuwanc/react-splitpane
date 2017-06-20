@@ -16,13 +16,7 @@ class TreePane extends Component {
 
     }
 
-    componentDidMount() {
-        let content = document.getElementById('content');
-        let outerDiv = document.getElementById('outer');
-        if (content && outerDiv) {
-            outerDiv.innerHTML = content.innerHTML;
-            content.parentNode.removeChild(content);
-        }
+    componentWillMount() {
         if (Store.message) {
             let tree = {};
             tree.childNodes = [];
@@ -57,6 +51,15 @@ class TreePane extends Component {
                     tree: tree
                 }
             })
+        }
+    }
+
+    componentDidMount() {
+        let content = document.getElementById('content');
+        let outerDiv = document.getElementById('outer');
+        if (content && outerDiv) {
+            outerDiv.innerHTML = content.innerHTML;
+            content.parentNode.removeChild(content);
         }
     }
 

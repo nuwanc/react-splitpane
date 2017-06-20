@@ -31,7 +31,7 @@ class BottomPane extends Component {
                     <Tab>Find</Tab>
                 </TabList>
 
-                <TabPanel forceRender={true}>
+                <TabPanel>
                     <StandardViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal}/>
                 </TabPanel>
                 <TabPanel>

@@ -41,14 +41,14 @@ class DocumentPane extends Component {
                     <Tab>Text</Tab>
                 </TabList>
 
-                <TabPanel >
-                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal}/>
+                <TabPanel>
+                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
                 <TabPanel>
-                   <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal}/>
+                   <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
                 <TabPanel>
-                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal}/>
+                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
             </Tabs>
         )
