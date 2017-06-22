@@ -21,7 +21,7 @@ class App extends Component {
       isModalOpen: false,
       isModalLarge: false,
       params: {},
-      viewerHeight: '58vh'
+      viewerHeight: null
     };
     this.onTreeNodeClick = this.onTreeNodeClick.bind(this);
     this.onViewerClick = this.onViewerClick.bind(this);
@@ -111,10 +111,10 @@ class App extends Component {
         <div>
           <SplitPane split="horizontal">
             <div id="outer"></div>
-            <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250} className="primary">
+            <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250}>
               <div><TreePane onTreeNodeClick={this.onTreeNodeClick} /></div>
               <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}}>
-                <div style={{ width: '100%' }}><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} userSelected={this.state.userSelected} onTabUserSelect={this.onTabUserSelect} openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
+                <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} userSelected={this.state.userSelected} onTabUserSelect={this.onTabUserSelect} openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
                 <div><BottomPane onViewerClick={this.onViewerClick} openModal={this.openModal}/></div>
               </SplitPane>
             </SplitPane>
@@ -125,10 +125,10 @@ class App extends Component {
     } else {
       return (
         <div>
-          <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250} className="primary">
+          <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250}>
             <div><TreePane onTreeNodeClick={this.onTreeNodeClick} /></div>
-            <SplitPane defaultSize="70%" split="horizontal" >
-              <div style={{ width: '100%' }}><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} userSelected={this.state.userSelected} onTabUserSelect={this.onTabUserSelect} /></div>
+            <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}}>
+              <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} userSelected={this.state.userSelected} onTabUserSelect={this.onTabUserSelect} /></div>
               <div><BottomPane onViewerClick={this.onViewerClick} /></div>
             </SplitPane>
           </SplitPane>

@@ -7,9 +7,29 @@ class DocumentViewer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading : true
+            loading : true,
+            viewerHeight : null
         }
+        this.updateDimensions = this.updateDimensions.bind(this);
     }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.updateDimensions);
+        this.updateDimensions();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions);
+    }
+
+    updateDimensions() {
+        this.setState(()=>{
+            return {
+                viewerHeight : document.getElementById("docPane").clientHeight - 44
+            }
+        });
+    }
+
     
     render() {
         let json = '';
@@ -18,7 +38,7 @@ class DocumentViewer extends Component {
         }
 
         let divStyle = {
-           maxHeight : this.props.viewerHeight 
+           maxHeight : this.props.viewerHeight || this.state.viewerHeight
         }
 
         return (
