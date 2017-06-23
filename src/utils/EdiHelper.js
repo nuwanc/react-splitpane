@@ -19,17 +19,7 @@ function getSegments(message) {
             let transactions = message.group[i].transaction.length;
             for (let j = 0; j < transactions; j++) {
                 let transaction = message.group[i].transaction[j];
-                let st = transaction.ST;
-                segment = {};
-                segment.name = st.name;
-                segment.element = st.element;
-                segments.push(segment);
                 processSegments(transaction.children,segments);
-                let se = transaction.SE;
-                segment = {};
-                segment.name = se.name;
-                segment.element = se.element;
-                segments.push(segment);
             }
             let ge = message.group[i].GE;
             segment = {};
@@ -52,17 +42,7 @@ function getSegments(message) {
         let transactions = message.transaction.length;
         for (let j = 0; j < transactions; j++) {
             let transaction = message.transaction[j];
-            let st = transaction.ST;
-            segment = {};
-            segment.name = st.name;
-            segment.element = st.element;
-            segments.push(segment);
             processSegments(transaction.children,segments);
-            let se = transaction.SE;
-            segment = {};
-            segment.name = se.name;
-            segment.element = se.element;
-            segments.push(segment);
         }
         let ge = message.GE;
         segment = {};
@@ -70,17 +50,7 @@ function getSegments(message) {
         segment.element = ge.element;
         segments.push(segment);
     } else if (message.ST != null) {
-        let st = message.ST;
-        segment = {};
-        segment.name = st.name;
-        segment.element = st.element;
-        segments.push(segment);
         processSegments(message.children,segments);
-        let se = message.SE;
-        segment = {};
-        segment.name = se.name;
-        segment.element = se.element;
-        segments.push(segment);
     }
 
     return segments;
@@ -89,7 +59,8 @@ function getSegments(message) {
 function processSegments(children, segments) {
     let segment = {};
     children.forEach((v, i) => {
-        if (v.type && v.type === 's') {
+        segment = {};
+        if (v.type && v.type === 'segment') {
             segment.name = v.name;
             segment.element = v.element;
             segments.push(segment);

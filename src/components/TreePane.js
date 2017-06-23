@@ -23,22 +23,32 @@ class TreePane extends Component {
 
             Store.message["interchange"].forEach((v,i)=>{
                 let isa = {};
-                isa.title = v.name;
-                isa.path = v.path;
+                if (v.ISA) {
+                    let element = v.ISA.element;
+                    isa.title = element[4]+'/'+element[5]+'->'+element[6]+'/'+element[7];//+', Ctrl = '+element[12];
+                } else {
+                    isa.title = v.name;
+                }
+                isa.path = v.jpath;
                 isa.icon = "fa fa-envelope-o";
                 isa.childNodes = [];
 
                 v["group"].forEach((v1,i1)=>{
                     let gs = {};
-                    gs.title = v1.name;
-                    gs.path = v1.path;
+                    if (v1.GS) {
+                        let element = v1.GS.element;
+                        gs.title = element[1] +'->' + element[2];// + ', Ctrl='+ element[5]
+                    } else {
+                        gs.title = v1.name; 
+                    }
+                    gs.path = v1.jpath;
                     gs.icon = "fa fa-folder-o";
                     gs.childNodes = [];
 
                     v1["transaction"].forEach((v2,i2)=>{
                         let st = {};
                         st.title = v2.name;
-                        st.path = v2.path;
+                        st.path = v2.jpath;
                         st.icon = "fa fa-file-o";
                         gs.childNodes.push(st);
                     })
