@@ -38,7 +38,7 @@ class BottomPane extends Component {
                     <ErrorViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal}/>
                 </TabPanel>
                 <TabPanel>
-                    <FindViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal}/>
+                    <FindViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal} selectedNode={this.props.selectedNode}/>
                 </TabPanel>
             </Tabs>
         )

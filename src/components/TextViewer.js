@@ -28,7 +28,6 @@ class TextViewer extends Component {
     }
 
     render() {
-         console.log('render() TextViewer');
          return <div>Text view</div>
      }
 }

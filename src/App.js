@@ -16,7 +16,6 @@ class App extends Component {
       node: null,
       segment: null,
       tabIndex: -1,
-      userSelected: false,
       loading: true,
       isModalOpen: false,
       isModalLarge: false,
@@ -27,7 +26,6 @@ class App extends Component {
     
     this.onTreeNodeClick = this.onTreeNodeClick.bind(this);
     this.onViewerClick = this.onViewerClick.bind(this);
-    this.onTabUserSelect = this.onTabUserSelect.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.openModal = this.openModal.bind(this);
     this.resizePane = this.resizePane.bind(this);
@@ -58,15 +56,6 @@ class App extends Component {
       return {
         segment: segment,
         tabIndex: tabIndex,
-        userSelected: false
-      }
-    });
-  }
-
-  onTabUserSelect(userSelected) {
-    this.setState(() => {
-      return {
-        userSelected: userSelected
       }
     });
   }
@@ -126,8 +115,8 @@ class App extends Component {
             <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250}>
               <div><TreePane onTreeNodeClick={this.onTreeNodeClick}  treeHeight={this.state.treeHeight}/></div>
               <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}}>
-                <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} userSelected={this.state.userSelected} onTabUserSelect={this.onTabUserSelect} openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
-                <div><BottomPane onViewerClick={this.onViewerClick} openModal={this.openModal}/></div>
+                <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex}  openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
+                <div><BottomPane onViewerClick={this.onViewerClick} selectedNode={this.state.node} openModal={this.openModal}/></div>
               </SplitPane>
             </SplitPane>
           </SplitPane>

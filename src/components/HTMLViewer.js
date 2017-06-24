@@ -28,7 +28,6 @@ class HTMLViewer extends Component {
     }
 
     render() {
-        console.log('render() HTMLViewer');
         return <div>HTML view</div>
     }
 }

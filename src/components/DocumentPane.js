@@ -20,23 +20,22 @@ class DocumentPane extends Component {
                 tabIndex : tabIndex
             }
         });
-        this.props.onTabUserSelect(true);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.tabToSelect > -1) {
+            this.setState(()=>{
+                return {
+                    tabIndex : nextProps.tabToSelect
+                }
+            })
+        }
     }
 
     render() {
-        let selectedIndex = 0;
-        if (this.props.userSelected) {
-            selectedIndex = this.state.tabIndex;   
-        } else {
-            if (this.props.tabToSelect === -1) {
-                selectedIndex = 0;
-            } else {
-                selectedIndex = this.props.tabToSelect;
-            }
-        }
 
         return (
-            <Tabs selectedIndex={selectedIndex} onSelect={this.selectTab}>
+            <Tabs selectedIndex={this.state.tabIndex} onSelect={this.selectTab}>
                 <TabList>
                     <Tab>Html</Tab>
                     <Tab>Edit</Tab>
@@ -44,13 +43,13 @@ class DocumentPane extends Component {
                 </TabList>
 
                 <TabPanel>
-                    <HTMLViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
+                    <HTMLViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
                 <TabPanel>
-                   <EditViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
+                   <EditViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
                 <TabPanel>
-                    <TextViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
+                    <TextViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
             </Tabs>
         )

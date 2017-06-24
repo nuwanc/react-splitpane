@@ -7,6 +7,7 @@ function getSegments(message) {
         let isa = message.ISA;
         segment = {};
         segment.name = isa.n;
+        segment.path = isa.p;
         segment.element = isa.e;
         segments.push(segment);
         let groups = message.group.length;
@@ -14,6 +15,7 @@ function getSegments(message) {
             let gs = message.group[i].GS;
             segment = {};
             segment.name = gs.n;
+            segment.path = gs.p;
             segment.element = gs.e;
             segments.push(segment);
             let transactions = message.group[i].transaction.length;
@@ -24,12 +26,14 @@ function getSegments(message) {
             let ge = message.group[i].GE;
             segment = {};
             segment.name = ge.n;
+            segment.path = ge.p;
             segment.element = ge.e;
             segments.push(segment);
         }
         let iea = message.IEA;
         segment = {};
         segment.name = iea.n;
+        segment.path = iea.p;
         segment.element = iea.e;
         segments.push(segment);
 
@@ -37,6 +41,7 @@ function getSegments(message) {
         let gs = message.GS;
         segment = {};
         segment.name = gs.n;
+        segment.path = gs.p;
         segment.element = gs.e;
         segments.push(segment);
         let transactions = message.transaction.length;
@@ -47,6 +52,7 @@ function getSegments(message) {
         let ge = message.GE;
         segment = {};
         segment.name = ge.n;
+        segment.path = ge.p;
         segment.element = ge.e;
         segments.push(segment);
     } else if (message.ST != null) {
@@ -62,6 +68,7 @@ function processSegments(children, segments) {
         segment = {};
         if (v.t && v.t === 'segment') {
             segment.name = v.n;
+            segment.path = v.p;
             segment.element = v.e;
             segments.push(segment);
         } else {

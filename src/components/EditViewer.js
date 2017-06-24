@@ -12,7 +12,7 @@ function Segment(props) {
     } else if (props.type === 1) {
         const name = <span>{props.segment.name}</span>;
         const elements = props.segment.element.map((v, i) => {
-            return <span>*{v}</span>
+            return <span key={i}>*{v}</span>
         })
         return (
             <div>{name}{elements}</div>
@@ -81,7 +81,7 @@ class EditViewer extends Component {
                 json = JSPath.apply(this.props.selectedNode, Store.message);
 
                 segments = EdiHelper.getSegments(json).map((v, i) => {
-                    return <Segment key={i} segment={v} type={this.props.docType} />
+                    return <Segment key={v.path} segment={v} type={this.props.docType} />
                 })
             } else {
                 segments = <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} params={{ msg: "Too many transaction to display in mode, please select individual transaction." }}></Modal>
