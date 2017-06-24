@@ -20,6 +20,7 @@ class TreePane extends Component {
         if (Store.message) {
             let tree = {};
             tree.childNodes = [];
+            let count = 0;
 
             Store.message["interchange"].forEach((v,i)=>{
                 let isa = {};
@@ -51,6 +52,7 @@ class TreePane extends Component {
                         st.path = v2.j;
                         st.icon = "fa fa-file-o";
                         gs.childNodes.push(st);
+                        count ++;
                     })
                     isa.childNodes.push(gs);
                 })
@@ -60,6 +62,8 @@ class TreePane extends Component {
                 return {
                     tree: tree
                 }
+            },()=>{
+                Store.large = (count > 50);
             })
         }
     }

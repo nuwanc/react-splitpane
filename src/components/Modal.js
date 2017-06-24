@@ -42,11 +42,18 @@ class Modal extends Component {
             display : 'block'
         };
 
-        let count = 0;
+        let content = null;
+        let title = 'Warnning';
 
         if (this.props.params) {
             if (this.props.params['tabs']) {
-                count = this.props.params['count'] || 3;
+                content = this.generateTabs(this.props.params['count'] || 3);
+            }
+            if (this.props.params['msg']) {
+                content = <h5>{this.props.params['msg']}</h5>;
+            }
+            if (this.props.params['title']) {
+                title = this.props.params['title'];
             }
         }
 
@@ -56,14 +63,13 @@ class Modal extends Component {
                     <div className="modal-content">
                         <div className="modal-header">
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={e => this.close(e)}><span aria-hidden="true">&times;</span></button>
-                            <h4 className="modal-title">Modal title</h4>
+                            <h6 className="modal-title">{title}</h6>
                         </div>
                         <div className="modal-body">
-                            {this.generateTabs(count)}
+                            {content}
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" data-dismiss="modal" onClick={e => this.close(e)}>Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
