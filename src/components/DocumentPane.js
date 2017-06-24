@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import DocumentViewer from './DocumentViewer';
+import EditViewer from './EditViewer';
+import HTMLViewer from './HTMLViewer';
+import TextViewer from './TextViewer';
 
 class DocumentPane extends Component {
 
@@ -42,13 +44,13 @@ class DocumentPane extends Component {
                 </TabList>
 
                 <TabPanel>
-                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
+                    <HTMLViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
                 <TabPanel>
-                   <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
+                   <EditViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
                 <TabPanel>
-                    <DocumentViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
+                    <TextViewer docType={selectedIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
             </Tabs>
         )

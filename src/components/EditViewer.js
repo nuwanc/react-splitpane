@@ -22,7 +22,7 @@ function Segment(props) {
 
 }
 
-class DocumentViewer extends Component {
+class EditViewer extends Component {
 
     constructor(props) {
         super(props);
@@ -56,7 +56,9 @@ class DocumentViewer extends Component {
         let segments = null;
 
         if (this.props.selectedNode) {
-            json = JSPath.apply('.' + this.props.selectedNode.replace(new RegExp('/', 'g'), '.'), Store.message);
+            //json = JSPath.apply('.' + this.props.selectedNode.replace(new RegExp('/', 'g'), '.'), Store.message);
+            json = JSPath.apply(this.props.selectedNode,Store.message);
+
             segments = EdiHelper.getSegments(json).map((v, i) => {
                 return <Segment key={i} segment={v} type={this.props.docType} />
             })
@@ -66,6 +68,7 @@ class DocumentViewer extends Component {
             maxHeight: this.props.viewerHeight || this.state.viewerHeight
         }
 
+        console.log('render() EditViewer');
         return (
             <div className="doc" style={divStyle}>
                 {segments}
@@ -75,4 +78,4 @@ class DocumentViewer extends Component {
 }
 
 
-export default DocumentViewer;
+export default EditViewer;

@@ -95,3 +95,7 @@ pre {
 .doc {
     overflow-y: scroll;
 }
+
+.tree {
+    overflow-y: scroll;
+}

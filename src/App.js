@@ -5,7 +5,7 @@ import DocumentPane from './components/DocumentPane';
 import BottomPane from './components/BottomPane';
 import TreePane from './components/TreePane';
 import Loading from './components/Loading';
-import * as api from './utils/api';
+import * as Api from './utils/api';
 import Store from './utils/Store';
 
 class App extends Component {
@@ -21,19 +21,21 @@ class App extends Component {
       isModalOpen: false,
       isModalLarge: false,
       params: {},
-      viewerHeight: null
+      viewerHeight: null,
+      treeHeight: null
     };
+    
     this.onTreeNodeClick = this.onTreeNodeClick.bind(this);
     this.onViewerClick = this.onViewerClick.bind(this);
     this.onTabUserSelect = this.onTabUserSelect.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.openModal = this.openModal.bind(this);
     this.resizePane = this.resizePane.bind(this);
-    
+    this.resizeTopPane = this.resizeTopPane.bind(this);
   }
 
   componentDidMount() {
-    api.fetchMessageData().then((message)=>{
+    Api.fetchMessageData().then((message)=>{
       Store.message = message;
       this.setState(()=>{
         return {
@@ -94,6 +96,16 @@ class App extends Component {
       };
     });
   }
+  
+  resizeTopPane(size) {
+    this.setState(()=>{
+      return {
+        treeHeight :  size + 'px'
+      };
+    });
+  }
+
+
 
   render() {
 
@@ -109,10 +121,10 @@ class App extends Component {
     if (isOuter) {
       return (
         <div>
-          <SplitPane split="horizontal">
+          <SplitPane split="horizontal" defaultSize={'90vh'} minSize={50} maxSize={-50} onChange={(size)=>{this.resizeTopPane(size)}} primary="second">
             <div id="outer"></div>
             <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250}>
-              <div><TreePane onTreeNodeClick={this.onTreeNodeClick} /></div>
+              <div><TreePane onTreeNodeClick={this.onTreeNodeClick}  treeHeight={this.state.treeHeight}/></div>
               <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}}>
                 <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} userSelected={this.state.userSelected} onTabUserSelect={this.onTabUserSelect} openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
                 <div><BottomPane onViewerClick={this.onViewerClick} openModal={this.openModal}/></div>
