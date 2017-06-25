@@ -81,7 +81,7 @@ class App extends Component {
   resizePane(size) {
     this.setState(()=>{
       return {
-        viewerHeight :  size - 44 + 'px'
+        viewerHeight :  size - 44
       };
     });
   }
@@ -114,10 +114,12 @@ class App extends Component {
             <div id="outer"></div>
             <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250}>
               <div><TreePane onTreeNodeClick={this.onTreeNodeClick}  treeHeight={this.state.treeHeight}/></div>
-              <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}} >
-                <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex}  openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
-                <div id="bottomPane"><BottomPane onViewerClick={this.onViewerClick} selectedNode={this.state.node} openModal={this.openModal}/></div>
-              </SplitPane>
+              <div id="rightPane">
+                <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}}>
+                  <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex}  openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
+                  <div style={{ width: '100%' }} id="bottomPane"><BottomPane onViewerClick={this.onViewerClick} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
+                </SplitPane>
+              </div>
             </SplitPane>
           </SplitPane>
           <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} isLarge={this.state.isModalLarge} params={this.state.params}></Modal>

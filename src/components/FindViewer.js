@@ -8,7 +8,8 @@ class FindViewer extends Component {
         super(props);
         this.state = {
             text : '',
-            results : null
+            results : null,
+            ulHeight : null
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFindClick = this.handleFindClick.bind(this);
@@ -22,6 +23,18 @@ class FindViewer extends Component {
                 text: value
             }
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.viewerHeight !== nextProps.viewerHeight) {
+            let parentHeight = document.getElementById("rightPane").firstChild.clientHeight;
+            let ulHeight = parentHeight - nextProps.viewerHeight;
+            this.setState(()=>{
+                return {
+                    ulHeight : ulHeight - 130
+                }
+            })
+        }
     }
 
     handleFindClick() {
@@ -51,10 +64,14 @@ class FindViewer extends Component {
 
     render() {
 
+        let ulStyle = {
+            height: this.state.ulHeight || 90
+        }
+
         return (
             <div>
                 <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange}/> <button onClick={this.handleFindClick}>Find</button></span>
-                <ol className="results">
+                <ol className="results" style={ulStyle}>
                     {this.state.results && this.state.results.map((v,i)=>{
                         return <li key={v.path}>{v.path} -> {v.element.join('*')}</li>
                     })}
