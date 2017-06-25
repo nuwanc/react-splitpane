@@ -50,10 +50,11 @@ class FindViewer extends Component {
     }
 
     render() {
+
         return (
             <div>
                 <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange}/> <button onClick={this.handleFindClick}>Find</button></span>
-                <ol>
+                <ol className="results">
                     {this.state.results && this.state.results.map((v,i)=>{
                         return <li key={v.path}>{v.path} -> {v.element.join('*')}</li>
                     })}

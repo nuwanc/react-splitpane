@@ -99,3 +99,8 @@ pre {
 .tree {
     overflow-y: scroll;
 }
+
+.results {
+    overflow-y: scroll;
+    max-height: 165px;
+}
