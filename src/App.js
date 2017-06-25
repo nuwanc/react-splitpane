@@ -89,7 +89,7 @@ class App extends Component {
   resizeTopPane(size) {
     this.setState(()=>{
       return {
-        treeHeight :  size + 'px'
+        treeHeight :  size 
       };
     });
   }

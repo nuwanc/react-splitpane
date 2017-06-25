@@ -14,6 +14,7 @@ class FindViewer extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleFindClick = this.handleFindClick.bind(this);
         this.onFindViewerClick = this.onFindViewerClick.bind(this);
+        this.updateDimensions = this.updateDimensions.bind(this);
     }
 
     handleChange(event) {
@@ -29,6 +30,27 @@ class FindViewer extends Component {
         if (this.props.viewerHeight !== nextProps.viewerHeight) {
             let parentHeight = document.getElementById("rightPane").firstChild.clientHeight;
             let ulHeight = parentHeight - nextProps.viewerHeight;
+            this.setState(()=>{
+                return {
+                    ulHeight : ulHeight - 130
+                }
+            })
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.updateDimensions);
+        this.updateDimensions();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions);
+    }
+
+    updateDimensions() {
+        let parentHeight = document.getElementById("rightPane").firstChild.clientHeight;
+        if (this.props.viewerHeight) {
+            let ulHeight = parentHeight - this.props.viewerHeight;
             this.setState(()=>{
                 return {
                     ulHeight : ulHeight - 130
