@@ -117,7 +117,7 @@ class App extends Component {
               <div id="rightPane">
                 <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}}>
                   <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex}  openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
-                  <div style={{ width: '100%' }} id="bottomPane"><BottomPane onViewerClick={this.onViewerClick} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
+                  <div style={{ width: '100%' }}><BottomPane onViewerClick={this.onViewerClick} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight}/></div>
                 </SplitPane>
               </div>
             </SplitPane>

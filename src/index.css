@@ -101,5 +101,14 @@ pre {
 }
 
 .results {
+    padding-top: 5px;
     overflow-y: scroll;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.pointer {
+    cursor: pointer;
 }

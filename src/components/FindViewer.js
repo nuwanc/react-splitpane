@@ -4,6 +4,7 @@ import Store from '../utils/Store';
 import * as EdiHelper from '../utils/EdiHelper';
 
 class FindViewer extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -15,6 +16,7 @@ class FindViewer extends Component {
         this.handleFindClick = this.handleFindClick.bind(this);
         this.onFindViewerClick = this.onFindViewerClick.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
+        this.saveRef = this.saveRef.bind(this);
     }
 
     handleChange(event) {
@@ -24,6 +26,10 @@ class FindViewer extends Component {
                 text: value
             }
         });
+    }
+
+    saveRef(ref) {
+        this.containerNode = ref;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -80,8 +86,8 @@ class FindViewer extends Component {
         });
     }
 
-    onFindViewerClick(){
-        this.props.onViewerClick('segment 3',0);
+    onFindViewerClick(path){
+        this.props.onViewerClick(path,1);
     }
 
     render() {
@@ -91,11 +97,11 @@ class FindViewer extends Component {
         }
 
         return (
-            <div>
+            <div ref={this.saveRef}>
                 <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange}/> <button onClick={this.handleFindClick}>Find</button></span>
                 <ol className="results" style={ulStyle}>
                     {this.state.results && this.state.results.map((v,i)=>{
-                        return <li key={v.path}>{v.path} -> {v.element.join('*')}</li>
+                        return <li key={v.path}><a className="pointer" onClick={this.onFindViewerClick.bind(null,v.path)}>{v.path}</a> -> {v.element.join('*')}</li>
                     })}
                 </ol>
             </div>

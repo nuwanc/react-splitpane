@@ -3,25 +3,7 @@ import Store from '../utils/Store';
 import * as EdiHelper from '../utils/EdiHelper';
 import JSPath from 'jspath';
 import Modal from './Modal'
-
-
-function Segment(props) {
-
-    if (props.type === 0) {
-        return <div><h1>HTML view</h1></div>
-    } else if (props.type === 1) {
-        const name = <span>{props.segment.name}</span>;
-        const elements = props.segment.element.map((v, i) => {
-            return <span key={i}>*{v}</span>
-        })
-        return (
-            <div>{name}{elements}</div>
-        )
-    } else if (props.type === 2) {
-        return <div><h1>Text view</h1></div>
-    }
-
-}
+import Segment from './Segment';
 
 class EditViewer extends Component {
 
@@ -81,7 +63,7 @@ class EditViewer extends Component {
                 json = JSPath.apply(this.props.selectedNode, Store.message);
 
                 segments = EdiHelper.getSegments(json).map((v, i) => {
-                    return <Segment key={v.path} segment={v} type={this.props.docType} />
+                    return <Segment key={v.path} segment={v} type={this.props.docType}  selectedSegment={v.path === this.props.selectedSegment}/>
                 })
             } else {
                 segments = <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} params={{ msg: "Too many transaction to display in mode, please select individual transaction." }}></Modal>
