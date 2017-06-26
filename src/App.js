@@ -46,7 +46,9 @@ class App extends Component {
   onTreeNodeClick(node) {
     this.setState(() => {
       return {
-        node: node
+        node: node,
+        tabIndex: -1,
+        segment: null
       }
     });
   }
