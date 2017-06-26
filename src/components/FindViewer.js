@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import JSPath from 'jspath';
 import Store from '../utils/Store';
 import * as EdiHelper from '../utils/EdiHelper';
@@ -18,6 +17,7 @@ class FindViewer extends Component {
         this.handleFindClick = this.handleFindClick.bind(this);
         this.onFindViewerClick = this.onFindViewerClick.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     handleChange(event) {
@@ -27,6 +27,12 @@ class FindViewer extends Component {
                 text: value
             }
         });
+    }
+
+    handleKeyPress(event) {
+        if (event.key == 'Enter') {
+            this.handleFindClick();
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -44,7 +50,8 @@ class FindViewer extends Component {
             this.setState(()=>{
                 return {
                     results : null,
-                    text : ''
+                    text : '',
+                    selected : null
                 }
             })
         }
@@ -118,7 +125,7 @@ class FindViewer extends Component {
 
         return (
             <div>
-                <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange}/> <button onClick={this.handleFindClick}>Find</button></span>
+                <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress}/> <button onClick={this.handleFindClick}>Find</button></span>
                 <ol className="results" style={ulStyle}>
                     {this.state.results && this.state.results.map((v,i)=>{
                         return <FindResult node={v} onClickResult={this.onFindViewerClick} selected={this.state.selected === v.path}/>
@@ -135,20 +142,12 @@ class FindResult extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    componentDidUpdate() {
-        if (this.props.selected) {
-            ReactDOM.findDOMNode(this).firstChild.classList.add('highlight');
-        } else {
-            ReactDOM.findDOMNode(this).firstChild.classList.remove('highlight');
-        }
-    }
-
     handleClick(path) {
         this.props.onClickResult(path);
     }
 
     render () {
-        return <li key={this.props.node.path}><span><a className="pointer" onClick={this.handleClick.bind(null,this.props.node.path)}>{this.props.node.path}</a> -> {this.props.node.element.join('*')}</span></li>
+        return <li key={this.props.node.path}><span className={ this.props.selected ? "highlight" : "" }><a className="pointer" onClick={this.handleClick.bind(null,this.props.node.path)}>{this.props.node.path}</a> -> {this.props.node.element.join('*')}</span></li>
     }
 }
 
