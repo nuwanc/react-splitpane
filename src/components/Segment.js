@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Store from '../utils/Store'
 
 class Segment extends Component {
 
@@ -17,7 +18,13 @@ class Segment extends Component {
         if (this.props.type === 0) {
             return <div><h1>HTML view</h1></div>
         } else if (this.props.type === 1) {
-            const name = <span>{this.props.segment.name}</span>
+            let name;
+            if (Store.lookupErrorSegment(this.props.segment.path)) {
+                name = <span><span style={{ color : 'red' }}>x</span>{this.props.segment.name}</span>
+            } else {
+                name = <span><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
+            }
+            
             const elements = this.props.segment.element.map((v, i) => {
                 return <span key={i}>*{v}</span>
             })
