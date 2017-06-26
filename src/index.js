@@ -12,5 +12,5 @@ import './index.css';
 //global variable to show outer most pane
 window.showOuter = true;
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App showOuter={window.showOuter}/>, document.getElementById('root'));
 registerServiceWorker();

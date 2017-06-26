@@ -87,9 +87,12 @@ class TreePane extends Component {
     }
 
     render() {
-
+        let maxHeight = '90vh';
+        if (!this.props.showOuter) {
+            maxHeight = '100vh';
+        }
         let divStyle = {
-            maxHeight: this.props.treeHeight || '90vh'
+            maxHeight: this.props.treeHeight || maxHeight
         }
 
         return (

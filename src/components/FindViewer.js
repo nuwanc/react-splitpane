@@ -42,6 +42,15 @@ class FindViewer extends Component {
                 }
             })
         }
+        // clear find results
+        if (this.props.selectedNode !== nextProps.selectedNode) {
+            this.setState(()=>{
+                return {
+                    results : null
+                }
+            })
+        }
+
     }
 
     componentDidMount() {
@@ -57,6 +66,14 @@ class FindViewer extends Component {
         let parentHeight = document.getElementById("rightPane").firstChild.clientHeight;
         if (this.props.viewerHeight) {
             let ulHeight = parentHeight - this.props.viewerHeight;
+            this.setState(()=>{
+                return {
+                    ulHeight : ulHeight - 130
+                }
+            })
+        } else {
+            let viewerHeight = document.getElementById("docPane").clientHeight - 44
+            let ulHeight = parentHeight - viewerHeight;
             this.setState(()=>{
                 return {
                     ulHeight : ulHeight - 130
