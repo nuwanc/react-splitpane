@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import JSPath from 'jspath';
 import Store from '../utils/Store';
 import * as EdiHelper from '../utils/EdiHelper';
@@ -10,13 +11,13 @@ class FindViewer extends Component {
         this.state = {
             text : '',
             results : null,
-            ulHeight : null
+            ulHeight : null,
+            selected : null
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFindClick = this.handleFindClick.bind(this);
         this.onFindViewerClick = this.onFindViewerClick.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
-        this.saveRef = this.saveRef.bind(this);
     }
 
     handleChange(event) {
@@ -26,10 +27,6 @@ class FindViewer extends Component {
                 text: value
             }
         });
-    }
-
-    saveRef(ref) {
-        this.containerNode = ref;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -46,7 +43,8 @@ class FindViewer extends Component {
         if (this.props.selectedNode !== nextProps.selectedNode) {
             this.setState(()=>{
                 return {
-                    results : null
+                    results : null,
+                    text : ''
                 }
             })
         }
@@ -105,6 +103,11 @@ class FindViewer extends Component {
 
     onFindViewerClick(path){
         this.props.onViewerClick(path,1);
+        this.setState(()=>{
+            return {
+                selected : path
+            }
+        });
     }
 
     render() {
@@ -114,15 +117,38 @@ class FindViewer extends Component {
         }
 
         return (
-            <div ref={this.saveRef}>
+            <div>
                 <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange}/> <button onClick={this.handleFindClick}>Find</button></span>
                 <ol className="results" style={ulStyle}>
                     {this.state.results && this.state.results.map((v,i)=>{
-                        return <li key={v.path}><a className="pointer" onClick={this.onFindViewerClick.bind(null,v.path)}>{v.path}</a> -> {v.element.join('*')}</li>
+                        return <FindResult node={v} onClickResult={this.onFindViewerClick} selected={this.state.selected === v.path}/>
                     })}
                 </ol>
             </div>
         )
+    }
+}
+
+class FindResult extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    componentDidUpdate() {
+        if (this.props.selected) {
+            ReactDOM.findDOMNode(this).firstChild.classList.add('highlight');
+        } else {
+            ReactDOM.findDOMNode(this).firstChild.classList.remove('highlight');
+        }
+    }
+
+    handleClick(path) {
+        this.props.onClickResult(path);
+    }
+
+    render () {
+        return <li key={this.props.node.path}><span><a className="pointer" onClick={this.handleClick.bind(null,this.props.node.path)}>{this.props.node.path}</a> -> {this.props.node.element.join('*')}</span></li>
     }
 }
 
