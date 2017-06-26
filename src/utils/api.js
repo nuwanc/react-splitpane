@@ -12,4 +12,11 @@ function fetchMessageData(id) {
     })
 }
 
-export {fetchMessageData};
+function fetchSchemaData() {
+    //https://jsonblob.com/5236af89-5a18-11e7-ae4c-5f04568414d8
+    return axios.get('https://jsonblob.com/api/jsonBlob/5236af89-5a18-11e7-ae4c-5f04568414d8').then((response)=>{
+        return response.data;
+    })
+}
+
+export {fetchMessageData,fetchSchemaData};
