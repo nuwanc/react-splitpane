@@ -97,7 +97,7 @@ pre {
 }
 
 .tree {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .results {

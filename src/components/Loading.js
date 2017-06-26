@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-let styles = {
-    content: {
-        textAlign: 'center',
-        fontSize: '20px',
-        
-    }
-};
-
 class Loading extends Component {
     constructor(props) {
         super(props);
@@ -39,8 +31,17 @@ class Loading extends Component {
     componentWillUnmount() {
         window.clearInterval(this.interval);
     }
-    
+
     render() {
+
+        let styles = {
+            content: {
+                textAlign: this.props.textAlign,
+                fontSize: this.props.fontSize,
+
+            }
+        };
+
         return (
             <p style={styles.content}>
                 {this.state.text}
@@ -52,11 +53,15 @@ class Loading extends Component {
 Loading.propTypes = {
     text: PropTypes.string.isRequired,
     speed: PropTypes.number.isRequired,
+    fontSize: PropTypes.string,
+    textAlign: PropTypes.string
 };
 
 Loading.defaultProps = {
     text: 'Loading',
-    speed: 300
+    speed: 300,
+    fontSize: '20px',
+    textAlign: 'center'
 };
 
 export default Loading;

@@ -35,7 +35,7 @@ class BottomPane extends Component {
                     <StandardViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal}/>
                 </TabPanel>
                 <TabPanel forceRender={true}>
-                    <ErrorViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal} />
+                    <ErrorViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal} selectedNode={this.props.selectedNode} viewerHeight={this.props.viewerHeight}/>
                 </TabPanel>
                 <TabPanel forceRender={true}>
                     <FindViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal} selectedNode={this.props.selectedNode} viewerHeight={this.props.viewerHeight}/>

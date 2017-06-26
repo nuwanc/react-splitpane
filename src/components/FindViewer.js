@@ -30,7 +30,7 @@ class FindViewer extends Component {
     }
 
     handleKeyPress(event) {
-        if (event.key == 'Enter') {
+        if (event.key === 'Enter') {
             this.handleFindClick();
         }
     }
@@ -128,7 +128,7 @@ class FindViewer extends Component {
                 <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress}/> <button onClick={this.handleFindClick}>Find</button></span>
                 <ol className="results" style={ulStyle}>
                     {this.state.results && this.state.results.map((v,i)=>{
-                        return <FindResult node={v} onClickResult={this.onFindViewerClick} selected={this.state.selected === v.path}/>
+                        return <FindResult key={v.path} node={v} onClickResult={this.onFindViewerClick} selected={this.state.selected === v.path}/>
                     })}
                 </ol>
             </div>
@@ -147,7 +147,7 @@ class FindResult extends Component {
     }
 
     render () {
-        return <li key={this.props.node.path}><span className={ this.props.selected ? "highlight" : "" }><a className="pointer" onClick={this.handleClick.bind(null,this.props.node.path)}>{this.props.node.path}</a> -> {this.props.node.element.join('*')}</span></li>
+        return <li><span className={ this.props.selected ? "highlight" : "" }><a className="pointer" onClick={this.handleClick.bind(null,this.props.node.path)}>{this.props.node.path}</a> -> {this.props.node.element.join('*')}</span></li>
     }
 }
 
