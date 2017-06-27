@@ -63,7 +63,19 @@
     cursor: pointer;    
 }
 
+.blank {
+    padding-left: 20px;
+}
+
 .SimpleTree {
+	list-style: none;
+    background-color: white;
+	margin-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 20px;
+}
+
+.LazyLoadTree {
 	list-style: none;
     background-color: white;
 	margin-top: 4px;
@@ -82,6 +94,7 @@
 .hidden {
     display: none;
 }
+
 .doc {
     overflow-y: scroll;
 }
@@ -130,5 +143,11 @@
 .selement {
   border: 1px solid black;
   background-color: lightblue;
+  border-radius: 1px;
+}
+
+.scomposite {
+  border: 1px solid black;
+  background-color: purple;
   border-radius: 1px;
 }

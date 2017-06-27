@@ -67,7 +67,7 @@ class LazyLoadTree extends Component {
                     }
                 }
                 break;
-            /*case 'composite':
+            case 'composite':
                 elements = Store.schema["composite"];
                 for (let i = 0, len = elements.length; i < len; i++) {
                     let composite = elements[i];
@@ -76,7 +76,16 @@ class LazyLoadTree extends Component {
                     }
                 }
                 break;
-            case 'segment':
+            case 'mpcode':
+                elements = Store.schema["mpcode"];
+                for(let i =0, len = elements.len; i < len; i++) {
+                    let mpcode = elements[i];
+                    if(mpcode.name === name) {
+                        return mpcode;
+                    }
+                }
+                break;
+            /*case 'segment':
                 elements = Store.schema["segment"];
                 for (let i = 0, len = elements.length; i < len; i++) {
                     let segment = elements[i];
@@ -149,9 +158,9 @@ class LazyLoadTree extends Component {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <span className="ssegment">S</span>
                     info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span> } </i>
-                } else if (name.startsWith("code")) {
+                } else if (name.startsWith("composite")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
-                    icon = <span className="scode">C</span>
+                    icon = <span className="scomposite">C</span>
                     info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span> } </i>
                 } else if (name.startsWith("loop")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
@@ -161,11 +170,16 @@ class LazyLoadTree extends Component {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <i className={'fa fa-file-o'} aria-hidden="true">&nbsp;</i>
                     info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span> } </i>
-                } else if (name.startsWith("composite")) {
+                } else if (name.startsWith("code")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
-                    icon = <span className="selement">CC</span>
+                    icon = <span className="scode">C</span>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span> } </i>
+                } else if (name.startsWith("mpcode")) {
+                    root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
+                    icon = <span className="scode">MC</span>
                     info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span> } </i>
                 } else {
+                    root = <span className="blank">&nbsp;</span>
                     icon = <span className="selement">E</span>
                     info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span> } </i>
                 }
@@ -179,7 +193,7 @@ class LazyLoadTree extends Component {
                     {root}
                     {icon}
                     {info}
-                    <ul className='SimpleTree' style={style}>
+                    <ul className='LazyLoadTree' style={style}>
                         {childNodes || this.state.childNodes}
                     </ul>
                 </div>
