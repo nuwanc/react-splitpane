@@ -58,8 +58,6 @@ class EditViewer extends Component {
         let json = '';
         let segments = null;
 
-        console.log(this.props.validate);
-
         if (this.props.selectedNode) {
             if (this.props.selectedNode.split('.').length > 3 || !Store.large) {
                 json = JSPath.apply(this.props.selectedNode, Store.message);

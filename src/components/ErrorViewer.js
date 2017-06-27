@@ -104,7 +104,7 @@ class ErrorViewer extends Component {
 
         let content = null;
         if (this.state.loading && this.state.results === null) {
-            content = <Loading fontSize={'13px'} textAlign={'left'}/>
+            content = <Loading textAlign={'center'} height={ulStyle.height}/>
         } else {
             if (this.state.results!== null) {
                 content =  this.state.results.map((v,i)=>{

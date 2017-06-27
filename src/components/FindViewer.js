@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import JSPath from 'jspath';
 import Store from '../utils/Store';
 import * as EdiHelper from '../utils/EdiHelper';
+import Loading from './Loading';
 
 class FindViewer extends Component {
 
@@ -11,7 +12,8 @@ class FindViewer extends Component {
             text : '',
             results : null,
             ulHeight : null,
-            selected : null
+            selected : null,
+            loading : false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFindClick = this.handleFindClick.bind(this);
@@ -92,6 +94,12 @@ class FindViewer extends Component {
         let text = this.state.text;
         let results = [];
 
+        this.setState(()=>{
+            return {
+                loading : true
+            }
+        });
+
         if (this.props.selectedNode && this.props.selectedNode.split('.').length > 3) {
             json = JSPath.apply(this.props.selectedNode, Store.message);
             EdiHelper.getSegments(json).forEach((v,i)=>{
@@ -103,7 +111,8 @@ class FindViewer extends Component {
         
         this.setState(()=>{
             return {
-                results : results
+                results : results,
+                loading : false
             }
         });
     }
@@ -122,14 +131,21 @@ class FindViewer extends Component {
         let ulStyle = {
             height: this.state.ulHeight || 90
         }
+        let content = null;
+
+        if (this.state.loading) {
+            content = <Loading textAlign={'center'} height={ulStyle.height}/>
+        } else {
+            content = this.state.results && this.state.results.map((v,i)=>{
+                        return <FindResult key={v.path} node={v} onClickResult={this.onFindViewerClick} selected={this.state.selected === v.path}/>
+            })
+        }
 
         return (
             <div>
                 <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress}/> <button onClick={this.handleFindClick}>Find</button></span>
                 <ol className="results" style={ulStyle}>
-                    {this.state.results && this.state.results.map((v,i)=>{
-                        return <FindResult key={v.path} node={v} onClickResult={this.onFindViewerClick} selected={this.state.selected === v.path}/>
-                    })}
+                    {content}
                 </ol>
             </div>
         )

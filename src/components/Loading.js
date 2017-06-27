@@ -35,17 +35,25 @@ class Loading extends Component {
     render() {
 
         let styles = {
+            main: {
+                display: 'flex',
+                justifyAontent: 'center',
+                alignItems: 'center',
+                height : this.props.height
+            },
             content: {
                 textAlign: this.props.textAlign,
                 fontSize: this.props.fontSize,
-
+                width: '100%'
             }
         };
 
         return (
-            <p style={styles.content}>
-                {this.state.text}
-            </p>
+            <div style={styles.main}>
+                <div style={styles.content}>
+                    {this.state.text}
+                </div>
+            </div>
         )
     }
 }
@@ -61,7 +69,8 @@ Loading.defaultProps = {
     text: 'Loading',
     speed: 300,
     fontSize: '20px',
-    textAlign: 'center'
+    textAlign: 'center',
+    height : '100vh'
 };
 
 export default Loading;
