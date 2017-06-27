@@ -20,7 +20,7 @@ class LazyLoadTree extends Component {
         if (!this.state.loaded) {
             if (this.props.node.element) {
                 childNodes = this.props.node.element.map((node, index) => {
-                    return <li key={index}><LazyLoadTree node={node} root={false}/></li>
+                    return <li key={index}><LazyLoadTree node={node} root={false} /></li>
                 });
                 this.setState(() => {
                     return {
@@ -67,8 +67,6 @@ class LazyLoadTree extends Component {
         let root;
         let childNodes = null;
 
-        console.log(this.props.node);
-
         if (this.props.root) {
             if (this.props.node.transaction != null) {
                 childNodes = this.props.node.transaction.map((node, index) => {
@@ -76,24 +74,36 @@ class LazyLoadTree extends Component {
                 });
             }
             style = { display: "block" };
+
+            return (
+                <div>
+                    <ul className='SimpleTree' style={style}>
+                        {childNodes || this.state.childNodes}
+                    </ul>
+                </div>
+            );
+
         } else {
             if (this.props.node.name) {
                 root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
             } else {
                 root = '';
             }
+
+            return (
+                <div>
+                    {root}
+                    <i className={'fa fa-file-o'} aria-hidden="true">&nbsp;</i>
+                    <i className={classNames(selectedObj)} >{this.props.node.description || this.props.node.name}</i>
+                    <ul className='SimpleTree' style={style}>
+                        {childNodes || this.state.childNodes}
+                    </ul>
+                </div>
+            );
+
         }
 
-        return (
-            <div>
-                {root}
-                <i className={'fa fa-file-o'} aria-hidden="true">&nbsp;</i>
-                <i className={classNames(selectedObj)} >{this.props.node.description || this.props.node.name}</i>
-                <ul className='SimpleTree' style={style}>
-                    {childNodes || this.state.childNodes}
-                </ul>
-            </div>
-        );
+        
     }
 
 }

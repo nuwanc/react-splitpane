@@ -39,7 +39,7 @@ class DocumentPane extends Component {
                 <TabList>
                     <Tab>Html</Tab>
                     <Tab>Edit</Tab>
-                    <Tab>Text</Tab>
+                    {/*<Tab>Text</Tab>*/}
                 </TabList>
 
                 <TabPanel forceRender={true}>
@@ -48,9 +48,9 @@ class DocumentPane extends Component {
                 <TabPanel forceRender={true}>
                    <EditViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight} validate={this.props.validate}/>
                 </TabPanel>
-                <TabPanel forceRender={true}>
+                {/*<TabPanel forceRender={true}>
                     <TextViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
-                </TabPanel>
+                </TabPanel>*/}
             </Tabs>
         )
     }
