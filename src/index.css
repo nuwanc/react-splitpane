@@ -106,3 +106,29 @@
 .standard {
    overflow-y: auto; 
 }
+
+.ssegment {
+  border: 1px solid black;
+  background-color: green;
+  border-radius: 1px;
+  width:14px;
+  height: 14px;
+}
+
+.sloop {
+  border: 1px solid black;
+  background-color: yellow;
+  border-radius: 1px;
+}
+
+.scode {
+  border: 1px solid black;
+  background-color: gray;
+  border-radius: 1px;
+}
+
+.selement {
+  border: 1px solid black;
+  background-color: lightblue;
+  border-radius: 1px;
+}

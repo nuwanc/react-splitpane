@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Store from '../utils/Store';
 
 class LazyLoadTree extends Component {
 
@@ -44,6 +45,60 @@ class LazyLoadTree extends Component {
         this.props.onTreeNodeSelect(node);
     }*/
 
+     getDetails(name) {
+        let type = name.split(":")[0];
+        let elements;
+        switch (type) {
+            case 'code':
+                elements = Store.schema["code"];
+                for (let i = 0, len = elements.length; i < len; i++) {
+                    let code = elements[i];
+                    if (code.name === name) {
+                        return code;
+                    }
+                }
+                break;
+            case 'simple':
+                elements = Store.schema["simple"];
+                for (let i = 0, len = elements.length; i < len; i++) {
+                    let simple = elements[i];
+                    if (simple.name === name) {
+                        return simple;
+                    }
+                }
+                break;
+            /*case 'composite':
+                elements = Store.schema["composite"];
+                for (let i = 0, len = elements.length; i < len; i++) {
+                    let composite = elements[i];
+                    if (composite.name === name) {
+                        return composite;
+                    }
+                }
+                break;
+            case 'segment':
+                elements = Store.schema["segment"];
+                for (let i = 0, len = elements.length; i < len; i++) {
+                    let segment = elements[i];
+                    if (segment.name === name) {
+                        return segment;
+                    }
+                }
+                break;
+            case 'loop' :
+                elements = Store.schema["loop"];
+                for (let i = 0, len = elements.length; i < len; i++) {
+                    let loop = elements[i];
+                    if (loop.name === name) {
+                        return loop;
+                    }
+                }
+                break;*/
+            default:
+                return null;
+        }
+    }
+
     render() {
         let classObj;
         let selectedObj;
@@ -60,12 +115,13 @@ class LazyLoadTree extends Component {
 
 
         selectedObj = {
-            "fa": true,
-            "node": true,
+            "node": true
         }
         //if root, show immediate childNode
         let root;
         let childNodes = null;
+        let icon;
+        let info;
 
         if (this.props.root) {
             if (this.props.node.transaction != null) {
@@ -84,17 +140,45 @@ class LazyLoadTree extends Component {
             );
 
         } else {
+            let details = null;
             if (this.props.node.name) {
-                root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
+                let name = this.props.node.name;
+                details = this.getDetails(name);
+                
+                if (name.startsWith("segment")) {
+                    root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
+                    icon = <span className="ssegment">S</span>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span> } </i>
+                } else if (name.startsWith("code")) {
+                    root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
+                    icon = <span className="scode">C</span>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span> } </i>
+                } else if (name.startsWith("loop")) {
+                    root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
+                    icon = <span className="sloop">L</span>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span> } </i>
+                } else if (name.startsWith("transaction")) {
+                    root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
+                    icon = <i className={'fa fa-file-o'} aria-hidden="true">&nbsp;</i>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span> } </i>
+                } else if (name.startsWith("composite")) {
+                    root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
+                    icon = <span className="selement">CC</span>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span> } </i>
+                } else {
+                    icon = <span className="selement">E</span>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span> } </i>
+                }
             } else {
                 root = '';
+                icon = <i className={'fa fa-file-o'} aria-hidden="true">&nbsp;</i>
             }
 
             return (
                 <div>
                     {root}
-                    <i className={'fa fa-file-o'} aria-hidden="true">&nbsp;</i>
-                    <i className={classNames(selectedObj)} >{this.props.node.description || this.props.node.name}</i>
+                    {icon}
+                    {info}
                     <ul className='SimpleTree' style={style}>
                         {childNodes || this.state.childNodes}
                     </ul>
