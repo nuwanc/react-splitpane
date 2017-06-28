@@ -31,6 +31,7 @@ class TreePane extends Component {
                     isa.title = v.n;
                 }
                 isa.path = v.j;
+                isa.spath = v.p;
                 isa.icon = "fa fa-envelope-o";
                 isa.childNodes = [];
 
@@ -43,6 +44,7 @@ class TreePane extends Component {
                         gs.title = v1.n; 
                     }
                     gs.path = v1.j;
+                    gs.spath = v1.p;
                     gs.icon = "fa fa-folder-o";
                     gs.childNodes = [];
 
@@ -50,6 +52,7 @@ class TreePane extends Component {
                         let st = {};
                         st.title = v2.n;
                         st.path = v2.j;
+                        st.spath = v2.p;
                         st.icon = "fa fa-file-o";
                         gs.childNodes.push(st);
                         count ++;
@@ -97,7 +100,7 @@ class TreePane extends Component {
 
         return (
             <div className="tree" style={divStyle}>
-                {!this.state.tree ? <Loading /> : <SimpleTree node={this.state.tree} selected={this.state.selected} onTreeNodeSelect={this.onTreeNodeSelect} />}
+                {!this.state.tree ? <Loading /> : <SimpleTree node={this.state.tree} selected={this.state.selected} onTreeNodeSelect={this.onTreeNodeSelect} validate={this.props.validate}/>}
             </div>
         )
     }

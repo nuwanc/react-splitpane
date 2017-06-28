@@ -126,7 +126,7 @@ class App extends Component {
           <SplitPane split="horizontal" defaultSize={'90vh'} minSize={50} maxSize={-50} onChange={(size)=>{this.resizeTopPane(size)}} primary="second">
             <div id="outer"></div>
             <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250}>
-              <div><TreePane onTreeNodeClick={this.onTreeNodeClick}  treeHeight={this.state.treeHeight} showOuter={isOuter}/></div>
+              <div><TreePane onTreeNodeClick={this.onTreeNodeClick}  treeHeight={this.state.treeHeight} showOuter={isOuter} validate={this.state.validate}/></div>
               <div id="rightPane">
                 <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}}>
                   <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex}  openModal={this.openModal} viewerHeight={this.state.viewerHeight} validate={this.state.validate}/></div>
@@ -142,7 +142,7 @@ class App extends Component {
       return (
         <div>
           <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={250}>
-            <div><TreePane onTreeNodeClick={this.onTreeNodeClick} treeHeight={this.state.treeHeight} showOuter={isOuter}/></div>
+            <div><TreePane onTreeNodeClick={this.onTreeNodeClick} treeHeight={this.state.treeHeight} showOuter={isOuter} validate={this.state.validate}/></div>
             <div id="rightPane">
               <SplitPane defaultSize="70%" split="horizontal" onChange={(size)=>{this.resizePane(size)}}>
                 <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex}  openModal={this.openModal} viewerHeight={this.state.viewerHeight} validate={this.state.validate}/></div>

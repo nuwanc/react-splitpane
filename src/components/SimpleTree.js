@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Store from '../utils/Store';
 
 class SimpleTree extends Component {
 
@@ -28,7 +29,7 @@ class SimpleTree extends Component {
 
         if (this.props.node.childNodes != null) {
             childNodes = this.props.node.childNodes.map((node, index) => {
-                return <li key={index}><SimpleTree node={node} selected={this.props.selected} onTreeNodeSelect={this.props.onTreeNodeSelect}/></li>
+                return <li key={index}><SimpleTree node={node} selected={this.props.selected} onTreeNodeSelect={this.props.onTreeNodeSelect} validate={this.props.validate}/></li>
             });
 
             classObj = {
@@ -43,11 +44,14 @@ class SimpleTree extends Component {
             style = { display: "none" };
         }
 
+        //console.log(this.props.node.spath,Store.lookupErrorSegment(this.props.node.spath))
+        //console.log(Store.errorPaths);
 
         selectedObj = {
             "fa": true,
             "node": true,
-            "selected": this.props.selected === this.props.node.path
+            "selected": this.props.selected === this.props.node.path,
+            "error" : Store.lookupErrorPath(this.props.node.spath)
         }
 
         let root;
