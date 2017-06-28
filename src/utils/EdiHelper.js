@@ -72,7 +72,7 @@ function processSegments(children, segments) {
             segment.name = v.n;
             segment.path = v.p;
             segment.element = v.e;
-            segment.schema = getSchema(v.t+":"+v.n);
+            segment.schema = getSchemaDetails(v.t + ":" + v.n);
             segments.push(segment);
         } else {
             if (v.c) {
@@ -82,14 +82,67 @@ function processSegments(children, segments) {
     })
 }
 
-function getSchema(name) {
-    let elements = Store.schema["segment"];
-    for (let i = 0, len = elements.length; i < len; i++) {
-        let segment = elements[i];
-        if (segment.name === name) {
-            return segment;
-        }
+function getSchemaDetails(name) {
+    let type = name.split(":")[0];
+    let elements;
+    switch (type) {
+        case 'code':
+            elements = Store.schema["code"];
+            for (let i = 0, len = elements.length; i < len; i++) {
+                let code = elements[i];
+                if (code.name === name) {
+                    return code;
+                }
+            }
+            break;
+        case 'simple':
+            elements = Store.schema["simple"];
+            for (let i = 0, len = elements.length; i < len; i++) {
+                let simple = elements[i];
+                if (simple.name === name) {
+                    return simple;
+                }
+            }
+            break;
+        case 'composite':
+            elements = Store.schema["composite"];
+            for (let i = 0, len = elements.length; i < len; i++) {
+                let composite = elements[i];
+                if (composite.name === name) {
+                    return composite;
+                }
+            }
+            break;
+        case 'mpcode':
+            elements = Store.schema["mpcode"];
+            for (let i = 0, len = elements.length; i < len; i++) {
+                let mpcode = elements[i];
+                if (mpcode.name === name) {
+                    return mpcode;
+                }
+            }
+            break;
+        case 'segment':
+            elements = Store.schema["segment"];
+            for (let i = 0, len = elements.length; i < len; i++) {
+                let segment = elements[i];
+                if (segment.name === name) {
+                    return segment;
+                }
+            }
+            break;
+        case 'loop' :
+            elements = Store.schema["loop"];
+            for (let i = 0, len = elements.length; i < len; i++) {
+                let loop = elements[i];
+                if (loop.name === name) {
+                    return loop;
+                }
+            }
+            break;
+        default:
+            return null;
     }
 }
 
-export { getSegments };
+export { getSegments, getSchemaDetails };
