@@ -19,12 +19,12 @@ class Segment extends Component {
             return <div><h1>HTML view</h1></div>
         } else if (this.props.type === 1) {
             let name;
+            let schema = this.props.segment.schema
             if (Store.lookupErrorSegment(this.props.segment.path)) {
-                name = <span><span style={{ color : 'red' }}>x</span>{this.props.segment.name}</span>
+                name = <span title={schema && schema.description}><span style={{ color : 'red' }}>x</span>{this.props.segment.name}</span>
             } else {
-                name = <span><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
+                name = <span title={schema && schema.description}><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
             }
-            
             const elements = this.props.segment.element.map((v, i) => {
                 return <span key={i}>*{v}</span>
             })

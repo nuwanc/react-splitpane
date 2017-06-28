@@ -1,3 +1,5 @@
+import Store from './Store';
+
 function getSegments(message) {
     let segments = [];
     let segment = {};
@@ -21,7 +23,7 @@ function getSegments(message) {
             let transactions = message.group[i].transaction.length;
             for (let j = 0; j < transactions; j++) {
                 let transaction = message.group[i].transaction[j];
-                processSegments(transaction.c,segments);
+                processSegments(transaction.c, segments);
             }
             let ge = message.group[i].GE;
             segment = {};
@@ -47,7 +49,7 @@ function getSegments(message) {
         let transactions = message.transaction.length;
         for (let j = 0; j < transactions; j++) {
             let transaction = message.transaction[j];
-            processSegments(transaction.c,segments);
+            processSegments(transaction.c, segments);
         }
         let ge = message.GE;
         segment = {};
@@ -56,7 +58,7 @@ function getSegments(message) {
         segment.element = ge.e;
         segments.push(segment);
     } else if (message.ST != null) {
-        processSegments(message.c,segments);
+        processSegments(message.c, segments);
     }
 
     return segments;
@@ -70,13 +72,24 @@ function processSegments(children, segments) {
             segment.name = v.n;
             segment.path = v.p;
             segment.element = v.e;
+            segment.schema = getSchema(v.t+":"+v.n);
             segments.push(segment);
         } else {
             if (v.c) {
-                processSegments(v.c,segments);
+                processSegments(v.c, segments);
             }
         }
     })
 }
 
-export {getSegments};
+function getSchema(name) {
+    let elements = Store.schema["segment"];
+    for (let i = 0, len = elements.length; i < len; i++) {
+        let segment = elements[i];
+        if (segment.name === name) {
+            return segment;
+        }
+    }
+}
+
+export { getSegments };
