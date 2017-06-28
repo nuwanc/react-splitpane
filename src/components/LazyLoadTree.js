@@ -21,7 +21,7 @@ class LazyLoadTree extends Component {
         if (!this.state.loaded) {
             if (this.props.node.element) {
                 childNodes = this.props.node.element.map((node, index) => {
-                    return <li key={index}><LazyLoadTree node={node} root={false} /></li>
+                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal}/></li>
                 });
                 this.setState(() => {
                     return {
@@ -30,6 +30,17 @@ class LazyLoadTree extends Component {
                         loaded: true
                     }
                 });
+            } else {
+                let name = this.props.node.name;
+                if (name.startsWith("code") || name.startsWith("mpcode")) {
+                    let details = this.getDetails(name);
+                    let codes = details.value.map((v,i)=>{
+                        return <li key={i}>{v.value} - {v.description}</li>
+                    })
+                    let content = <ul style={{height : 220, overflowY : 'auto'}}>{codes}</ul>
+                    this.props.openModal(false, {title:details.name +" - "+details.description,content:content});
+                }
+                
             }
         } else {
             this.setState(() => {
@@ -135,7 +146,7 @@ class LazyLoadTree extends Component {
         if (this.props.root) {
             if (this.props.node.transaction != null) {
                 childNodes = this.props.node.transaction.map((node, index) => {
-                    return <li key={index}><LazyLoadTree node={node} root={false} /></li>
+                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal}/></li>
                 });
             }
             style = { display: "block" };

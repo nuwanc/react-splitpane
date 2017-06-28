@@ -55,6 +55,9 @@ class Modal extends Component {
             if (this.props.params['title']) {
                 title = this.props.params['title'];
             }
+            if (this.props.params['content']) {
+                content = this.props.params['content'];
+            }
         }
 
         return (

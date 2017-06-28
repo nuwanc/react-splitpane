@@ -83,7 +83,7 @@ class StandardViewer extends Component {
             content = <Loading textAlign={'center'} height={divStyle.height}/>
         } else {
             if (Store.schema !== null) {
-                content =  <LazyLoadTree node={Store.schema} root={true} />
+                content =  <LazyLoadTree node={Store.schema} root={true} openModal={this.props.openModal}/>
             }
         }
 
