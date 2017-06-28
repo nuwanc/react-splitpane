@@ -7,6 +7,7 @@ import TreePane from './components/TreePane';
 import Loading from './components/Loading';
 import * as Api from './utils/HttpService';
 import Store from './utils/Store';
+import * as startsWith from 'string.prototype.startswith/startswith'
 
 class App extends Component {
 

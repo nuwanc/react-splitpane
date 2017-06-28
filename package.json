@@ -13,7 +13,8 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-split-pane": "^0.1.63",
-    "react-tabs": "^1.0.0"
+    "react-tabs": "^1.0.0",
+    "string.prototype.startswith": "^0.2.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
