@@ -5,10 +5,6 @@ import * as EdiHelper from '../utils/EdiHelper';
 
 class Segment extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidUpdate() {
         if (this.props.selectedSegment) {
             ReactDOM.findDOMNode(this).scrollIntoView({block: 'end', behavior: 'smooth'});
