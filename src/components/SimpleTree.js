@@ -44,9 +44,6 @@ class SimpleTree extends Component {
             style = { display: "none" };
         }
 
-        //console.log(this.props.node.spath,Store.lookupErrorSegment(this.props.node.spath))
-        //console.log(Store.errorPaths);
-
         selectedObj = {
             "fa": true,
             "node": true,

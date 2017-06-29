@@ -32,7 +32,7 @@ class BottomPane extends Component {
                 </TabList>
 
                 <TabPanel forceRender={true}>
-                    <StandardViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal} selectedNode={this.props.selectedNode} viewerHeight={this.props.viewerHeight}/>
+                    <StandardViewer onViewerClick={this.props.onViewerClick} openModal={this.props.openModal} selectedNode={this.props.selectedNode} viewerHeight={this.props.viewerHeight} selectedPath={this.props.selectedPath}/>
                 </TabPanel>
                 <TabPanel forceRender={true}>
                     <ErrorViewer onViewerClick={this.props.onViewerClick} onValidateClick={this.props.onValidateClick} openModal={this.props.openModal} selectedNode={this.props.selectedNode} viewerHeight={this.props.viewerHeight}/>

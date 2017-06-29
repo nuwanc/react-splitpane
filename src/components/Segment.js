@@ -5,10 +5,19 @@ import * as EdiHelper from '../utils/EdiHelper';
 
 class Segment extends Component {
 
+    constructor(props) {
+        super(props);
+        this.onSegmentClick = this.onSegmentClick.bind(this);
+    }
+
     componentDidUpdate() {
         if (this.props.selectedSegment) {
             ReactDOM.findDOMNode(this).scrollIntoView({block: 'end', behavior: 'smooth'});
         }
+    }
+
+    onSegmentClick(path) {
+        this.props.onSegmentClick(path);
     }
 
     render() {
@@ -18,21 +27,21 @@ class Segment extends Component {
             let name;
             let schema = this.props.segment.schema
             if (Store.lookupErrorSegment(this.props.segment.path)) {
-                name = <span title={schema && schema.description}><span style={{ color : 'red' }}>x</span>{this.props.segment.name}</span>
+                name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null,this.props.segment.path)}><span style={{ color : 'red' }}>x</span>{this.props.segment.name}</span>
             } else {
-                name = <span title={schema && schema.description}><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
+                name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null,this.props.segment.path)}><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
             }
             const elements = this.props.segment.element.map((v, i) => {
-                let details = null;
-                let codeVal = '';
+                
                 let title = '';
                 if (schema && schema.element != null && schema.element.length > 0) {
-                    details = EdiHelper.getSchemaDetails(schema.element[i].name);
+                    let codeDesc = '';
+                    let details = EdiHelper.getSchemaDetails(schema.element[i].name);
                     if (details.name.startsWith("code") || details.name.startsWith("mpcode")) {
                         if (details.value) {
                             for (let el of details.value) {
                                 if (el.value === v) {
-                                    codeVal = v + "=" + el.description;
+                                    codeDesc = v + "=" + el.description;
                                     break;
                                 }
                             }
@@ -42,7 +51,7 @@ class Segment extends Component {
                                 let codes = details.parts[i];
                                 for (let el of codes) {
                                     if ( el.value === v) {
-                                        codeVal = v + "=" + el.description;
+                                        codeDesc = v + "=" + el.description;
                                         break;
                                     }
                                 }
@@ -50,9 +59,9 @@ class Segment extends Component {
                         }
                     }
                     title = details && details.description;
-                    title = title + '\n' + codeVal
+                    title = title + '\n' + codeDesc
                 }
-                return <span key={i} title={title}>*{v}</span>
+                return <span key={i} title={title} className="pointer">*{v}</span>
             })
             if (this.props.selectedSegment) {
                 return <div><span className="highlight">{name}{elements}</span></div>

@@ -21,7 +21,6 @@ class StandardViewer extends Component {
     }
 
     componentWillMount() {
-        
         Api.fetchSchemaData().then((schema)=>{
             Store.schema = schema;
             this.setState(()=>{
@@ -77,13 +76,13 @@ class StandardViewer extends Component {
         let divStyle = {
             height: this.state.divHeight || 110
         }
-
+        
         let content = null;
         if (this.state.loading) {
             content = <Loading textAlign={'center'} height={divStyle.height}/>
         } else {
             if (Store.schema !== null) {
-                content =  <LazyLoadTree node={Store.schema} root={true} openModal={this.props.openModal}/>
+                content =  <LazyLoadTree node={Store.schema} root={true} openModal={this.props.openModal} selectedPath={this.props.selectedPath} />
             }
         }
 

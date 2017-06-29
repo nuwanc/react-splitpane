@@ -140,6 +140,15 @@ function getSchemaDetails(name) {
                 }
             }
             break;
+        case 'transaction' :
+            elements = Store.schema["transaction"];
+            for (let i = 0, len = elements.length; i < len; i++) {
+                let transaction = elements[i];
+                if (transaction.name === name) {
+                    return transaction;
+                }
+            }
+            break;
         default:
             return null;
     }

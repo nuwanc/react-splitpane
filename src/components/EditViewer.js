@@ -63,7 +63,7 @@ class EditViewer extends Component {
                 json = JSPath.apply(this.props.selectedNode, Store.message);
 
                 segments = EdiHelper.getSegments(json).map((v, i) => {
-                    return <Segment key={v.path} segment={v} type={this.props.docType}  selectedSegment={v.path === this.props.selectedSegment}/>
+                    return <Segment key={v.path} segment={v} type={this.props.docType}  selectedSegment={v.path === this.props.selectedSegment} validate={this.props.validate} onSegmentClick={this.props.onSegmentClick}/>
                 })
             } else {
                 segments = <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} params={{ msg: "Too many transaction to display in mode, please select individual transaction." }}></Modal>

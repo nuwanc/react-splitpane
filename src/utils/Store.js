@@ -5,6 +5,7 @@ class Store {
 		this.large = false;
 		this.errors = null;
 		this.errorPaths = [];
+		this.segmentPaths = null;
 	}
 
 	lookupErrorSegment(path) {
@@ -31,6 +32,40 @@ class Store {
 			}
 		}
 		return found;
+	}
+
+	lookupSegmentPath(selectedPath) {
+		if (this.segmentPaths === null && this.schema != null) {
+			this.segmentPaths = {};
+			let path = ".";
+			this.processPath(path,this.schema["transaction"][0].element);
+		}
+		let paths = selectedPath.split('/');
+		if (paths.length > 3) {
+			//in transaction
+			let segment = paths[paths.length - 1];
+			segment = "segment:"+segment.substring(0,segment.indexOf('['));
+			paths = this.segmentPaths[segment];
+			console.log(paths);
+		}
+	}
+
+	processPath(path,element) {
+		for (let el of element) {
+			if (el.name.startsWith("segment")) {
+				let paths = [];
+				if (this.segmentPaths[el.name]) {
+					let paths = this.segmentPaths[el.name];
+					paths.push(path + "/" + el.name);
+					this.segmentPaths[el.name] = paths
+				} else {
+					paths.push(path + "/" + el.name)
+					this.segmentPaths[el.name] = paths;
+				}
+			} else if (el.name.startsWith("loop")) {
+				this.processPath(path + "/" + el.name , el.element);
+			}
+		}
 	}
 }
 
