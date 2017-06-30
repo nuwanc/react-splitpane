@@ -16,6 +16,12 @@ class LazyLoadTree extends Component {
         //this.nodeClick = this.nodeClick.bind(this);
     }
 
+    componentDidMount() {
+        if (this.props.toggleOnLoad && this.props.toggleOnLoad === true) {
+            this.toggle();
+        }
+    }
+
     toggle() {
         let childNodes = null;
         if (!this.state.loaded) {
@@ -93,8 +99,12 @@ class LazyLoadTree extends Component {
         let info;
 
         if (this.props.root) {
-            if (this.props.node.transaction != null) {
+            if (this.props.node.transaction) {
                 childNodes = this.props.node.transaction.map((node, index) => {
+                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal} /></li>
+                });
+            } else if (this.props.node.element) {
+                childNodes = this.props.node.element.map((node, index) => {
                     return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal} /></li>
                 });
             }

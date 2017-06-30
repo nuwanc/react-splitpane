@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Schema from './Schema';
 
 class Modal extends Component {
 
@@ -25,6 +26,11 @@ class Modal extends Component {
         return <Tabs><TabList>{tabs}</TabList>{tabPanels}</Tabs>;
         
     }
+
+    generateSchema(path) {
+        return (<Schema path={path}></Schema>)
+    }
+
 
     render() {
         if (!this.props.isOpen) {
@@ -57,6 +63,9 @@ class Modal extends Component {
             }
             if (this.props.params['content']) {
                 content = this.props.params['content'];
+            }
+            if (this.props.params['schema']) {
+                content = this.generateSchema(this.props.params['path']);
             }
         }
 

@@ -17,6 +17,7 @@ class Segment extends Component {
     }
 
     onSegmentClick(path) {
+        this.props.openModal(true,{ schema : true , path : path, title : 'Schema'});
         this.props.onSegmentClick(path);
     }
 
