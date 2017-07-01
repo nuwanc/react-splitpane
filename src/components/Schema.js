@@ -26,8 +26,16 @@ class Schema extends Component {
             if (!Array.isArray(v)) {
                 return <span key={i}><span>*</span><span onClick={this.onElementClick.bind(null,i)} className={ this.state.selectedElement === i ? "highlight pointer" : "pointer"}>{v}</span></span>
             } else {
-                // process composite
-                return <span className="pointer" key={i}>*{v}</span>
+                let composite = [];
+                v.forEach((c,ci)=>{
+                    let key = i+"_"+ci;
+                    if ( ci === 0) {
+                        composite.push(<span key={key}><span>*</span><span onClick={this.onElementClick.bind(null,key)} className={ this.state.selectedElement === key ? "highlight pointer" : "pointer"}>{c}</span></span>)
+                    } else {
+                        composite.push(<span className="pointer" key={key}>>{c}</span>)
+                    }
+                })
+                return composite;
             }
         });
 
