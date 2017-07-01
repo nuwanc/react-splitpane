@@ -7,7 +7,7 @@ class Schema extends Component {
     render() {
         let node = Store.lookupSegmentPath(this.props.path);
         return (
-            <div>
+            <div className="schema">
                 <h5>{this.props.path}</h5>
                 <LazyLoadTree node={node} root={false} toggleOnLoad={true}/>
             </div>

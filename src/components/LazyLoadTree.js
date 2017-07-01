@@ -46,15 +46,25 @@ class LazyLoadTree extends Component {
                             return <li key={i}>{v.value} - {v.description}</li>
                         })
                     } else if (details.part) {
-                        details.part.forEach((v,i)=>{
-                            codes = details.part[i].map((v,i)=>{
+                        details.part.forEach((v, i) => {
+                            codes = details.part[i].map((v, i) => {
                                 return <li key={i}>{v.value} - {v.description}</li>
                             })
                         })
                     }
+                    let content = <ul style={{ maxHeight: 220, overflowY: 'auto' }}>{codes}</ul>
+                    if (this.props.openModal) {
+                        this.props.openModal(false, { title: details.name + " - " + details.description, content: content });
+                    } else {
+                        this.setState(() => {
+                            return {
+                                visible: !this.state.visible,
+                                childNodes: content,
+                                loaded: true
+                            }
+                        });
+                    }
 
-                    let content = <ul style={{ height: 220, overflowY: 'auto' }}>{codes}</ul>
-                    this.props.openModal(false, { title: details.name + " - " + details.description, content: content });
                 }
 
             }
@@ -72,7 +82,7 @@ class LazyLoadTree extends Component {
         this.props.onTreeNodeSelect(node);
     }*/
 
-    
+
 
     render() {
         let classObj;
@@ -112,7 +122,7 @@ class LazyLoadTree extends Component {
 
             return (
                 <div>
-                    <ul className='SimpleTree' style={style}>
+                    <ul className='LazyLoadTree' style={style}>
                         {childNodes || this.state.childNodes}
                     </ul>
                 </div>

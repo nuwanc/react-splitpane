@@ -156,3 +156,8 @@
     content: 'X';
     color: red;
 }
+
+.schema {
+    max-height: 70vh;
+    overflow-y : auto;
+}
