@@ -27,8 +27,8 @@ class Modal extends Component {
         
     }
 
-    generateSchema(path) {
-        return (<Schema path={path}></Schema>)
+    generateSchema(segment) {
+        return (<Schema segment={segment}></Schema>)
     }
 
 
@@ -65,7 +65,7 @@ class Modal extends Component {
                 content = this.props.params['content'];
             }
             if (this.props.params['schema']) {
-                content = this.generateSchema(this.props.params['path']);
+                content = this.generateSchema(this.props.params['segment']);
             }
         }
 

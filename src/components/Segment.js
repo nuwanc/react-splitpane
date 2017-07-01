@@ -16,21 +16,19 @@ class Segment extends Component {
         }
     }
 
-    onSegmentClick(path) {
-        this.props.openModal(true,{ schema : true , path : path, title : 'Schema'});
-        this.props.onSegmentClick(path);
+    onSegmentClick(segment) {
+        this.props.openModal(true,{ schema : true , title : 'Schema', segment : segment});
+        this.props.onSegmentClick(segment.path);
     }
 
     render() {
-        if (this.props.type === 0) {
-            return <div><h1>HTML view</h1></div>
-        } else if (this.props.type === 1) {
+        if (this.props.type === 1) {
             let name;
             let schema = this.props.segment.schema
             if (Store.lookupErrorSegment(this.props.segment.path)) {
-                name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null,this.props.segment.path)}><span style={{ color : 'red' }}>x</span>{this.props.segment.name}</span>
+                name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null,this.props.segment)}><span style={{ color : 'red' }}>x</span>{this.props.segment.name}</span>
             } else {
-                name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null,this.props.segment.path)}><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
+                name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null,this.props.segment)}><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
             }
             const elements = this.props.segment.element.map((v, i) => {
                 
@@ -62,6 +60,7 @@ class Segment extends Component {
                     title = details && details.description;
                     title = title + '\n' + codeDesc
                 }
+                //TODO : get the segment seperator
                 return <span key={i} title={title} className="pointer">*{v}</span>
             })
             if (this.props.selectedSegment) {
@@ -70,8 +69,8 @@ class Segment extends Component {
                 return <div>{name}{elements}</div>
             }
             
-        } else if (this.props.type === 2) {
-            return <div><h1>Text view</h1></div>
+        } else {
+            return null;
         }
     }
 }
