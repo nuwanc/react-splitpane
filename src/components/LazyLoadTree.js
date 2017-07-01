@@ -13,7 +13,6 @@ class LazyLoadTree extends Component {
             childNodes: null
         };
         this.toggle = this.toggle.bind(this);
-        //this.nodeClick = this.nodeClick.bind(this);
     }
 
     componentDidMount() {
@@ -27,7 +26,7 @@ class LazyLoadTree extends Component {
         if (!this.state.loaded) {
             if (this.props.node.element) {
                 childNodes = this.props.node.element.map((node, index) => {
-                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal} /></li>
+                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal} selectedElement={this.props.selectedElement}/></li>
                 });
                 this.setState(() => {
                     return {
@@ -78,12 +77,6 @@ class LazyLoadTree extends Component {
 
     }
 
-    /*nodeClick(node) {
-        this.props.onTreeNodeSelect(node);
-    }*/
-
-
-
     render() {
         let classObj;
         let selectedObj;
@@ -111,11 +104,11 @@ class LazyLoadTree extends Component {
         if (this.props.root) {
             if (this.props.node.transaction) {
                 childNodes = this.props.node.transaction.map((node, index) => {
-                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal} /></li>
+                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal} selectedElement={this.props.selectedElement}/></li>
                 });
             } else if (this.props.node.element) {
                 childNodes = this.props.node.element.map((node, index) => {
-                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal} /></li>
+                    return <li key={index}><LazyLoadTree node={node} root={false} openModal={this.props.openModal} selectedElement={this.props.selectedElement}/></li>
                 });
             }
             style = { display: "block" };

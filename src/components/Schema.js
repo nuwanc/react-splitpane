@@ -4,24 +4,38 @@ import LazyLoadTree from './LazyLoadTree';
 
 class Schema extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedElement : null
+        };
+        this.onElementClick = this.onElementClick.bind(this);
+    }
+
+    onElementClick(i) {
+        this.setState(()=>{
+            return {
+                selectedElement : i
+            }
+        });
+    }
+
     render() {
         let node = Store.lookupSegmentPath(this.props.segment.path);
-        let elements = this.props.segment.element.map((v,i)=>{
-                    if (!Array.isArray(v)) {
-                        return <span className="pointer" key={i}>*{v}</span>
-                    } else {
-                        // process composite
-                        return <span className="pointer" key={i}>*{v}</span>
-                    }
+        let elements = this.props.segment.element.map((v, i) => {
+            if (!Array.isArray(v)) {
+                return <span key={i}><span>*</span><span onClick={this.onElementClick.bind(null,i)} className={ this.state.selectedElement === i ? "highlight pointer" : "pointer"}>{v}</span></span>
+            } else {
+                // process composite
+                return <span className="pointer" key={i}>*{v}</span>
+            }
         });
-
-        
 
         return (
             <div className="schema">
-                <h5>Segment Path:{this.props.segment.path}</h5>
+                <h5>Path:{this.props.segment.path}</h5>
                 <div>Content:{this.props.segment.name}{elements}</div>
-                <LazyLoadTree node={node} root={false} toggleOnLoad={true}/>
+                <LazyLoadTree node={node} root={false} toggleOnLoad={true} selectedElement={this.state.selectedElement}/>
             </div>
         );
     }
