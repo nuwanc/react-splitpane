@@ -69,7 +69,7 @@ class Store {
 		}
 	}
 
-	processPath(path, element) {
+	/*processPath(path, element) {
 		for (let el of element) {
 			if (el.name.startsWith("segment")) {
 				let paths = [];
@@ -85,7 +85,7 @@ class Store {
 				this.processPath(path + "/" + el.name, el.element);
 			}
 		}
-	}
+	}*/
 }
 
 export default (new Store());

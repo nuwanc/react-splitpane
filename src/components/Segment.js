@@ -8,6 +8,7 @@ class Segment extends Component {
     constructor(props) {
         super(props);
         this.onSegmentClick = this.onSegmentClick.bind(this);
+        this.onElementClick = this.onElementClick.bind(this);
     }
 
     componentDidUpdate() {
@@ -19,6 +20,10 @@ class Segment extends Component {
     onSegmentClick(segment) {
         this.props.openModal(true, { schema: true, title: 'Schema', segment: segment });
         this.props.onSegmentClick(segment.path);
+    }
+
+    onElementClick(segment,index) {
+        this.props.openModal(true, { segment : segment , index : index });
     }
 
     render() {
@@ -64,7 +69,7 @@ class Segment extends Component {
                         title = title + '\n' + codeDesc
                     }
                     //TODO : get the segment seperator
-                    return <span key={i}><span>*</span><span title={title} className="pointer">{v}</span></span>
+                    return <span key={i}><span>*</span><span title={title} className="pointer" onClick={this.onElementClick.bind(null,this.props.segment,i)}>{v}</span></span>
                 } else {
                     //composite
                     let composite = [];

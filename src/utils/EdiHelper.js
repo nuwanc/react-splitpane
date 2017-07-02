@@ -72,7 +72,7 @@ function processSegments(children, segments) {
             segment.name = v.n;
             segment.path = v.p;
             segment.element = v.e;
-            segment.schema = getSchemaDetails(v.t + ":" + v.n);
+            segment.schema = Store.lookupSegmentPath(v.p); //getSchemaDetails(v.t + ":" + v.n);
             segments.push(segment);
         } else {
             if (v.c) {

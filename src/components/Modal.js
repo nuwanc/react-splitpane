@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Schema from './Schema';
+import SegmentTab from './SegmentTab';
 
 class Modal extends Component {
 
@@ -14,20 +14,11 @@ class Modal extends Component {
       }
     }
 
-    generateTabs(count) {
-        
-        let tabs = [];
-        let tabPanels = [];
-        for (let i = 0; i < count; i++) {
-            tabs.push(<Tab>{i + 1}</Tab>);
-            tabPanels.push(<TabPanel>This is content for tab panel {i + 1}</TabPanel>);
-        }    
-
-        return <Tabs><TabList>{tabs}</TabList>{tabPanels}</Tabs>;
-        
+    showSegmentTab(segment,index) {
+        return (<SegmentTab segment={segment} index={index}></SegmentTab>)
     }
 
-    generateSchema(segment) {
+    showSchema(segment) {
         return (<Schema segment={segment}></Schema>)
     }
 
@@ -52,8 +43,10 @@ class Modal extends Component {
         let title = 'Warnning';
 
         if (this.props.params) {
-            if (this.props.params['tabs']) {
-                content = this.generateTabs(this.props.params['count'] || 3);
+            if (this.props.params['segment']) {
+                let segment = this.props.params['segment'];
+                title = segment.name;
+                content = this.showSegmentTab(segment,this.props.params['index']);
             }
             if (this.props.params['msg']) {
                 content = <h5>{this.props.params['msg']}</h5>;
@@ -65,7 +58,10 @@ class Modal extends Component {
                 content = this.props.params['content'];
             }
             if (this.props.params['schema']) {
-                content = this.generateSchema(this.props.params['segment']);
+                let segment = this.props.params['segment'];
+                title = "Schema for:"+segment.name;
+                content = this.showSchema(segment);
+
             }
         }
 
