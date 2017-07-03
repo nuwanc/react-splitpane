@@ -45,6 +45,20 @@ class Store {
 		}
 	}
 
+	lookupHeaderPath(selectedPath) {
+		let paths = selectedPath.split('/');
+		if (paths.length > 0) {
+			let elements = this.schema["segment"];
+			let path = paths[paths.length - 1];
+			let name = "segment:"+ path.substring(0, path.indexOf('['));
+			for (let el of elements) {
+				if (el.name === name) {
+					return el;
+				}
+			}
+		}
+	}
+
 	processPaths(elements, paths) {
 
 		for (let i = 0, len = paths.length; i < len; i++) {

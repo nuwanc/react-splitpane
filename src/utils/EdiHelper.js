@@ -1,6 +1,6 @@
 import Store from './Store';
 
-function getSegments(message) {
+function getSegments(message, ignoreTransactions) {
     let segments = [];
     let segment = {};
 
@@ -11,6 +11,7 @@ function getSegments(message) {
         segment.name = isa.n;
         segment.path = isa.p;
         segment.element = isa.e;
+        segment.schema = Store.lookupHeaderPath(isa.p);
         segments.push(segment);
         let groups = message.group.length;
         for (let i = 0; i < groups; i++) {
@@ -19,17 +20,21 @@ function getSegments(message) {
             segment.name = gs.n;
             segment.path = gs.p;
             segment.element = gs.e;
+            segment.schema = Store.lookupHeaderPath(gs.p);
             segments.push(segment);
-            let transactions = message.group[i].transaction.length;
-            for (let j = 0; j < transactions; j++) {
-                let transaction = message.group[i].transaction[j];
-                processSegments(transaction.c, segments);
+            if (!ignoreTransactions) {
+                let transactions = message.group[i].transaction.length;
+                for (let j = 0; j < transactions; j++) {
+                    let transaction = message.group[i].transaction[j];
+                    processSegments(transaction.c, segments);
+                }
             }
             let ge = message.group[i].GE;
             segment = {};
             segment.name = ge.n;
             segment.path = ge.p;
             segment.element = ge.e;
+            segment.schema = Store.lookupHeaderPath(ge.p);
             segments.push(segment);
         }
         let iea = message.IEA;
@@ -37,6 +42,7 @@ function getSegments(message) {
         segment.name = iea.n;
         segment.path = iea.p;
         segment.element = iea.e;
+        segment.schema = Store.lookupHeaderPath(iea.p);
         segments.push(segment);
 
     } else if (message.GS != null) {
@@ -45,17 +51,21 @@ function getSegments(message) {
         segment.name = gs.n;
         segment.path = gs.p;
         segment.element = gs.e;
+        segment.schema = Store.lookupHeaderPath(gs.p);
         segments.push(segment);
-        let transactions = message.transaction.length;
-        for (let j = 0; j < transactions; j++) {
-            let transaction = message.transaction[j];
-            processSegments(transaction.c, segments);
+        if (!ignoreTransactions) {
+            let transactions = message.transaction.length;
+            for (let j = 0; j < transactions; j++) {
+                let transaction = message.transaction[j];
+                processSegments(transaction.c, segments);
+            }
         }
         let ge = message.GE;
         segment = {};
         segment.name = ge.n;
         segment.path = ge.p;
         segment.element = ge.e;
+        segment.schema = Store.lookupHeaderPath(ge.p);
         segments.push(segment);
     } else if (message.ST != null) {
         processSegments(message.c, segments);
@@ -85,22 +95,22 @@ function processSegments(children, segments) {
 function serverPathToJsonPath(serverPath) {
     //ISA[1]/GS[1]/856[1]/BSN[1]
     let paths = serverPath.split("/");
-    if ( paths.length > 3) {
+    if (paths.length > 3) {
         let indexes = [];
-        paths.forEach((v,i)=>{
-            indexes.push(v.substring(v.indexOf("[") + 1,v.indexOf("]")));
+        paths.forEach((v, i) => {
+            indexes.push(v.substring(v.indexOf("[") + 1, v.indexOf("]")));
         })
-        let jsonPath="";
+        let jsonPath = "";
         for (let i = 0; i < 3; i++) {
             switch (i) {
                 case 0:
-                    jsonPath = jsonPath+".interchange["+(indexes[i] - 1)+"]";
+                    jsonPath = jsonPath + ".interchange[" + (indexes[i] - 1) + "]";
                     break;
                 case 1:
-                    jsonPath = jsonPath+".group["+(indexes[i] - 1)+"]";
+                    jsonPath = jsonPath + ".group[" + (indexes[i] - 1) + "]";
                     break;
                 case 2:
-                    jsonPath = jsonPath+".transaction["+(indexes[i] - 1)+"]";
+                    jsonPath = jsonPath + ".transaction[" + (indexes[i] - 1) + "]";
                     break;
                 default:
                     jsonPath = "";
@@ -162,7 +172,7 @@ function getSchemaDetails(name) {
                 }
             }
             break;
-        case 'loop' :
+        case 'loop':
             elements = Store.schema["loop"];
             for (let i = 0, len = elements.length; i < len; i++) {
                 let loop = elements[i];
@@ -171,7 +181,7 @@ function getSchemaDetails(name) {
                 }
             }
             break;
-        case 'transaction' :
+        case 'transaction':
             elements = Store.schema["transaction"];
             for (let i = 0, len = elements.length; i < len; i++) {
                 let transaction = elements[i];

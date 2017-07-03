@@ -59,6 +59,7 @@ class EditViewer extends Component {
     render() {
         let json = '';
         let segments = null;
+        let popup = null;
 
         if (Store.message === null || Store.schema === null) {
             return <Loading />
@@ -67,12 +68,15 @@ class EditViewer extends Component {
         if (this.props.selectedNode) {
             if (this.props.selectedNode.split('.').length > 3 || !Store.large) {
                 json = JSPath.apply(this.props.selectedNode, Store.message);
-
-                segments = EdiHelper.getSegments(json).map((v, i) => {
+                segments = EdiHelper.getSegments(json,false).map((v, i) => {
                     return <Segment key={v.path} segment={v} type={this.props.docType}  selectedSegment={v.path === this.props.selectedSegment} validate={this.props.validate} openModal={this.props.openModal} onSegmentClick={this.props.onSegmentClick}/>
                 })
             } else {
-                segments = <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} params={{ msg: "Too many transaction to display in mode, please select individual transaction." }}></Modal>
+                json = JSPath.apply(this.props.selectedNode, Store.message);
+                segments = EdiHelper.getSegments(json,true).map((v, i) => {
+                    return <Segment key={v.path} segment={v} type={this.props.docType}  selectedSegment={v.path === this.props.selectedSegment} validate={this.props.validate} openModal={this.props.openModal} onSegmentClick={this.props.onSegmentClick}/>
+                })
+                popup = <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()} params={{ msg: "Too many transaction to display. Please select individual transaction." }}></Modal>
             }
         }
 
@@ -83,6 +87,7 @@ class EditViewer extends Component {
         return (
             <div className="doc" style={divStyle}>
                 {segments}
+                {popup}
             </div>
         )
     }
