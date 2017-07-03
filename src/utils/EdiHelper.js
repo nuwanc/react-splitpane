@@ -82,6 +82,37 @@ function processSegments(children, segments) {
     })
 }
 
+function serverPathToJsonPath(serverPath) {
+    //ISA[1]/GS[1]/856[1]/BSN[1]
+    let paths = serverPath.split("/");
+    if ( paths.length > 3) {
+        let indexes = [];
+        paths.forEach((v,i)=>{
+            indexes.push(v.substring(v.indexOf("[") + 1,v.indexOf("]")));
+        })
+        let jsonPath="";
+        for (let i = 0; i < 3; i++) {
+            switch (i) {
+                case 0:
+                    jsonPath = jsonPath+".interchange["+(indexes[i] - 1)+"]";
+                    break;
+                case 1:
+                    jsonPath = jsonPath+".group["+(indexes[i] - 1)+"]";
+                    break;
+                case 2:
+                    jsonPath = jsonPath+".transaction["+(indexes[i] - 1)+"]";
+                    break;
+                default:
+                    jsonPath = "";
+                    break;
+            }
+        }
+        return jsonPath;
+    }
+
+    return null;
+}
+
 function getSchemaDetails(name) {
     let type = name.split(":")[0];
     let elements;
@@ -154,4 +185,4 @@ function getSchemaDetails(name) {
     }
 }
 
-export { getSegments, getSchemaDetails };
+export { getSegments, getSchemaDetails, serverPathToJsonPath };

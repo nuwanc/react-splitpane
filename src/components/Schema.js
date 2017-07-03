@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Store from '../utils/Store';
 import LazyLoadTree from './LazyLoadTree';
 
 class Schema extends Component {

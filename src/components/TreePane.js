@@ -71,6 +71,16 @@ class TreePane extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.state.selected !== nextProps.selectNode) {
+            this.setState(()=>{
+                return {
+                    selected : nextProps.selectNode
+                }
+            });
+        } 
+    }
+
     componentDidMount() {
         let content = document.getElementById('content');
         let outerDiv = document.getElementById('outer');

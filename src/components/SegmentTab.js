@@ -4,11 +4,6 @@ import * as EdiHelper from '../utils/EdiHelper';
 
 class SegmentTab extends Component {
 
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         let node = this.props.segment.schema;
         let index = this.props.index;
@@ -26,7 +21,7 @@ class SegmentTab extends Component {
                  <div>Standard: {details.name} {details.dataType} {details.minLength}/{details.maxLength}</div>
             </TabPanel>);
         })
-        return <Tabs defaultIndex={index}><TabList>{tabs}</TabList>{tabPanels}</Tabs>;;
+        return <Tabs defaultIndex={index}><TabList>{tabs}</TabList>{tabPanels}</Tabs>
     }
 }
 

@@ -130,7 +130,7 @@ class Segment extends Component {
             }
 
         } else {
-            return null;
+            return <div></div>;
         }
     }
 }

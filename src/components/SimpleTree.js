@@ -11,15 +11,11 @@ class SimpleTree extends Component {
             visible: true
         };
         this.toggle = this.toggle.bind(this);
-        this.nodeClick = this.nodeClick.bind(this);
     }
+
 
     toggle() {
         this.setState({ visible: !this.state.visible });
-    }
-
-    nodeClick(node) {
-        this.props.onTreeNodeSelect(node);
     }
 
     render() {
