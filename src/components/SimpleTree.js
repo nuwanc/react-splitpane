@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Store from '../utils/Store';
@@ -13,6 +14,11 @@ class SimpleTree extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
+    componentDidUpdate() {
+        if (this.props.selected === this.props.node.path) {
+            ReactDOM.findDOMNode(this).scrollIntoView({ block: 'end', behavior: 'smooth' });
+        }
+    }
 
     toggle() {
         this.setState({ visible: !this.state.visible });
