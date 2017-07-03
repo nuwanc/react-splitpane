@@ -58,13 +58,13 @@ class ErrorViewer extends Component {
             })
         }
         // clear find results
-        if (this.props.selectedNode !== nextProps.selectedNode) {
+        /*if (this.props.selectedNode !== nextProps.selectedNode) {
             this.setState(()=>{
                 return {
                     selected : null
                 }
             })
-        }
+        }*/
 
     }
 
@@ -108,7 +108,7 @@ class ErrorViewer extends Component {
         } else {
             if (this.state.results!== null) {
                 content =  this.state.results.map((v,i)=>{
-                        return <ErrorResult key={v.location} node={v} onClickResult={this.onErrorViewerClick} selected={this.state.selected === v.location}/>
+                    return <ErrorResult key={v.location} node={v} onClickResult={this.onErrorViewerClick} selected={this.state.selected === v.location}/>
                 })
             }
         }

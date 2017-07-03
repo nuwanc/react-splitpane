@@ -94,6 +94,9 @@ function processSegments(children, segments) {
 
 function serverPathToJsonPath(serverPath) {
     //ISA[1]/GS[1]/856[1]/BSN[1]
+    //ISA[1]/GS[1]/GS[1]/2
+    //ISA[1]/ISA[1]
+    //ISA[1]/GS[1]/GS[1]
     let paths = serverPath.split("/");
     if (paths.length > 3) {
         let indexes = [];
@@ -118,6 +121,24 @@ function serverPathToJsonPath(serverPath) {
             }
         }
         return jsonPath;
+    } else {
+        let jsonPath = "";
+        if (paths.length === 2) {
+            if (paths[0] === paths[1]) {
+                let index = paths[1].substring(paths[1].indexOf("[")+1,paths[1].indexOf("]"));
+                jsonPath = jsonPath + ".interchange[" + (index - 1) + "]";
+            }
+            return jsonPath;
+        } 
+        if (paths.length === 3) {
+            if (paths[1] === paths[2]) {
+                let index = paths[1].substring(paths[1].indexOf("[")+1,paths[1].indexOf("]"));
+                jsonPath = jsonPath + ".interchange[" + (index - 1) + "]";
+                index = paths[2].substring(paths[2].indexOf("[")+1,paths[2].indexOf("]"));
+                jsonPath = jsonPath + ".group[" + (index - 1) +"]";
+            }
+            return jsonPath;
+        }
     }
 
     return null;
