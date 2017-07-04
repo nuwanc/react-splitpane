@@ -35,7 +35,7 @@ class Segment extends Component {
             } else {
                 name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null, this.props.segment)}><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
             }
-            const elements = this.props.segment.element.map((v, i) => {
+            const elements = this.props.segment && this.props.segment.element.map((v, i) => {
 
                 let title = '';
                 let codeDesc = '';

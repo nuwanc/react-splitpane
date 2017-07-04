@@ -3,13 +3,13 @@ import Store from './Store';
 function getSegments(message, ignoreTransactions) {
     let segments = [];
 
-    if (message.ISA != null) {
+    if (message.ISA != null || message.UNB != null) {
         //is interchange
-        let isa = message.ISA;
+        let isa = message.ISA || message.UNB;
         segments.push(processSegment(isa));
         let groups = message.group.length;
         for (let i = 0; i < groups; i++) {
-            let gs = message.group[i].GS;
+            let gs = message.group[i].GS ||  message.group[i].UNG;
             segments.push(processSegment(gs));
             if (!ignoreTransactions) {
                 let transactions = message.group[i].transaction.length;
@@ -18,14 +18,14 @@ function getSegments(message, ignoreTransactions) {
                     processSegments(transaction.c, segments);
                 }
             }
-            let ge = message.group[i].GE;
+            let ge = message.group[i].GE ||  message.group[i].UNE;
             segments.push(processSegment(ge));
         }
-        let iea = message.IEA;
+        let iea = message.IEA || message.UNZ;
         segments.push(processSegment(iea));
 
-    } else if (message.GS != null) {
-        let gs = message.GS;
+    } else if (message.GS != null || message.UNG != null) {
+        let gs = message.GS || message.UNG;
         segments.push(processSegment(gs));
         if (!ignoreTransactions) {
             let transactions = message.transaction.length;
@@ -34,9 +34,9 @@ function getSegments(message, ignoreTransactions) {
                 processSegments(transaction.c, segments);
             }
         }
-        let ge = message.GE;
+        let ge = message.GE || message.UNE;
         segments.push(processSegment(ge));
-    } else if (message.ST != null) {
+    } else if (message.ST != null || message.UNH) {
         processSegments(message.c, segments);
     }
 
@@ -46,12 +46,19 @@ function getSegments(message, ignoreTransactions) {
 function processSegment(inSegment) {
     let segment = {};
 
-    segment.name = inSegment.n;
-    segment.path = inSegment.p;
-    segment.element = inSegment.e;
-    segment.schema = Store.lookupHeaderPath(inSegment.p);
-
-    return segment;
+    if (inSegment !== undefined && inSegment !== null) {
+        segment.name = inSegment.n;
+        segment.path = inSegment.p;
+        segment.element = inSegment.e;
+        segment.schema = Store.lookupHeaderPath(inSegment.p);
+        return segment;
+    } else {
+        segment.name = " ";
+        segment.path = " ";
+        segment.element = [];
+        segment.schema = {};
+        return segment;
+    }
 }
 
 function processSegments(children, segments) {
