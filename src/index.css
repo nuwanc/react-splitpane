@@ -153,8 +153,10 @@
 }
 
 .error::before {
-    content: 'X';
-    color: red;
+    content: '\0078';
+	color: red;
+	font-weight: bold;
+	font-style: normal !important;
 }
 
 .schema {
