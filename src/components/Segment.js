@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Store from '../utils/Store'
+import Store from '../utils/Store';
 import * as EdiHelper from '../utils/EdiHelper';
 
 class Segment extends Component {
@@ -68,8 +68,8 @@ class Segment extends Component {
                         title = details && details.description;
                         title = title + '\n' + codeDesc
                     }
-                    //TODO : get the segment seperator
-                    return <span key={i}><span>*</span><span title={title} className="pointer" onClick={this.onElementClick.bind(null,this.props.segment,i)}>{v}</span></span>
+                    let delimiter = Store.delimiters[1];
+                    return <span key={i}><span>{delimiter}</span><span title={title} className="pointer" onClick={this.onElementClick.bind(null,this.props.segment,i)}>{v}</span></span>
                 } else {
                     //composite
                     let composite = [];
@@ -112,9 +112,11 @@ class Segment extends Component {
                         }
 
                         if (ci === 0) {
-                            composite.push(<span key={key}><span>*</span><span title={title} className="pointer">{c}</span></span>);
+                            let delimiter = Store.delimiters[1];
+                            composite.push(<span key={key}><span>{delimiter}</span><span title={title} className="pointer">{c}</span></span>);
                         } else {
-                            composite.push(<span key={key}><span>*</span><span title={title} className="pointer">{c}</span></span>);
+                            let delimiter = Store.delimiters[2];
+                            composite.push(<span key={key}><span>{delimiter}</span><span title={title} className="pointer">{c}</span></span>);
                         }
                     })
 

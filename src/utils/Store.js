@@ -6,6 +6,16 @@ class Store {
 		this.errors = null;
 		this.errorPaths = [];
 		this.segmentPaths = null;
+		this.delimiters = [];
+	}
+
+	processDelimiters() {
+		if (this.message["delimiters"]) {
+			let delms = Store.message["delimiters"];
+			this.delimiters = delms.split('Q');
+		} else {
+			this.delimiters = ["\\r\\n","*","\\","^"];
+		}
 	}
 
 	lookupErrorSegment(path) {

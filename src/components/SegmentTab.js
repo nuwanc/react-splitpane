@@ -12,7 +12,6 @@ class SegmentTab extends Component {
 
         node.element.forEach((v,i)=>{
             let details = EdiHelper.getSchemaDetails(v.name);
-            //console.log(v,details);
             tabs.push(<Tab key={this.props.segment.name + (i + 1)}>{this.props.segment.name + (i + 1)}</Tab>);
             tabPanels.push(
             <TabPanel key={this.props.segment.name + (i + 1)}>

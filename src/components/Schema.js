@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LazyLoadTree from './LazyLoadTree';
+import Store from '../utils/Store';
 
 class Schema extends Component {
 
@@ -24,15 +25,18 @@ class Schema extends Component {
         let node = this.props.segment.schema;
         let elements = this.props.segment.element.map((v, i) => {
             if (!Array.isArray(v)) {
-                return <span key={i}><span>*</span><span onClick={this.onElementClick.bind(null,i)} className={ this.state.selectedElement === i ? "highlight pointer" : "pointer"}>{v}</span></span>
+                let delimiter = Store.delimiters[1]
+                return <span key={i}><span>{delimiter}</span><span onClick={this.onElementClick.bind(null,i)} className={ this.state.selectedElement === i ? "highlight pointer" : "pointer"}>{v}</span></span>
             } else {
                 let composite = [];
                 v.forEach((c,ci)=>{
                     let key = i+"_"+ci;
                     if ( ci === 0) {
-                        composite.push(<span key={key}><span>*</span><span onClick={this.onElementClick.bind(null,key)} className={ this.state.selectedElement === key ? "highlight pointer" : "pointer"}>{c}</span></span>)
+                        let delimiter = Store.delimiters[1];
+                        composite.push(<span key={key}><span>{delimiter}</span><span onClick={this.onElementClick.bind(null,key)} className={ this.state.selectedElement === key ? "highlight pointer" : "pointer"}>{c}</span></span>)
                     } else {
-                        composite.push(<span className="pointer" key={key}>>{c}</span>)
+                        let delimiter = Store.delimiters[2];
+                        composite.push(<span className="pointer" key={key}><span>{delimiter}</span>{c}</span>)
                     }
                 })
                 return composite;

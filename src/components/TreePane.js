@@ -21,6 +21,8 @@ class TreePane extends Component {
             let tree = {};
             tree.childNodes = [];
             let count = 0;
+            
+            Store.processDelimiters();
 
             Store.message["interchange"].forEach((v,i)=>{
                 let isa = {};
