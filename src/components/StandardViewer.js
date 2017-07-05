@@ -27,6 +27,8 @@ class StandardViewer extends Component {
                 return {
                     loading : false
                 }
+            },()=> {
+                this.props.onSchemaLoad()
             })
         })
     }
@@ -79,7 +81,7 @@ class StandardViewer extends Component {
         
         let content = null;
         if (this.state.loading) {
-            content = <Loading textAlign={'center'} height={divStyle.height}/>
+            content = <Loading textAlign={'center'} height={divStyle.height} text={'Loading the schema'}/>
         } else {
             if (Store.schema !== null) {
                 content =  <LazyLoadTree node={Store.schema} root={true} openModal={this.props.openModal} selectedPath={this.props.selectedPath} />

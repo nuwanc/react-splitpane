@@ -43,10 +43,10 @@ class DocumentPane extends Component {
                 </TabList>
 
                 <TabPanel forceRender={true}>
-                    <HTMLViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight} validate={this.props.validate} onSegmentClick={this.props.onSegmentClick}/>
+                    <HTMLViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight} validate={this.props.validate} onSegmentClick={this.props.onSegmentClick} schemaLoading={this.props.schemaLoading}/>
                 </TabPanel>
                 <TabPanel forceRender={true}>
-                   <EditViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight} validate={this.props.validate} onSegmentClick={this.props.onSegmentClick}/>
+                   <EditViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight} validate={this.props.validate} onSegmentClick={this.props.onSegmentClick} schemaLoading={this.props.schemaLoading}/>
                 </TabPanel>
                 {/*<TabPanel forceRender={true}>
                     <TextViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight}/>
