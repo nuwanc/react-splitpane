@@ -98,7 +98,9 @@ class App extends Component {
   onSchemaLoad() {
     this.setState(()=>{
       return {
-        schemaLoading : false
+        schemaLoading : false,
+        node : '.interchange[0]',
+        tabIndex : 0
       }
     })
   }
