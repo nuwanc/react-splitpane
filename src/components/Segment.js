@@ -13,7 +13,7 @@ class Segment extends Component {
 
     componentDidUpdate() {
         if (this.props.selectedSegment) {
-            ReactDOM.findDOMNode(this).scrollIntoView({ block: 'end', behavior: 'smooth' });
+            ReactDOM.findDOMNode(this).scrollIntoView(true);
         }
     }
 
@@ -128,9 +128,9 @@ class Segment extends Component {
 
             })
             if (this.props.selectedSegment) {
-                return <div><span className="highlight">{name}{elements}</span></div>
+                return <div className="edit-segment"><span className="highlight">{name}{elements}</span></div>
             } else {
-                return <div>{name}{elements}</div>
+                return <div className="edit-segment">{name}{elements}</div>
             }
 
         } else {

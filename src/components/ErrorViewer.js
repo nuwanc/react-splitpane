@@ -57,22 +57,15 @@ class ErrorViewer extends Component {
                 }
             })
         }
-        // clear find results
-        /*if (this.props.selectedNode !== nextProps.selectedNode) {
-            this.setState(()=>{
-                return {
-                    selected : null
-                }
-            })
-        }*/
-
     }
 
 
     handleValidateClick() {
         this.setState(()=>{
             return {
-                loading : true
+                loading : true,
+                results : null,
+                selected : null
             }
         });
 
@@ -104,7 +97,7 @@ class ErrorViewer extends Component {
 
         let content = null;
         if (this.state.loading && this.state.results === null) {
-            content = <Loading textAlign={'center'} height={ulStyle.height}/>
+            content = <Loading textAlign={'center'} height={ulStyle.height} text={'Validating the message'}/>
         } else {
             if (this.state.results!== null) {
                 content =  this.state.results.map((v,i)=>{
