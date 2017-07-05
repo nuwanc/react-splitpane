@@ -30,8 +30,9 @@ class Segment extends Component {
         if (this.props.type === 1) {
             let name;
             let schema = this.props.segment.schema
-            if (Store.lookupErrorSegment(this.props.segment.path)) {
-                name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null, this.props.segment)}><span style={{ color: 'red' }}>x</span>{this.props.segment.name}</span>
+            let error = Store.lookupErrorSegment(this.props.segment.path);
+            if (error !== null) {
+                name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null, this.props.segment)}><span className="error" title={error.text}></span>{this.props.segment.name}</span>
             } else {
                 name = <span title={schema && schema.description} className="pointer" onClick={this.onSegmentClick.bind(null, this.props.segment)}><span>&nbsp;&nbsp;</span>{this.props.segment.name}</span>
             }

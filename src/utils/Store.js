@@ -25,7 +25,15 @@ class Store {
 				this.errorPaths.push(v.location.substring(0, v.location.lastIndexOf('/')))
 			})
 		}
-		return this.errorPaths.indexOf(path) > -1
+		let index = this.errorPaths.indexOf(path);
+		if (index > -1) {
+			return {
+				text : this.errors[index].message
+			}
+		} else {
+			return null;
+		}
+		//return this.errorPaths.indexOf(path) > -1
 	}
 
 	lookupErrorPath(path) {

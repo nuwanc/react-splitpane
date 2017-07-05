@@ -8,6 +8,8 @@ class Group extends Component {
             if (segment.schema && segment.schema.element) {
                 let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
                 return <div key={i}><span>{details.description}</span><span>:</span><span>{v}</span></div>
+            } else {
+                return <div></div>
             }
         })
 
@@ -21,6 +23,8 @@ class Group extends Component {
                 if (segment.schema && segment.schema.element){
                     let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
                     return <th>{details.description}</th>
+                } else {
+                    return <th></th>
                 }
             })
 
