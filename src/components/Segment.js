@@ -24,6 +24,7 @@ class Segment extends Component {
 
     onElementClick(segment,index) {
         this.props.openModal(true, { segment : segment , index : index });
+        this.props.onSegmentClick(segment.path);
     }
 
     render() {

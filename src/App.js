@@ -87,7 +87,8 @@ class App extends Component {
   onSegmentClick(path) {
     this.setState(() => {
       return {
-        path: path
+        path: path,
+        segment : path
       }
     })
   }
