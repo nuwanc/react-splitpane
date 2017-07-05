@@ -10,6 +10,9 @@ function fetchMessageData(id) {
     //https://jsonblob.com/api/jsonBlob/9f7ca9a8-58a3-11e7-ae4c-6ba4129cae91
     //Case3_586
     //https://jsonblob.com/4e9ae052-5a91-11e7-ae4c-9df4ba3dc194
+    //edifact
+    //https://jsonblob.com/ec5f0b6d-6088-11e7-ae4c-492c2c142ff8
+    //https://jsonblob.com/38521ed9-609c-11e7-ae4c-b9107d8afa6e
     return axios.get('https://jsonblob.com/api/jsonBlob/9f7ca9a8-58a3-11e7-ae4c-6ba4129cae91').then((response)=>{
         return response.data;
     })
@@ -22,6 +25,8 @@ function fetchSchemaData() {
     //https://jsonblob.com/43c0b4b4-5bff-11e7-ae4c-6f0b74b006be
     //4060-850
     //https://jsonblob.com/499ce7d3-5c78-11e7-ae4c-5bce762b6543
+    //edifact
+    //https://jsonblob.com/35dafa20-609b-11e7-ae4c-5d4541e47d81
     return axios.get('https://jsonblob.com/api/jsonBlob/499ce7d3-5c78-11e7-ae4c-5bce762b6543').then((response)=>{
         return response.data;
     })

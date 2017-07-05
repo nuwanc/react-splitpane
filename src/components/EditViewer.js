@@ -65,7 +65,7 @@ class EditViewer extends Component {
             return <Loading />
         }
 
-        if (this.props.selectedNode) {
+        if (this.props.selectedNode && this.props.docType === 1) {
             if (this.props.selectedNode.split('.').length > 3 || !Store.large) {
                 json = JSPath.apply(this.props.selectedNode, Store.message);
                 segments = EdiHelper.getSegments(json,false).map((v, i) => {

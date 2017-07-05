@@ -203,4 +203,4 @@ function getSchemaDetails(name) {
     }
 }
 
-export { getSegments, getSchemaDetails, serverPathToJsonPath };
+export { getSegments, getSchemaDetails, serverPathToJsonPath, processSegment };
