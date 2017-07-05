@@ -22,7 +22,7 @@ class Interchange extends Component {
             headers = segment.element.map((v,i)=>{
                 if (segment.schema && segment.schema.element){
                     let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
-                    return <th>{details.description}</th>
+                    return <th key={i}>{details.description}</th>
                 } else {
                     return <th></th>
                 }
@@ -31,17 +31,18 @@ class Interchange extends Component {
             rows = this.props.group.map((v,i)=>{
                 let gs = v.GS;
                 let tds = gs.e.map((v,i)=>{
-                    return <td>{v}</td>
+                    return <td key={i}>{v}</td>
                 });
-                return <tr>{tds}</tr>
+                return <tr key={i}>{tds}</tr>
             })
         }
         return (
-            <div>
-            <section>
+            <div style={{marginLeft:'30px'}}>
+            <section className="segment segment-marker">
+                <header>{segment.schema.description}</header>
                 {elements}
             </section>
-            <table>
+            <table className="table table-bordered" style={{width:'70%'}}>
                 <thead>
                     <tr>{headers}</tr>
                 </thead>

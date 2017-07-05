@@ -163,3 +163,45 @@
     max-height: 70vh;
     overflow-y : auto;
 }
+
+.table {
+	overflow: auto !important;
+    border: 0px solid #000 !important;
+	border-color: #000;
+	background-color: #FFF;
+	border-collapse: collapse !important;
+}
+
+.table th,.table td {
+	border: 1px solid #A9A9A9 !important;
+	background-color: #FFF;
+	padding:4px !important;
+	font-size: 12px !important;
+}
+
+.table th {
+	border: 1px solid #000;
+	background-color: #DDD;
+	font-size: 9pt !important;
+}
+
+.segment {
+	margin-bottom: 5px;
+	white-space: nowrap;
+}
+
+.segment-marker {
+    cursor: pointer
+}
+
+.segment header {
+	font-size: 9pt;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+.segment div {
+	margin-left: 10px;
+	margin-bottom: 3px;
+	font-size: 9pt !important;
+}
