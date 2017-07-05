@@ -69,7 +69,14 @@ class Store {
 			let elements = this.schema["segment"];
 			let path = paths[paths.length - 1];
 			let name = "segment:"+ path.substring(0, path.indexOf('['));
-			for (let el of elements) {
+			//this is not working in IE
+			/*for (let el of elements) {
+				if (el.name === name) {
+					return el;
+				}
+			}*/
+			for (let i = 0, length = elements.length; i < length; i++) {
+				let el = elements[i];
 				if (el.name === name) {
 					return el;
 				}
@@ -88,8 +95,8 @@ class Store {
 			} else {
 				name = "loop:" + path.substring(0, path.indexOf('['));
 			}
-
-			for (let el of elements) {
+			//not working in ie
+			/*for (let el of elements) {
 				if (el.name === name) {
 					if (el.name.startsWith("loop")) {
 						return this.processPaths(el.element, paths.slice(1));
@@ -97,6 +104,16 @@ class Store {
 						return el;
 					}
 				}
+			}*/
+			for (let i=0, length = elements.length; i < length; i++){
+				let el = elements[i];
+				if (el.name === name) {
+					if (el.name.startsWith("loop")) {
+						return this.processPaths(el.element, paths.slice(1));
+					} else {
+						return el;
+					}
+				} 
 			}
 		}
 	}

@@ -48,7 +48,15 @@ class Segment extends Component {
                         let details = EdiHelper.getSchemaDetails(schema.element[i].name);
                         if (details.name.startsWith("code") || details.name.startsWith("mpcode")) {
                             if (details.value) {
-                                for (let el of details.value) {
+                                //not working in ie
+                                /*for (let el of details.value) {
+                                    if (el.value === v) {
+                                        codeDesc = v + "=" + el.description;
+                                        break;
+                                    }
+                                }*/
+                                for (let i = 0, length = details.value; i < length; i++) {
+                                    let el = details.value[i];
                                     if (el.value === v) {
                                         codeDesc = v + "=" + el.description;
                                         break;
@@ -58,7 +66,15 @@ class Segment extends Component {
                                 let len = details.parts.length;
                                 for (let i = 0; i < len; i++) {
                                     let codes = details.parts[i];
-                                    for (let el of codes) {
+                                    //not working in ie
+                                    /*for (let el of codes) {
+                                        if (el.value === v) {
+                                            codeDesc = v + "=" + el.description;
+                                            break;
+                                        }
+                                    }*/
+                                    for (let i = 0, length = codes.length; i < length; i++) {
+                                        let el = codes[i];
                                         if (el.value === v) {
                                             codeDesc = v + "=" + el.description;
                                             break;
@@ -90,7 +106,15 @@ class Segment extends Component {
 
                             if (cDetails.name.startsWith("code") || cDetails.name.startsWith("mpcode")) {
                                 if (cDetails.value) {
-                                    for (let el of cDetails.value) {
+                                    //not working in ie
+                                    /*for (let el of cDetails.value) {
+                                        if (el.value === c) {
+                                            codeDesc = c + "=" + el.description;
+                                            break;
+                                        }
+                                    }*/
+                                    for (let i = 0, length = cDetails.value.length; i < length; i++){
+                                        let el = cDetails.value[i];
                                         if (el.value === c) {
                                             codeDesc = c + "=" + el.description;
                                             break;
@@ -100,7 +124,15 @@ class Segment extends Component {
                                     let len = cDetails.parts.length;
                                     for (let i = 0; i < len; i++) {
                                         let codes = cDetails.parts[i];
-                                        for (let el of codes) {
+                                        //not working in ie
+                                        /*for (let el of codes) {
+                                            if (el.value === c) {
+                                                codeDesc = c + "=" + el.description;
+                                                break;
+                                            }
+                                        }*/
+                                        for (let i = 0, length = codes.length; i < length; i++){
+                                            let el = codes[i];
                                             if (el.value === c) {
                                                 codeDesc = c + "=" + el.description;
                                                 break;

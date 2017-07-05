@@ -3,6 +3,7 @@ import JSPath from 'jspath';
 import Store from '../utils/Store';
 import Interchange from './templates/Interchange';
 import Group from './templates/Group';
+import Transaction from './templates/Transaction';
 import Loading from './Loading';
 
 class HTMLViewer extends Component {
@@ -52,12 +53,14 @@ class HTMLViewer extends Component {
                         content = <Interchange segment={isa} group={group} />
                         break;
                     case 3:
-                        let gs = json.GS || json.UNE;
+                        let gs = json.GS || json.UNG;
                         let transaction = json.transaction;
                         content = <Group segment={gs} transaction={transaction} />
                         break;
                     case 4:
-
+                        let st = json.ST;
+                        console.log(this.props.selectedNode,json);
+                        content = <Transaction segment={st} transaction={json} />
                         break;
                     default:
                         break;
