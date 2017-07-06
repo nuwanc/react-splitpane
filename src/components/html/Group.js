@@ -5,7 +5,7 @@ class Group extends Component {
     render() {
         let segment = EdiHelper.processSegment(this.props.segment);
         let elements = segment.element.map((v,i)=>{
-            if (segment.schema && segment.schema.element) {
+            if (segment.schema && segment.schema.element && v.trim() !== "") {
                 let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
                 if (details.name.startsWith("code")) {
                     if (details.value) {
