@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Store from '../utils/Store';
-import * as EdiHelper from '../utils/EdiHelper';
+import Store from '../../utils/Store';
+import * as EdiHelper from '../../utils/EdiHelper';
 
 class Segment extends Component {
 

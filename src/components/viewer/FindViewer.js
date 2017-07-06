@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import JSPath from 'jspath';
-import Store from '../utils/Store';
-import * as EdiHelper from '../utils/EdiHelper';
-import Loading from './Loading';
+import Store from '../../utils/Store';
+import * as EdiHelper from '../../utils/EdiHelper';
+import Loading from '../ui/Loading';
 
 class FindViewer extends Component {
 

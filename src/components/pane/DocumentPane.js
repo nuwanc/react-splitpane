@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import EditViewer from './EditViewer';
-import HTMLViewer from './HTMLViewer';
+import EditViewer from '../viewer/EditViewer';
+import HTMLViewer from '../viewer/HTMLViewer';
 //import TextViewer from './TextViewer';
 
 class DocumentPane extends Component {

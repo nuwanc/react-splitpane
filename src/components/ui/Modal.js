@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Schema from './Schema';
-import SegmentTab from './SegmentTab';
+import Schema from '../edit/Schema';
+import SegmentTab from '../edit/SegmentTab';
 
 class Modal extends Component {
 

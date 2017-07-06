@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Store from '../utils/Store';
-import * as EdiHelper from '../utils/EdiHelper';
+import Store from '../../utils/Store';
+import * as EdiHelper from '../../utils/EdiHelper';
 import JSPath from 'jspath';
-import Modal from './Modal'
-import Segment from './Segment';
-import Loading from './Loading';
+import Modal from '../ui/Modal'
+import Segment from '../edit/Segment';
+import Loading from '../ui/Loading';
 
 
 class EditViewer extends Component {

@@ -10,7 +10,7 @@ import './index.css';
 
 
 //global variable to show outer most pane
-window.showOuter = true;
+window.showOuter = false;
 
 ReactDOM.render(<App showOuter={window.showOuter}/>, document.getElementById('root'));
 registerServiceWorker();

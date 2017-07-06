@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import * as EdiHelper from '../utils/EdiHelper';
+import * as EdiHelper from '../../utils/EdiHelper';
 
 class LazyLoadTree extends Component {
 

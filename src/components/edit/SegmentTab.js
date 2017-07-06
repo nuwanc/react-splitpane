@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import * as EdiHelper from '../utils/EdiHelper';
+import * as EdiHelper from '../../utils/EdiHelper';
 
 class SegmentTab extends Component {
 

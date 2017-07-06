@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import * as Api from '../utils/HttpService';
-import Store from '../utils/Store';
-import Loading from './Loading';
+import * as Api from '../../utils/HttpService';
+import Store from '../../utils/Store';
+import Loading from '../ui/Loading';
 
 class ErrorViewer extends Component {
 

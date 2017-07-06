@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import StandardViewer from './StandardViewer';
-import ErrorViewer from './ErrorViewer';
-import FindViewer from './FindViewer';
+import StandardViewer from '../viewer/StandardViewer';
+import ErrorViewer from '../viewer/ErrorViewer';
+import FindViewer from '../viewer/FindViewer';
 
 
 class BottomPane extends Component {

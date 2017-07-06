@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import SplitPane from 'react-split-pane';
-import Modal from './components/Modal';
-import DocumentPane from './components/DocumentPane';
-import BottomPane from './components/BottomPane';
-import TreePane from './components/TreePane';
-import Loading from './components/Loading';
+import Modal from './components/ui/Modal';
+import DocumentPane from './components/pane/DocumentPane';
+import BottomPane from './components/pane/BottomPane';
+import TreePane from './components/pane/TreePane';
+import Loading from './components/ui/Loading';
 import * as Api from './utils/HttpService';
 import Store from './utils/Store';
 import 'string.prototype.startswith/startswith';

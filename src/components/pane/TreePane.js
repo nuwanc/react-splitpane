@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SimpleTree from './SimpleTree';
-import Loading from './Loading';
-import Store from '../utils/Store';
+import SimpleTree from '../tree/SimpleTree';
+import Loading from '../ui/Loading';
+import Store from '../../utils/Store';
 
 class TreePane extends Component {
 

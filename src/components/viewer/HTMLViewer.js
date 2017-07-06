@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import JSPath from 'jspath';
-import Store from '../utils/Store';
-import Interchange from './templates/Interchange';
-import Group from './templates/Group';
-import Transaction from './templates/Transaction';
-import Loading from './Loading';
+import Store from '../../utils/Store';
+import Interchange from '../html/Interchange';
+import Group from '../html/Group';
+import Transaction from '../html/Transaction';
+import Loading from '../ui/Loading';
 
 class HTMLViewer extends Component {
     constructor(props) {
@@ -58,9 +58,7 @@ class HTMLViewer extends Component {
                         content = <Group segment={gs} transaction={transaction} />
                         break;
                     case 4:
-                        let st = json.ST;
-                        console.log(this.props.selectedNode,json);
-                        content = <Transaction segment={st} transaction={json} />
+                        content = <Transaction transaction={json} />
                         break;
                     default:
                         break;

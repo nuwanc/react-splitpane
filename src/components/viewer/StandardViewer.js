@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import LazyLoadTree from './LazyLoadTree';
-import * as Api from '../utils/HttpService';
-import Store from '../utils/Store';
-import Loading from './Loading';
+import LazyLoadTree from '../tree/LazyLoadTree';
+import * as Api from '../../utils/HttpService';
+import Store from '../../utils/Store';
+import Loading from '../ui/Loading';
 
 class StandardViewer extends Component {
 
