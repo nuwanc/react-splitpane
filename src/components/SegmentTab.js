@@ -20,10 +20,10 @@ class SegmentTab extends Component {
             if (details.name.startsWith("code")) {
                 let options = [];
                 options = details.value.map((v,i)=>{
-                    return <option value={v.value}>{v.value} = {v.description}</option>
+                    return <option key={i + 1} value={v.value}>{v.value} = {v.description}</option>
                 })
-                options.unshift(<option value="">[empty]</option>);
-                select = <select value={this.props.segment.element[i]} style={{width:'400px'}}>{options}</select>
+                options.unshift(<option value="" key={0}>[empty]</option>);
+                select = <select defaultValue={this.props.segment.element[i]} style={{width:'400px'}}>{options}</select>
             } else {
                 if (this.props.segment.element[i]) {
                     select = <span>{this.props.segment.element[i]}</span>
