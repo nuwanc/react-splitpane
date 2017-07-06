@@ -213,3 +213,14 @@
 .tab-panel {
     padding-left: 20px;
 }
+
+.title {
+    font-size: 9pt !important;
+    font-weight: 700 !important;
+    border: 2px solid #A9A9A9 !important;
+    background-color: #D3D3D3 !important;
+    padding: 2pt !important;
+    color: #000 !important;
+    margin-bottom: 12px !important;
+    margin-top: 12px !important;
+}
