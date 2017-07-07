@@ -3,6 +3,17 @@ import * as EdiHelper from '../../utils/EdiHelper';
 import * as Utilities from '../../utils/Utilities';
 
 class Interchange extends Component {
+
+    constructor(props) {
+        super(props);
+        this.onSegmentClick = this.onSegmentClick.bind(this);
+    }
+
+    onSegmentClick(segment) {
+        this.props.openModal(true, { schema: true, title: 'Schema', segment: segment });
+        this.props.onSegmentClick(segment.path);
+    }
+
     render() {
         let segment = EdiHelper.processSegment(this.props.segment);
         let elements = segment.element.map((v,i)=>{
@@ -54,7 +65,7 @@ class Interchange extends Component {
             })
         }
         return (
-            <div style={{marginLeft:'30px'}}>
+            <div style={{marginLeft:'30px'}} onClick={this.onSegmentClick.bind(null,segment)}>
             <section className="segment segment-marker">
                 <header className="title" style={{width : '90%'}}>{segment.schema.description}</header>
                 {elements}

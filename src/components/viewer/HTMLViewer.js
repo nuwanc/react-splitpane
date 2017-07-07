@@ -50,15 +50,15 @@ class HTMLViewer extends Component {
                     case 2:
                         let isa = json.ISA || json.UNB;
                         let group = json.group;
-                        content = <Interchange segment={isa} group={group} />
+                        content = <Interchange segment={isa} group={group} openModal={this.props.openModal} onSegmentClick={this.props.onSegmentClick}/>
                         break;
                     case 3:
                         let gs = json.GS || json.UNG;
                         let transaction = json.transaction;
-                        content = <Group segment={gs} transaction={transaction} />
+                        content = <Group segment={gs} transaction={transaction} openModal={this.props.openModal} onSegmentClick={this.props.onSegmentClick}/>
                         break;
                     case 4:
-                        content = <Transaction transaction={json} />
+                        content = <Transaction transaction={json} openModal={this.props.openModal} onSegmentClick={this.props.onSegmentClick}/>
                         break;
                     default:
                         break;
