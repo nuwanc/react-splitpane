@@ -46,7 +46,7 @@ class Group extends Component {
 
         if (this.props.transaction) {
             
-            let segment = EdiHelper.processSegment(this.props.transaction[0].ST);
+            let segment = EdiHelper.processSegment(this.props.transaction[0].ST || this.props.transaction[0].UNH);
             headers = segment.element.map((v,i)=>{
                 if (Utilities.isNotEmptyArrayOrString(segment.schema) && Utilities.isNotEmptyArrayOrString(segment.schema.element)){
                     let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
@@ -57,7 +57,7 @@ class Group extends Component {
             })
 
             rows = this.props.transaction.map((v,i)=>{
-                let st = v.ST;
+                let st = v.ST || v.UNH;
                 let tds = st.e.map((v,i)=>{
                     return <td key={i}>{v}</td>
                 });

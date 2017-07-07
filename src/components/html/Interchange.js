@@ -46,7 +46,7 @@ class Interchange extends Component {
 
         if (this.props.group) {
             
-            let segment = EdiHelper.processSegment(this.props.group[0].GS);
+            let segment = EdiHelper.processSegment(this.props.group[0].GS || this.props.group[0].UNG);
             headers = segment.element.map((v,i)=>{
                 if (segment.schema && segment.schema.element){
                     let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
@@ -57,7 +57,7 @@ class Interchange extends Component {
             });
 
             rows = this.props.group.map((v,i)=>{
-                let gs = v.GS;
+                let gs = v.GS || v.UNG;
                 let tds = gs.e.map((v,i)=>{
                     return <td key={i}>{v}</td>
                 });
