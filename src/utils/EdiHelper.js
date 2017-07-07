@@ -43,14 +43,18 @@ function getSegments(message, ignoreTransactions) {
     return segments;
 }
 
-function processSegment(inSegment) {
+function processSegment(inSegment, isHeader = true) {
     let segment = {};
 
     if (inSegment !== undefined && inSegment !== null) {
         segment.name = inSegment.n;
         segment.path = inSegment.p;
         segment.element = inSegment.e;
-        segment.schema = Store.lookupHeaderPath(inSegment.p);
+        if (isHeader) {
+            segment.schema = Store.lookupHeaderPath(inSegment.p);
+        } else {
+            segment.schema = Store.lookupSegmentPath(inSegment.p);
+        }
         return segment;
     } else {
         segment.name = " ";
@@ -61,6 +65,7 @@ function processSegment(inSegment) {
     }
 }
 
+
 function processSegments(children, segments) {
     let segment = {};
     children.forEach((v, i) => {
@@ -69,7 +74,7 @@ function processSegments(children, segments) {
             segment.name = v.n;
             segment.path = v.p;
             segment.element = v.e;
-            segment.schema = Store.lookupSegmentPath(v.p); //getSchemaDetails(v.t + ":" + v.n);
+            segment.schema = Store.lookupSegmentPath(v.p);
             segments.push(segment);
         } else {
             if (v.c) {

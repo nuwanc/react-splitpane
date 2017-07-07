@@ -5,10 +5,11 @@ import * as Utilities from '../../utils/Utilities';
 
 class Segment extends Component {
     render() {
-        let schema = Store.lookupSegmentPath(this.props.node.p);
-        let elements = this.props.node.e.map((v,i)=>{
-            if (Utilities.isNotEmptyArrayOrString(schema) && Utilities.isNotEmptyArrayOrString(schema.element) && Utilities.isNotEmptyArrayOrString(v)) {
-                let details = EdiHelper.getSchemaDetails(schema.element[i].name);
+        let segment = EdiHelper.processSegment(this.props.node,false);
+
+        let elements = segment.element.map((v,i)=>{
+            if (Utilities.isNotEmptyArrayOrString(segment.schema) && Utilities.isNotEmptyArrayOrString(segment.schema.element) && Utilities.isNotEmptyArrayOrString(v)) {
+                let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
                 if (details.name.startsWith("code")) {
                     if (Utilities.isNotEmptyArrayOrString(details.value)) {
                         let code = {};
@@ -34,7 +35,7 @@ class Segment extends Component {
         return (
             <div style={{marginLeft:'30px'}}>
                 <section className="segment segment-marker">
-                    <header className="title" style={{width : '90%'}}>{schema.description}</header>
+                    <header className="title" style={{width : '90%'}}>{segment.schema.description}</header>
                     {elements}
                 </section>
             </div>
