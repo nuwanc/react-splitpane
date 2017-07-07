@@ -130,6 +130,7 @@ class LazyLoadTree extends Component {
             if (this.props.node.name) {
                 let name = this.props.node.name;
                 details = EdiHelper.getSchemaDetails(name);
+                console.log(details);
 
                 if (name.startsWith("segment")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
@@ -155,17 +156,17 @@ class LazyLoadTree extends Component {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <span className="scode">C</span>
                     selectedObj["highlight"] = this.props.selectedElement === this.props.node.position - 1
-                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{details.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.name} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
                 } else if (name.startsWith("mpcode")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <span className="scode">MC</span>
                     selectedObj["highlight"] = this.props.selectedElement === this.props.node.position - 1
-                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{details.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.name} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
                 } else {
                     root = <span className="blank">&nbsp;</span>
                     icon = <span className="selement">E</span>
                     selectedObj["highlight"] = this.props.selectedElement === this.props.node.position - 1
-                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
+                    info = <i className={classNames(selectedObj)} >&nbsp;{details.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.name} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
                 }
             } else {
                 root = '';

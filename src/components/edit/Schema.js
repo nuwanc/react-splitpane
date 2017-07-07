@@ -21,7 +21,6 @@ class Schema extends Component {
     }
 
     render() {
-        //let node = Store.lookupSegmentPath(this.props.segment.path);
         let node = this.props.segment.schema;
         let elements = this.props.segment.element.map((v, i) => {
             if (!Array.isArray(v)) {
