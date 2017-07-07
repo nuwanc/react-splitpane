@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Store from '../../utils/Store';
 import * as EdiHelper from '../../utils/EdiHelper';
+import * as Utilities from '../../utils/Utilities';
 
 class Segment extends Component {
 
@@ -43,11 +44,11 @@ class Segment extends Component {
                 let codeDesc = '';
 
                 if (!Array.isArray(v)) {
-                    if (schema && schema.element != null && schema.element.length > 0) {
+                    if (Utilities.isNotEmptyArrayOrString(schema) && Utilities.isNotEmptyArrayOrString(schema.element) && Utilities.isNotEmptyArrayOrString(schema.element)) {
                         
                         let details = EdiHelper.getSchemaDetails(schema.element[i].name);
                         if (details.name.startsWith("code") || details.name.startsWith("mpcode")) {
-                            if (details.value) {
+                            if (Utilities.isNotEmptyArrayOrString(details.value)) {
                                 //not working in ie
                                 /*for (let el of details.value) {
                                     if (el.value === v) {
@@ -62,7 +63,7 @@ class Segment extends Component {
                                         break;
                                     }
                                 }
-                            } else if (details.parts) {
+                            } else if (Utilities.isNotEmptyArrayOrString(details.parts)) {
                                 let len = details.parts.length;
                                 for (let i = 0; i < len; i++) {
                                     let codes = details.parts[i];
@@ -92,7 +93,7 @@ class Segment extends Component {
                     //composite
                     let composite = [];
                     let details = null;
-                    if (schema && schema.element != null && schema.element.length > 0) {
+                    if (Utilities.isNotEmptyArrayOrString(schema) && Utilities.isNotEmptyArrayOrString(schema.element) && Utilities.isNotEmptyArrayOrString(schema.element)) {
                         details = EdiHelper.getSchemaDetails(schema.element[i].name);
                     }
 
@@ -100,12 +101,12 @@ class Segment extends Component {
                         let key = i + "_" + ci;
                         let element;
 
-                        if (details && details.element) {
+                        if (Utilities.isNotEmptyArrayOrString(details) && Utilities.isNotEmptyArrayOrString(details.element)) {
                             element = details.element[ci];
                             let  cDetails = EdiHelper.getSchemaDetails(element.name);
 
                             if (cDetails.name.startsWith("code") || cDetails.name.startsWith("mpcode")) {
-                                if (cDetails.value) {
+                                if (Utilities.isNotEmptyArrayOrString(cDetails.value)) {
                                     //not working in ie
                                     /*for (let el of cDetails.value) {
                                         if (el.value === c) {
@@ -120,7 +121,7 @@ class Segment extends Component {
                                             break;
                                         }
                                     }
-                                } else if (cDetails.parts) {
+                                } else if (Utilities.isNotEmptyArrayOrString(cDetails.parts)) {
                                     let len = cDetails.parts.length;
                                     for (let i = 0; i < len; i++) {
                                         let codes = cDetails.parts[i];

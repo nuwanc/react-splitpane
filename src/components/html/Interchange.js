@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import * as EdiHelper from '../../utils/EdiHelper';
+import * as Utilities from '../../utils/Utilities';
 
 class Interchange extends Component {
     render() {
         let segment = EdiHelper.processSegment(this.props.segment);
         let elements = segment.element.map((v,i)=>{
-            if (segment.schema && segment.schema.element && v.trim() !== "") {
+            if (Utilities.isNotEmptyArrayOrString(segment.schema) && Utilities.isNotEmptyArrayOrString(segment.schema.element) && Utilities.isNotEmptyArrayOrString(v)) {
                 let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
                 if (details.name.startsWith("code")) {
-                    if (details.value) {
+                    if (Utilities.isNotEmptyArrayOrString(details.value)) {
                         let code;
                         for (let i=0,length = details.value.length;i < length; i++) {
                             let el = details.value[i];

@@ -15,12 +15,6 @@ class LazyLoadTree extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    componentDidMount() {
-        /*if (this.props.toggleOnLoad && this.props.toggleOnLoad === true) {
-            this.toggle();
-        }*/
-    }
-
     toggle() {
         let childNodes = null;
         if (!this.state.loaded) {

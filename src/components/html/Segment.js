@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import Store from '../../utils/Store';
 import * as EdiHelper from '../../utils/EdiHelper';
+import * as Utilities from '../../utils/Utilities';
 
 class Segment extends Component {
     render() {
-        console.log(this.props.node.p);
         let schema = Store.lookupSegmentPath(this.props.node.p);
         let elements = this.props.node.e.map((v,i)=>{
-            if (schema && schema.element) {
+            if (Utilities.isNotEmptyArrayOrString(schema) && Utilities.isNotEmptyArrayOrString(schema.element) && Utilities.isNotEmptyArrayOrString(v)) {
                 let details = EdiHelper.getSchemaDetails(schema.element[i].name);
                 if (details.name.startsWith("code")) {
-                    if (details.value) {
+                    if (Utilities.isNotEmptyArrayOrString(details.value)) {
                         let code = {};
                         for (let i=0,length = details.value.length;i < length; i++) {
                             let el = details.value[i];
