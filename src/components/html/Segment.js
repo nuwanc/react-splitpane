@@ -4,6 +4,7 @@ import * as EdiHelper from '../../utils/EdiHelper';
 
 class Segment extends Component {
     render() {
+        console.log(this.props.node.p);
         let schema = Store.lookupSegmentPath(this.props.node.p);
         let elements = this.props.node.e.map((v,i)=>{
             if (schema && schema.element) {

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Store from '../../utils/Store';
-import * as EdiHelper from '../../utils/EdiHelper';
 import Segment from "./Segment";
 
 class Loop extends Component {
@@ -10,6 +8,18 @@ class Loop extends Component {
                 return <Segment node={v} key={i}/>
             } else if (v.t === "loop") {
                 return <Loop node={v} key={i}/>
+            } else if (v.t === "list"){
+                let segments = v.c.map((v,i)=>{
+                        return <Segment node={v} key={i}/>
+                })
+                return segments;
+            } else if (v.t === "loop-list") {
+                let loops = v.c.map((v,i)=>{
+                        return <Loop node={v} key={i}/>
+                })
+                return loops;
+            } else {
+                return <Segment node={v} key={i}/>
             }
         })
         return <div>{elements}</div>
