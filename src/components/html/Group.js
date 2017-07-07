@@ -60,7 +60,7 @@ class Group extends Component {
                 let st = v.ST || v.UNH;
                 let path = v.j;
                 let tds = st.e.map((v,i)=>{
-                    if (i == 1) {
+                    if (i === 1) {
                          return <td key={i}><a style={{cursor:"pointer"}} onClick={this.props.onCtrlNumberClick.bind(null,path)}>{v}</a></td>
                     }
                     return <td key={i}>{v}</td>

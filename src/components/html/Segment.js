@@ -11,19 +11,40 @@ class Segment extends Component {
 
     onSegmentClick(segment) {
         this.props.openModal(true, { schema: true, title: 'Schema', segment: segment });
-        this.props.onSegmentClick(segment.path,0);
+        this.props.onSegmentClick(segment.path, 0);
     }
 
     render() {
-        let segment = EdiHelper.processSegment(this.props.node,false);
+        let segment = EdiHelper.processSegment(this.props.node, false);
 
-        let elements = segment.element.map((v,i)=>{
+        if (segment.name === "ST") {
+            let element = segment.element[0];
+            let details = EdiHelper.getSchemaDetails(segment.schema.element[0].name);
+            if (details.name.startsWith("code")) {
+                if (Utilities.isNotEmptyArrayOrString(details.value)) {
+                    let code = {};
+                    for (let i = 0, length = details.value.length; i < length; i++) {
+                        let el = details.value[i];
+                        if (el.value === element) {
+                            code = el;
+                            break;
+                        }
+                    }
+
+                    return (
+                        <h4 style={{marginLeft:'30px'}}>{code.description}</h4>
+                    )
+                }
+            }
+        }
+
+        let elements = segment.element.map((v, i) => {
             if (Utilities.isNotEmptyArrayOrString(segment.schema) && Utilities.isNotEmptyArrayOrString(segment.schema.element) && Utilities.isNotEmptyArrayOrString(v)) {
                 let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
                 if (details.name.startsWith("code")) {
                     if (Utilities.isNotEmptyArrayOrString(details.value)) {
                         let code = {};
-                        for (let i=0,length = details.value.length;i < length; i++) {
+                        for (let i = 0, length = details.value.length; i < length; i++) {
                             let el = details.value[i];
                             if (el.value === v) {
                                 code = el;
@@ -43,9 +64,9 @@ class Segment extends Component {
         })
 
         return (
-            <div style={{marginLeft:'30px'}} onClick={this.onSegmentClick.bind(null,segment)}>
+            <div style={{ marginLeft: '30px' }} onClick={this.onSegmentClick.bind(null, segment)}>
                 <section className="segment segment-marker">
-                    <header className="title" style={{width : '90%'}}>{segment.schema.description}</header>
+                    <header className="title" style={{ width: '90%' }}>{segment.schema.description}</header>
                     {elements}
                 </section>
             </div>
