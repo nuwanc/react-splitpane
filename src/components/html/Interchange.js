@@ -21,7 +21,7 @@ class Interchange extends Component {
                 let details = EdiHelper.getSchemaDetails(segment.schema.element[i].name);
                 if (details.name.startsWith("code")) {
                     if (Utilities.isNotEmptyArrayOrString(details.value)) {
-                        let code;
+                        let code = {};
                         for (let i=0,length = details.value.length;i < length; i++) {
                             let el = details.value[i];
                             if (el.value === v) {
