@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Store from '../../utils/Store';
 import * as EdiHelper from '../../utils/EdiHelper';
 import * as Utilities from '../../utils/Utilities';
 
@@ -12,7 +11,7 @@ class Segment extends Component {
 
     onSegmentClick(segment) {
         this.props.openModal(true, { schema: true, title: 'Schema', segment: segment });
-        this.props.onSegmentClick(segment.path);
+        this.props.onSegmentClick(segment.path,0);
     }
 
     render() {

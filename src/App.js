@@ -71,7 +71,6 @@ class App extends Component {
         return {
           segment: segment,
           tabIndex: tabIndex,
-
         }
       })
     });
@@ -86,11 +85,12 @@ class App extends Component {
     })
   }
 
-  onSegmentClick(path) {
+  onSegmentClick(path,tabIndex) {
     this.setState(() => {
       return {
         path: path,
-        segment : path
+        segment : path,
+        tabIndex: tabIndex
       }
     })
   }

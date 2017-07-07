@@ -130,7 +130,6 @@ class LazyLoadTree extends Component {
             if (this.props.node.name) {
                 let name = this.props.node.name;
                 details = EdiHelper.getSchemaDetails(name);
-                console.log(details);
 
                 if (name.startsWith("segment")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;

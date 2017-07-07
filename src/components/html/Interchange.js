@@ -11,7 +11,7 @@ class Interchange extends Component {
 
     onSegmentClick(segment) {
         this.props.openModal(true, { schema: true, title: 'Schema', segment: segment });
-        this.props.onSegmentClick(segment.path);
+        this.props.onSegmentClick(segment.path,0);
     }
 
     render() {

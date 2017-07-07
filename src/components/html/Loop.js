@@ -7,7 +7,7 @@ class Loop extends Component {
             if (v.t === "segment") {
                 return <Segment node={v} key={i} openModal={this.props.openModal} onSegmentClick={this.props.onSegmentClick}/>
             } else if (v.t === "loop") {
-                return <Loop node={v} key={i}/>
+                return <Loop node={v} key={i} openModal={this.props.openModal} onSegmentClick={this.props.onSegmentClick}/>
             } else if (v.t === "list"){
                 let segments = v.c.map((v,i)=>{
                         return <Segment node={v} key={i} openModal={this.props.openModal} onSegmentClick={this.props.onSegmentClick}/>

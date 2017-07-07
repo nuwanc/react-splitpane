@@ -18,14 +18,20 @@ class Segment extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.selectedSegment) {
+            ReactDOM.findDOMNode(this).scrollIntoView(true);
+        }
+    }
+
     onSegmentClick(segment) {
         this.props.openModal(true, { schema: true, title: 'Schema', segment: segment });
-        this.props.onSegmentClick(segment.path);
+        this.props.onSegmentClick(segment.path,1);
     }
 
     onElementClick(segment,index) {
         this.props.openModal(true, { segment : segment , index : index });
-        this.props.onSegmentClick(segment.path);
+        this.props.onSegmentClick(segment.path,1);
     }
 
     render() {
