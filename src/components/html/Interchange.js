@@ -58,15 +58,19 @@ class Interchange extends Component {
 
             rows = this.props.group.map((v,i)=>{
                 let gs = v.GS || v.UNG;
+                let path = v.j;
                 let tds = gs.e.map((v,i)=>{
+                    if ( i === 5) {
+                        return <td key={i}><a style={{cursor:"pointer"}} onClick={this.props.onCtrlNumberClick.bind(null,path)}>{v}</a></td> 
+                    }
                     return <td key={i}>{v}</td>
                 });
                 return <tr key={i}>{tds}</tr>
             })
         }
         return (
-            <div style={{marginLeft:'30px'}} onClick={this.onSegmentClick.bind(null,segment)}>
-            <section className="segment segment-marker">
+            <div style={{marginLeft:'30px'}}>
+            <section className="segment segment-marker" onClick={this.onSegmentClick.bind(null,segment)}>
                 <header className="title" style={{width : '90%'}}>{segment.schema.description}</header>
                 {elements}
             </section>

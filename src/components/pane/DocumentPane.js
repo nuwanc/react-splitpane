@@ -43,7 +43,7 @@ class DocumentPane extends Component {
                 </TabList>
 
                 <TabPanel forceRender={true}>
-                    <HTMLViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight} validate={this.props.validate} onSegmentClick={this.props.onSegmentClick} schemaLoading={this.props.schemaLoading}/>
+                    <HTMLViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight} validate={this.props.validate} onSegmentClick={this.props.onSegmentClick} schemaLoading={this.props.schemaLoading} onCtrlNumberClick={this.props.onCtrlNumberClick}/>
                 </TabPanel>
                 <TabPanel forceRender={true}>
                    <EditViewer docType={this.state.tabIndex} selectedNode={this.props.selectedNode} selectedSegment={this.props.selectedSegment} openModal={this.props.openModal} viewerHeight={this.props.viewerHeight} validate={this.props.validate} onSegmentClick={this.props.onSegmentClick} schemaLoading={this.props.schemaLoading}/>
