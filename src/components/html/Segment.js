@@ -32,10 +32,110 @@ class Segment extends Component {
                     }
 
                     return (
-                        <h4 style={{marginLeft:'30px'}}>{code.description}</h4>
+                        <h4 style={{ marginLeft: '30px' }}>{code.description}</h4>
                     )
                 }
             }
+        }
+
+        if (segment.name === "DTM") {
+            let content;
+            let description = segment.schema.description;
+            let value = segment.element[1];
+            let codeValue = segment.element[0];
+            let details = EdiHelper.getSchemaDetails(segment.schema.element[0].name);
+            if (details.name.startsWith("code")) {
+                let code = {};
+                for (let i = 0, length = details.value.length; i < length; i++) {
+                    let el = details.value[i];
+                    if (el.value === codeValue) {
+                        code = el;
+                        break;
+                    }
+                }
+                content = <div onClick={this.onSegmentClick.bind(null, segment)}><span>{code.description}</span>:<span>{value}</span></div>
+            } else {
+                content = <div onClick={this.onSegmentClick.bind(null, segment)}><span>{codeValue}</span>:<span>{value}</span></div>
+            }
+
+            return (
+                <div style={{ marginLeft: '30px' }}>
+                    <section className="segment segment-marker">
+                        <header className="title" style={{ width: '90%' }}>{description}</header>
+                        {content}
+                    </section>
+                </div>
+            )
+        }
+
+        if (segment.name === "AMT") {
+            let content;
+            //let description = segment.schema.description;
+            let value = segment.element[1];
+            let codeValue = segment.element[0];
+            let details = EdiHelper.getSchemaDetails(segment.schema.element[0].name);
+            if (details.name.startsWith("code")) {
+                let code = {};
+                for (let i = 0, length = details.value.length; i < length; i++) {
+                    let el = details.value[i];
+                    if (el.value === codeValue) {
+                        code = el;
+                        break;
+                    }
+                }
+                content = <div onClick={this.onSegmentClick.bind(null, segment)}><span style={{ fontWeight: 'bold' }}>{code.description}</span>:<span>{value}</span></div>
+            } else {
+                content = <div onClick={this.onSegmentClick.bind(null, segment)}><span style={{ fontWeight: 'bold' }}>{codeValue}</span>:<span>{value}</span></div>
+            }
+
+            return (
+                <div style={{ marginLeft: '20px' }}>
+                    <section className="segment segment-marker">
+                        {content}
+                    </section>
+                </div>
+            )
+        }
+
+        if (segment.name === "N1") {
+            let value1 = segment.element[0];
+            let value2 = segment.element[1];
+            let value3 = segment.element[2];
+            let value4 = segment.element[3];
+            let content = [];
+
+            let details = EdiHelper.getSchemaDetails(segment.schema.element[0].name);
+            if (details.name.startsWith("code")) {
+                let code = {};
+                for (let i = 0, length = details.value.length; i < length; i++) {
+                    let el = details.value[i];
+                    if (el.value === value1) {
+                        code = el;
+                        break;
+                    }
+                }
+                content.push(<div onClick={this.onSegmentClick.bind(null, segment)}><span style={{ fontWeight: 'bold' }}>{code.description}:</span></div>);
+            }
+            details = EdiHelper.getSchemaDetails(segment.schema.element[2].name);
+            if (details.name.startsWith("code")) {
+                let code = {};
+                for (let i = 0, length = details.value.length; i < length; i++) {
+                    let el = details.value[i];
+                    if (el.value === value3) {
+                        code = el;
+                        break;
+                    }
+                }
+                content.push(<div onClick={this.onSegmentClick.bind(null, segment)}><span>({code.description}:{value4})</span></div>);
+            }
+
+            return (
+                <div style={{ marginLeft: '20px' }}>
+                    <section className="segment segment-marker">
+                        {content}
+                    </section>
+                </div>
+            )
         }
 
         let elements = segment.element.map((v, i) => {

@@ -19,7 +19,7 @@ class SegmentList extends Component {
         let first = node.c[0];
         let description = "";
 
-        if (first.n === "REF") {
+        if (first.n === "REF" || first.n === "DTM") {
             segments = node.c.map((v, i) => {
                 let segment = EdiHelper.processSegment(v, false);
                 description = segment.schema.description;
