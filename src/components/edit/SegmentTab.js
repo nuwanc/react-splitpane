@@ -12,6 +12,9 @@ class SegmentTab extends Component {
         let node = this.props.segment.schema;
         let index = this.props.index;
         let cIndex = this.props.cIndex;
+        if (isNaN(cIndex)){
+            cIndex = 0;
+        }
         let tabs = [];
         let tabPanels = [];
         let innerTabs = [];
