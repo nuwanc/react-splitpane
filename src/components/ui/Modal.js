@@ -14,8 +14,8 @@ class Modal extends Component {
       }
     }
 
-    showSegmentTab(segment,index) {
-        return (<SegmentTab segment={segment} index={index}></SegmentTab>)
+    showSegmentTab(segment,index,cIndex) {
+        return (<SegmentTab segment={segment} index={index} cIndex={cIndex}></SegmentTab>)
     }
 
     showSchema(segment) {
@@ -46,7 +46,7 @@ class Modal extends Component {
             if (this.props.params['segment']) {
                 let segment = this.props.params['segment'];
                 title = segment.name;
-                content = this.showSegmentTab(segment,this.props.params['index']);
+                content = this.showSegmentTab(segment,this.props.params['index'],this.props.params['cIndex']);
             }
             if (this.props.params['msg']) {
                 content = <h5>{this.props.params['msg']}</h5>;

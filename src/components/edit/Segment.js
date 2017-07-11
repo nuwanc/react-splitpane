@@ -29,8 +29,8 @@ class Segment extends Component {
         this.props.onSegmentClick(segment.path,1);
     }
 
-    onElementClick(segment,index) {
-        this.props.openModal(true, { segment : segment , index : index });
+    onElementClick(segment,index,compositeIndex) {
+        this.props.openModal(true, { segment : segment , index : index, cIndex : compositeIndex });
         this.props.onSegmentClick(segment.path,1);
     }
 
@@ -154,10 +154,10 @@ class Segment extends Component {
 
                         if (ci === 0) {
                             let delimiter = Store.delimiters[1];
-                            composite.push(<span key={key}><span>{delimiter}</span><span title={title} className="pointer">{c}</span></span>);
+                            composite.push(<span key={key}><span>{delimiter}</span><span title={title} className="pointer" onClick={this.onElementClick.bind(null,this.props.segment,i,ci)}>{c}</span></span>);
                         } else {
                             let delimiter = Store.delimiters[2];
-                            composite.push(<span key={key}><span>{delimiter}</span><span title={title} className="pointer">{c}</span></span>);
+                            composite.push(<span key={key}><span>{delimiter}</span><span title={title} className="pointer" onClick={this.onElementClick.bind(null,this.props.segment,i,ci)}>{c}</span></span>);
                         }
                     })
 
