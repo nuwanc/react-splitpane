@@ -82,7 +82,13 @@ class ErrorViewer extends Component {
     }
 
     onErrorViewerClick(path) {
-        this.props.onViewerClick(path.substring(0,path.lastIndexOf('/')), 1);
+        let paths = path.split("/");
+        if (isNaN(paths[paths.length - 1])) {
+            this.props.onViewerClick(path, 1);
+        } else {
+            this.props.onViewerClick(path.substring(0,path.lastIndexOf('/')), 1);
+        }
+        
         this.setState(()=>{
             return {
                 selected : path

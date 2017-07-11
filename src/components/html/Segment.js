@@ -114,7 +114,7 @@ class Segment extends Component {
                         break;
                     }
                 }
-                content.push(<div onClick={this.onSegmentClick.bind(null, segment)}><span style={{ fontWeight: 'bold' }}>{code.description}:</span></div>);
+                content.push(<div key={0} onClick={this.onSegmentClick.bind(null, segment)}><span style={{ fontWeight: 'bold' }}>{code.description}:</span></div>);
             }
             details = EdiHelper.getSchemaDetails(segment.schema.element[2].name);
             if (details.name.startsWith("code")) {
@@ -126,7 +126,7 @@ class Segment extends Component {
                         break;
                     }
                 }
-                content.push(<div onClick={this.onSegmentClick.bind(null, segment)}><span>({code.description}:{value4})</span></div>);
+                content.push(<div key={2} onClick={this.onSegmentClick.bind(null, segment)}><span>({code.description}:{value4})</span></div>);
             }
 
             return (
