@@ -70,11 +70,11 @@ class ErrorViewer extends Component {
         });
 
         Api.fetchErrorData().then((errors) => {
-            Store.errors = errors;
+            Store.errors = errors.slice(0,500);
             this.props.onValidateClick(true);
             this.setState(()=>{
                 return {
-                    results : errors,
+                    results : errors.slice(0,500),
                     loading : false
                 }
             })

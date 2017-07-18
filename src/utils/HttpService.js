@@ -39,7 +39,9 @@ function fetchSchemaData() {
 function fetchErrorData(id) {
     //errors
     //https://jsonblob.com/81a98ecb-5a91-11e7-ae4c-7d4c57e5d03f
-    return axios.get('https://jsonblob.com/api/jsonBlob/81a98ecb-5a91-11e7-ae4c-7d4c57e5d03f').then((response)=>{
+    //big list
+    //https://jsonblob.com/b4359356-6bd7-11e7-a38a-4fb49769c307
+    return axios.get('https://jsonblob.com/api/jsonBlob/b4359356-6bd7-11e7-a38a-4fb49769c307').then((response)=>{
         return response.data;
     })
 }

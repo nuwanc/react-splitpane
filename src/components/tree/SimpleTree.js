@@ -49,9 +49,11 @@ class SimpleTree extends Component {
         selectedObj = {
             "fa": true,
             "node": true,
-            "selected": this.props.selected === this.props.node.path,
-            "error" : Store.lookupErrorPath(this.props.node.spath)
+            "selected": this.props.selected === this.props.node.path
+            
         }
+        
+        let error = Store.lookupErrorPath(this.props.node.spath) ? 'fa fa-times fa-stack-1x text-danger' : 'fa';
 
         let root;
         if (this.props.node.title) {
@@ -63,7 +65,10 @@ class SimpleTree extends Component {
         return (
             <div>
                 {root}
-                <i className={this.props.node.icon} aria-hidden="true">&nbsp;</i>
+                <span className="fa-stack">
+                    <i className={this.props.node.icon}></i>
+                    <i className={error}></i>
+                </span>
                 <i className={classNames(selectedObj)} onClick={this.props.onTreeNodeSelect.bind(null,this.props.node.path)}>{this.props.node.title}</i>
                 <ul className='SimpleTree' style={style}>
                     {childNodes}

@@ -33,7 +33,6 @@ class Store {
 		} else {
 			return null;
 		}
-		//return this.errorPaths.indexOf(path) > -1
 	}
 
 	lookupErrorPath(path) {
