@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
-import JSPath from 'jspath';
-import Store from '../../utils/Store';
-import * as EdiHelper from '../../utils/EdiHelper';
 import Loading from '../ui/Loading';
+import * as Api from '../../utils/FindService';
 
 class FindViewer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            text : '',
-            results : null,
-            ulHeight : null,
-            selected : null,
-            loading : false
+            text: '',
+            results: null,
+            ulHeight: null,
+            selected: null,
+            loading: false,
+            noResults: false,
+            exact: false,
+            matchCase: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFindClick = this.handleFindClick.bind(this);
         this.onFindViewerClick = this.onFindViewerClick.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     handleChange(event) {
         let value = event.target.value;
-        this.setState(()=>{
+        this.setState(() => {
             return {
                 text: value
             }
@@ -41,22 +53,22 @@ class FindViewer extends Component {
         if (this.props.viewerHeight !== nextProps.viewerHeight) {
             let parentHeight = document.getElementById("rightPane").firstChild.clientHeight;
             let ulHeight = parentHeight - nextProps.viewerHeight;
-            this.setState(()=>{
+            this.setState(() => {
                 return {
-                    ulHeight : ulHeight - 130
+                    ulHeight: ulHeight - 130
                 }
             })
         }
         // clear find results
-        if (this.props.selectedNode !== nextProps.selectedNode) {
-            this.setState(()=>{
+        /*if (this.props.selectedNode !== nextProps.selectedNode) {
+            this.setState(() => {
                 return {
-                    results : null,
-                    text : '',
-                    selected : null
+                    results: null,
+                    text: '',
+                    selected: null
                 }
             })
-        }
+        }*/
 
     }
 
@@ -73,55 +85,58 @@ class FindViewer extends Component {
         let parentHeight = document.getElementById("rightPane").firstChild.clientHeight;
         if (this.props.viewerHeight) {
             let ulHeight = parentHeight - this.props.viewerHeight;
-            this.setState(()=>{
+            this.setState(() => {
                 return {
-                    ulHeight : ulHeight - 130
+                    ulHeight: ulHeight - 130
                 }
             })
         } else {
             let viewerHeight = document.getElementById("docPane").clientHeight - 44
             let ulHeight = parentHeight - viewerHeight;
-            this.setState(()=>{
+            this.setState(() => {
                 return {
-                    ulHeight : ulHeight - 130
+                    ulHeight: ulHeight - 130
                 }
             })
         }
     }
 
     handleFindClick() {
-        let json = '';
         let text = this.state.text;
-        let results = [];
 
-        this.setState(()=>{
+        this.setState(() => {
             return {
-                loading : true
+                loading: true,
+                results: null,
+                noResults: false
             }
         });
 
-        if (this.props.selectedNode && this.props.selectedNode.split('.').length > 3) {
-            json = JSPath.apply(this.props.selectedNode, Store.message);
-            EdiHelper.getSegments(json).forEach((v,i)=>{
-                if (v.element && v.element.indexOf(text) > -1) {
-                    results.push(v);
+        Api.findInDocument(text, this.props.selectedNode, this.state.exact, this.state.matchCase).then((results) => {
+            console.log(results);
+            this.setState(() => {
+                return {
+                    results: results,
+                    loading: false
                 }
-            })
-        }
-        
-        this.setState(()=>{
-            return {
-                results : results,
-                loading : false
-            }
-        });
+            });
+        }).catch((results) => {
+            console.log(results);
+            this.setState(() => {
+                return {
+                    noResults: results,
+                    loading: false
+                }
+            });
+        })
+
     }
 
-    onFindViewerClick(path){
-        this.props.onViewerClick(path,1);
-        this.setState(()=>{
+    onFindViewerClick(path) {
+        this.props.onViewerClick(path, 1);
+        this.setState(() => {
             return {
-                selected : path
+                selected: path
             }
         });
     }
@@ -134,16 +149,25 @@ class FindViewer extends Component {
         let content = null;
 
         if (this.state.loading) {
-            content = <Loading textAlign={'center'} height={ulStyle.height}/>
+            content = <Loading textAlign={'center'} height={ulStyle.height} text={'Finding'} />
         } else {
-            content = this.state.results && this.state.results.map((v,i)=>{
-                        return <FindResult key={v.path} node={v} onClickResult={this.onFindViewerClick} selected={this.state.selected === v.path}/>
-            })
+            if (this.state.results !== null) {
+                content = Array.from(this.state.results).slice(0,500).map((v, i) => {
+                    return <FindResult key={v.path} node={v} onClickResult={this.onFindViewerClick} selected={this.state.selected === v.path} />
+                })
+            }
+        }
+
+        if (this.state.noResults) {
+            content = <li>No Results.</li>
         }
 
         return (
             <div>
-                <span>Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress}/> <button onClick={this.handleFindClick}>Find</button></span>
+                <span>
+                    Find in Edit View : <input type="text" name="find" value={this.state.text} onChange={this.handleChange} onKeyPress={this.handleKeyPress} /> <button onClick={this.handleFindClick}>Find</button>&nbsp;
+                    Options:  <input type="checkbox" name="exact" checked={this.state.exact} onChange={this.handleInputChange} /> Match whole word <input type="checkbox" name="matchCase" checked={this.state.matchCase} onChange={this.handleInputChange} /> Match case
+                </span>
                 <ol className="results" style={ulStyle}>
                     {content}
                 </ol>
@@ -162,8 +186,8 @@ class FindResult extends Component {
         this.props.onClickResult(path);
     }
 
-    render () {
-        return <li><span className={ this.props.selected ? "highlight" : "" }><a className="pointer" onClick={this.handleClick.bind(null,this.props.node.path)}>{this.props.node.path}</a> -> {this.props.node.element.join('*')}</span></li>
+    render() {
+        return <li><span className={this.props.selected ? "highlight" : ""}><a className="pointer" onClick={this.handleClick.bind(null, this.props.node.path)}>{this.props.node.path}</a> -> {this.props.node.element.join('*')}</span></li>
     }
 }
 
