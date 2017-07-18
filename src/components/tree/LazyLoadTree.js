@@ -134,7 +134,8 @@ class LazyLoadTree extends Component {
                 if (name.startsWith("segment")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <span className="ssegment">S</span>
-                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span>} </i>
+                    //{'Segment ID '}{this.props.node.name.split(":")[1]} - 
+                    info = <span className={classNames(selectedObj)} >&nbsp;<b>{this.props.node.description || this.props.node.name}</b> {this.props.node.requirementType ? <span>{this.props.node.requirementType} - {this.props.node.maxOccurs == -1 ? 'Unbound' : this.props.node.maxOccurs}</span> : <span> </span>} </span>
                 } else if (name.startsWith("composite")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <span className="scomposite">C</span>
@@ -142,30 +143,30 @@ class LazyLoadTree extends Component {
                         let keys = this.props.selectedElement.split("_");
                         selectedObj["highlight"] = keys[0] == this.props.node.position - 1
                     }
-                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span>} </i>
+                    info = <span className={classNames(selectedObj)} >&nbsp;<b>{this.props.node.description || this.props.node.name}</b> {this.props.node.requirementType ? <span>{this.props.node.requirementType} - {this.props.node.maxOccurs == -1 ? 'Unbound' : this.props.node.maxOccurs}</span> : <span> </span>} </span>
                 } else if (name.startsWith("loop")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <span className="sloop">L</span>
-                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span>} </i>
+                    info = <span className={classNames(selectedObj)} >&nbsp;<b>{this.props.node.description || this.props.node.name.split(":")[1]}</b> {this.props.node.requirementType ? <span>{this.props.node.requirementType} - {this.props.node.maxOccurs == -1 ? 'Unbound' : this.props.node.maxOccurs}</span> : <span> </span>} </span>
                 } else if (name.startsWith("transaction")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <i className={'fa fa-file-o'} aria-hidden="true">&nbsp;</i>
-                    info = <i className={classNames(selectedObj)} >&nbsp;{this.props.node.description || this.props.node.name} {this.props.node.requirementType ? <span>({this.props.node.requirementType}/{this.props.node.maxOccurs})</span> : <span> </span>} </i>
+                    info = <span className={classNames(selectedObj)} >&nbsp;<b>{this.props.node.description || this.props.node.name}</b> {this.props.node.requirementType ? <span>{this.props.node.requirementType} - {this.props.node.maxOccurs == -1 ? 'Unbound' : this.props.node.maxOccurs}</span> : <span> </span>} </span>
                 } else if (name.startsWith("code")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <span className="scode">C</span>
                     selectedObj["highlight"] = this.props.selectedElement === this.props.node.position - 1
-                    info = <i className={classNames(selectedObj)} >&nbsp;{details.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.name} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
+                    info = <span className={classNames(selectedObj)} >&nbsp;<b>{details.description || this.props.node.name}</b> {this.props.node.requirementType && details ? <span>{'Element ID '}{this.props.node.name.split(":")[1]} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength}</span> : <span> </span>} </span>
                 } else if (name.startsWith("mpcode")) {
                     root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
                     icon = <span className="scode">MC</span>
                     selectedObj["highlight"] = this.props.selectedElement === this.props.node.position - 1
-                    info = <i className={classNames(selectedObj)} >&nbsp;{details.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.name} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
+                    info = <span className={classNames(selectedObj)} >&nbsp;<b>{details.description || this.props.node.name}</b> {this.props.node.requirementType && details ? <span>{'Element ID '}{this.props.node.name.split(":")[1]} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength}</span> : <span> </span>} </span>
                 } else {
                     root = <span className="blank">&nbsp;</span>
                     icon = <span className="selement">E</span>
                     selectedObj["highlight"] = this.props.selectedElement === this.props.node.position - 1
-                    info = <i className={classNames(selectedObj)} >&nbsp;{details.description || this.props.node.name} {this.props.node.requirementType && details ? <span>({this.props.node.name} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength})</span> : <span> </span>} </i>
+                    info = <span className={classNames(selectedObj)} >&nbsp;<b>{details.description || this.props.node.name}</b> {this.props.node.requirementType && details ? <span>{'Element ID '}{this.props.node.name.split(":")[1]} - {this.props.node.requirementType} - {details.dataType} -  {details.minLength} / {details.maxLength}</span> : <span> </span>} </span>
                 }
             } else {
                 root = '';

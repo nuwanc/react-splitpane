@@ -81,7 +81,7 @@ class StandardViewer extends Component {
         
         let content = null;
         if (this.state.loading) {
-            content = <Loading textAlign={'center'} height={divStyle.height} text={'Loading the schema'}/>
+            content = <Loading textAlign={'center'} height={divStyle.height} text={'Loading the Specification'}/>
         } else {
             if (Store.schema !== null) {
                 content =  <LazyLoadTree node={Store.schema} root={true} openModal={this.props.openModal} selectedPath={this.props.selectedPath} />

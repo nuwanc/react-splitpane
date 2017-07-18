@@ -59,7 +59,7 @@ class Modal extends Component {
             }
             if (this.props.params['schema']) {
                 let segment = this.props.params['segment'];
-                title = "Schema for:"+segment.name;
+                title = "Specification for:"+segment.name;
                 content = this.showSchema(segment);
 
             }
