@@ -9,7 +9,7 @@ class Store {
 
 	processDelimiters() {
 		if (this.message["delimiters"]) {
-			let delms = Store.message["delimiters"];
+			let delms = this.message["delimiters"];
 			this.delimiters = delms.split('Q');
 		} else {
 			this.delimiters = ["\\r\\n", "*", "\\", "^"];
