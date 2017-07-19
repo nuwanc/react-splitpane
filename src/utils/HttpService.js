@@ -41,7 +41,9 @@ function fetchErrorData(id) {
     //https://jsonblob.com/81a98ecb-5a91-11e7-ae4c-7d4c57e5d03f
     //big list
     //https://jsonblob.com/b4359356-6bd7-11e7-a38a-4fb49769c307
-    return axios.get('https://jsonblob.com/api/jsonBlob/b4359356-6bd7-11e7-a38a-4fb49769c307').then((response)=>{
+    //new format
+    //https://jsonblob.com/6d2350cb-6c6f-11e7-a38a-6db307f861f5
+    return axios.get('https://jsonblob.com/api/jsonBlob/6d2350cb-6c6f-11e7-a38a-6db307f861f5').then((response)=>{
         return response.data;
     })
 }

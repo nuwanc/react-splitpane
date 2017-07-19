@@ -4,8 +4,6 @@ class Store {
 		this.message = null;
 		this.large = false;
 		this.errors = null;
-		this.errorPaths = [];
-		this.segmentPaths = null;
 		this.delimiters = [];
 	}
 
@@ -14,41 +12,49 @@ class Store {
 			let delms = Store.message["delimiters"];
 			this.delimiters = delms.split('Q');
 		} else {
-			this.delimiters = ["\\r\\n","*","\\","^"];
+			this.delimiters = ["\\r\\n", "*", "\\", "^"];
 		}
 	}
 
-	lookupErrorSegment(path) {
-		if (this.errorPaths.length === 0 && this.errors !== null) {
-			this.errorPaths = [];
-			this.errors.forEach((v, i) => {
-				this.errorPaths.push(v.location.substring(0, v.location.lastIndexOf('/')))
-			})
+	getErrorList() {
+		let errors = [];
+		if (this.errors) {
+			Object.keys(this.errors).forEach((key)=>{
+				errors = errors.concat(this.errors[key]);
+			});
 		}
-		let index = this.errorPaths.indexOf(path);
-		if (index > -1) {
-			return {
-				text : this.errors[index].message
+		return errors;
+	}
+
+	lookupErrorSegment(path) {
+		if (this.errors) {
+			let error = this.errors[path];
+			if (error) {
+				return {
+					text: error[0].message
+				}
+			} else {
+				return null;
 			}
 		} else {
 			return null;
 		}
+
 	}
 
 	lookupErrorPath(path) {
-		if (this.errorPaths.length === 0 && this.errors !== null) {
-			this.errorPaths = [];
-			this.errors.forEach((v, i) => {
-				this.errorPaths.push(v.location.substring(0, v.location.lastIndexOf('/')))
-			})
-		}
 		let found = false;
-		for (let i = 0, len = this.errorPaths.length; i < len; i++) {
-			if (this.errorPaths[i].startsWith(path)) {
-				found = true;
-			}
+		if (this.errors) {
+			Object.keys(this.errors).forEach((key)=>{
+				if (key.startsWith(path)) {
+					found = true;
+				}
+			});
+			return found;
+		} else {
+			return found;
 		}
-		return found;
+
 	}
 
 	lookupSegmentPath(selectedPath) {
@@ -67,7 +73,7 @@ class Store {
 		if (paths.length > 0) {
 			let elements = this.schema["segment"];
 			let path = paths[paths.length - 1];
-			let name = "segment:"+ path.substring(0, path.indexOf('['));
+			let name = "segment:" + path.substring(0, path.indexOf('['));
 			//this is not working in IE
 			/*for (let el of elements) {
 				if (el.name === name) {
@@ -104,7 +110,7 @@ class Store {
 					}
 				}
 			}*/
-			for (let i=0, length = elements.length; i < length; i++){
+			for (let i = 0, length = elements.length; i < length; i++) {
 				let el = elements[i];
 				if (el.name === name) {
 					if (el.name.startsWith("loop")) {
@@ -112,28 +118,10 @@ class Store {
 					} else {
 						return el;
 					}
-				} 
+				}
 			}
 		}
 	}
-
-	/*processPath(path, element) {
-		for (let el of element) {
-			if (el.name.startsWith("segment")) {
-				let paths = [];
-				if (this.segmentPaths[el.name]) {
-					let paths = this.segmentPaths[el.name];
-					paths.push(path + "/" + el.name);
-					this.segmentPaths[el.name] = paths
-				} else {
-					paths.push(path + "/" + el.name)
-					this.segmentPaths[el.name] = paths;
-				}
-			} else if (el.name.startsWith("loop")) {
-				this.processPath(path + "/" + el.name, el.element);
-			}
-		}
-	}*/
 }
 
 export default (new Store());

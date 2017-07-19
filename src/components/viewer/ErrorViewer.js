@@ -8,7 +8,6 @@ class ErrorViewer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            results : null,
             ulHeight : null,
             selected : null,
             loading : false
@@ -64,17 +63,15 @@ class ErrorViewer extends Component {
         this.setState(()=>{
             return {
                 loading : true,
-                results : null,
                 selected : null
             }
         });
 
         Api.fetchErrorData().then((errors) => {
-            Store.errors = errors.slice(0,500);
+            Store.errors = errors;
             this.props.onValidateClick(true);
             this.setState(()=>{
                 return {
-                    results : errors.slice(0,500),
                     loading : false
                 }
             })
@@ -105,8 +102,8 @@ class ErrorViewer extends Component {
         if (this.state.loading && this.state.results === null) {
             content = <Loading textAlign={'center'} height={ulStyle.height} text={'Validating the message'}/>
         } else {
-            if (this.state.results!== null) {
-                content =  this.state.results.map((v,i)=>{
+            if (Store.errors !== null) {
+                content = Store.getErrorList().map((v,i)=>{
                     return <ErrorResult key={v.location} node={v} onClickResult={this.onErrorViewerClick} selected={this.state.selected === v.location}/>
                 })
             }
