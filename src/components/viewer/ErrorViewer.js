@@ -99,11 +99,11 @@ class ErrorViewer extends Component {
         }
 
         let content = null;
-        if (this.state.loading && this.state.results === null) {
+        if (this.state.loading) {
             content = <Loading textAlign={'center'} height={ulStyle.height} text={'Validating the message'}/>
         } else {
             if (Store.errors !== null) {
-                content = Store.getErrorList().map((v,i)=>{
+                content = Store.getErrorList(500).map((v,i)=>{
                     return <ErrorResult key={v.location} node={v} onClickResult={this.onErrorViewerClick} selected={this.state.selected === v.location}/>
                 })
             }

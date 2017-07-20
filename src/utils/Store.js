@@ -5,6 +5,7 @@ class Store {
 		this.large = false;
 		this.errors = null;
 		this.delimiters = [];
+		this.errorsOnDisplay = [];
 	}
 
 	processDelimiters() {
@@ -16,14 +17,15 @@ class Store {
 		}
 	}
 
-	getErrorList() {
+	getErrorList(size) {
 		let errors = [];
-		if (this.errors) {
+		if (this.errors && this.errorsOnDisplay.length === 0) {
 			Object.keys(this.errors).forEach((key)=>{
 				errors = errors.concat(this.errors[key]);
 			});
+			this.errorsOnDisplay = errors.slice(0,size);
 		}
-		return errors;
+		return this.errorsOnDisplay;
 	}
 
 	lookupErrorSegment(path) {

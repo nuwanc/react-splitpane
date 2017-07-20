@@ -5,14 +5,13 @@
   "dependencies": {
     "axios": "^0.16.2",
     "bootstrap": "^3.3.7",
-    "bowser": "1.6.1",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "jspath": "^0.3.4",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-split-pane": "^0.1.63",
+    "react-split-pane": "^0.1.65",
     "react-tabs": "^1.0.0",
     "string.prototype.startswith": "^0.2.0"
   },

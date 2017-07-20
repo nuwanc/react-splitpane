@@ -166,7 +166,7 @@ class App extends Component {
         <div>
           <SplitPane split="horizontal" defaultSize={'90vh'} minSize={50} maxSize={-50} onChange={(size) => { this.resizeTopPane(size) }} primary="second">
             <div id="outer"></div>
-            <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={290}>
+            <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={300}>
               <div><TreePane onTreeNodeClick={this.onTreeNodeClick} treeHeight={this.state.treeHeight} showOuter={isOuter} validate={this.state.validate} selectNode={this.state.node} /></div>
               <div id="rightPane">
                 <SplitPane defaultSize="70%" split="horizontal" onChange={(size) => { this.resizePane(size) }}>
@@ -182,7 +182,7 @@ class App extends Component {
     } else {
       return (
         <div>
-          <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={290}>
+          <SplitPane split="vertical" minSize={150} maxSize={300} defaultSize={300}>
             <div><TreePane onTreeNodeClick={this.onTreeNodeClick} treeHeight={this.state.treeHeight} showOuter={isOuter} validate={this.state.validate} selectNode={this.state.node} /></div>
             <div id="rightPane">
               <SplitPane defaultSize="70%" split="horizontal" onChange={(size) => { this.resizePane(size) }}>
