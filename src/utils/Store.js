@@ -6,6 +6,7 @@ class Store {
 		this.errors = null;
 		this.delimiters = [];
 		this.errorsOnDisplay = [];
+		this.errorList = [];
 	}
 
 	processDelimiters() {
@@ -20,43 +21,66 @@ class Store {
 	getErrorList(size) {
 		let errors = [];
 		if (this.errors && this.errorsOnDisplay.length === 0) {
-			Object.keys(this.errors).forEach((key)=>{
+			Object.keys(this.errors).forEach((key) => {
 				errors = errors.concat(this.errors[key]);
 			});
-			this.errorsOnDisplay = errors.slice(0,size);
+			this.errorsOnDisplay = errors.slice(0, size);
 		}
 		return this.errorsOnDisplay;
 	}
 
 	lookupErrorSegment(path) {
-		if (this.errors) {
-			let error = this.errors[path];
-			if (error) {
-				return {
-					text: error[0].message
+		if (this.errorList) {
+			for (let i = 0, length = this.errorList.length; i < length; i++) {
+				let error = this.errorList[i];
+				let location = error.location;
+				let paths = location.split("/");
+				let last = paths[paths.length - 1];
+				if (!isNaN(last)) { 
+					location = location.substring(0, location.lastIndexOf("/"))
 				}
-			} else {
-				return null;
+				if (path === location) {
+					return {
+						text : error.message
+					}
+				} else {
+					continue;
+				}
 			}
+			return null;
 		} else {
 			return null;
 		}
 
 	}
 
-	lookupErrorPath(path) {
-		let found = false;
+	lookupErrorList(path) {
 		if (this.errors) {
-			Object.keys(this.errors).forEach((key)=>{
+			let errors = this.errors[path];
+			if (errors) {
+				this.errorList = errors;
+			}
+		}
+	}
+
+
+	lookupErrorPath(path) {
+		/*let found = false;
+		if (this.errors) {
+			Object.keys(this.errors).forEach((key) => {
 				if (key.startsWith(path)) {
-					found = true;
+					return true;
 				}
 			});
-			return found;
+			return false;
 		} else {
-			return found;
+			return false;
+		}*/
+		if (this.errors){
+			return this.errors[path];
+		} else {
+			return false;
 		}
-
 	}
 
 	lookupSegmentPath(selectedPath) {

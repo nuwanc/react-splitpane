@@ -84,6 +84,27 @@ function processSegments(children, segments) {
     })
 }
 
+function segmentPathToRootPath(segmentPath) {
+    let paths = segmentPath.split("/");
+    if (paths.length > 3) {
+        return paths.slice(0,3).join("/");
+    } else {
+        if (paths.length === 3) {
+            if (paths[1] === paths[2]) {
+                return paths.slice(0,2).join("/");
+            } else {
+                return paths.join("/");
+            }
+        } else if (paths.length === 2) {
+            if (paths[0] === paths[1]){
+                return paths.slice(0,1).join("/");
+            } else {
+                return paths.join("/");
+            }
+        }
+    }
+}
+
 function serverPathToJsonPath(serverPath) {
     //ISA[1]/GS[1]/856[1]/BSN[1]
     //ISA[1]/GS[1]/GS[1]/2
@@ -209,4 +230,4 @@ function getSchemaDetails(name) {
 }
 
 
-export { getSegments, getSchemaDetails, serverPathToJsonPath, processSegment };
+export { getSegments, getSchemaDetails, serverPathToJsonPath, processSegment, segmentPathToRootPath };

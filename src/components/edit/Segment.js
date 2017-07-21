@@ -12,6 +12,10 @@ class Segment extends Component {
         this.onElementClick = this.onElementClick.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.selectedSegment !== nextProps.selectedSegment
+    }
+
     componentDidUpdate() {
         if (this.props.selectedSegment) {
             ReactDOM.findDOMNode(this).scrollIntoView(true);

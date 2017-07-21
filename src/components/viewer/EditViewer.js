@@ -69,6 +69,7 @@ class EditViewer extends Component {
             return <Loading textAlign={'center'} height={divStyle.maxHeight} text={'Initializing the Edit Viewer'}/>
         } else {
             if (this.props.selectedNode && this.props.docType === 1) {
+                Store.lookupErrorList(this.props.selectedServerNode);
                 if (this.props.selectedNode.split('.').length > 3 || !Store.large) {
                     json = JSPath.apply(this.props.selectedNode, Store.message);
                     segments = EdiHelper.getSegments(json, false).map((v, i) => {

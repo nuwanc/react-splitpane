@@ -15,7 +15,7 @@ function fetchMessageData(id) {
     //https://jsonblob.com/38521ed9-609c-11e7-ae4c-b9107d8afa6e
     //xml
     //https://jsonblob.com/8c3a67ba-6221-11e7-ae4c-7d5cbf68dd9a
-    return axios.get('https://jsonblob.com/api/jsonBlob/9f7ca9a8-58a3-11e7-ae4c-6ba4129cae91').then((response)=>{
+    return axios.get('http://localhost:3004/message').then((response)=>{
         return response.data;
     })
 }
@@ -31,7 +31,7 @@ function fetchSchemaData() {
     //https://jsonblob.com/35dafa20-609b-11e7-ae4c-5d4541e47d81
     //xml
     //https://jsonblob.com/e211f583-6221-11e7-ae4c-cf2602f53f9f
-    return axios.get('https://jsonblob.com/api/jsonBlob/499ce7d3-5c78-11e7-ae4c-5bce762b6543').then((response)=>{
+    return axios.get('http://localhost:3004/schema').then((response)=>{
         return response.data;
     })
 }
@@ -43,7 +43,8 @@ function fetchErrorData(id) {
     //https://jsonblob.com/b4359356-6bd7-11e7-a38a-4fb49769c307
     //new format
     //https://jsonblob.com/6d2350cb-6c6f-11e7-a38a-6db307f861f5
-    return axios.get('https://jsonblob.com/api/jsonBlob/6d2350cb-6c6f-11e7-a38a-6db307f861f5').then((response)=>{
+    //https://jsonblob.com/3bc78bc4-6d6f-11e7-a38a-515afd967d2e
+    return axios.get('http://localhost:3004/validate').then((response)=>{
         return response.data;
     })
 }

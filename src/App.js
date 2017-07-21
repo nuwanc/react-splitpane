@@ -26,7 +26,8 @@ class App extends Component {
       treeHeight: null,
       validate: false,
       path: null,
-      schemaLoading: true
+      schemaLoading: true,
+      snode: null
     };
 
     this.onTreeNodeClick = this.onTreeNodeClick.bind(this);
@@ -52,12 +53,13 @@ class App extends Component {
     })
   }
 
-  onTreeNodeClick(node) {
+  onTreeNodeClick(node,snode) {
     this.setState(() => {
       return {
         node: node,
         tabIndex: -1,
-        segment: null
+        segment: null,
+        snode: snode
       }
     });
   }
@@ -73,7 +75,8 @@ class App extends Component {
   onViewerClick(segment, tabIndex) {
     this.setState(() => {
       return {
-        node: EdiHelper.serverPathToJsonPath(segment)
+        node: EdiHelper.serverPathToJsonPath(segment),
+        snode : EdiHelper.segmentPathToRootPath(segment)
       }
     }, () => {
       this.setState(() => {
@@ -170,7 +173,7 @@ class App extends Component {
               <div><TreePane onTreeNodeClick={this.onTreeNodeClick} treeHeight={this.state.treeHeight} showOuter={isOuter} validate={this.state.validate} selectNode={this.state.node} /></div>
               <div id="rightPane">
                 <SplitPane defaultSize="70%" split="horizontal" onChange={(size) => { this.resizePane(size) }}>
-                  <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} openModal={this.openModal} viewerHeight={this.state.viewerHeight} validate={this.state.validate} onSegmentClick={this.onSegmentClick} schemaLoading={this.state.schemaLoading} onCtrlNumberClick={this.onCtrlNumberClick}/></div>
+                  <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedServerNode={this.state.snode} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} openModal={this.openModal} viewerHeight={this.state.viewerHeight} validate={this.state.validate} onSegmentClick={this.onSegmentClick} schemaLoading={this.state.schemaLoading} onCtrlNumberClick={this.onCtrlNumberClick}/></div>
                   <div style={{ width: '100%' }}><BottomPane onViewerClick={this.onViewerClick} onValidateClick={this.onValidateClick} onSchemaLoad={this.onSchemaLoad} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight} selectedPath={this.state.path} /></div>
                 </SplitPane>
               </div>
@@ -186,7 +189,7 @@ class App extends Component {
             <div><TreePane onTreeNodeClick={this.onTreeNodeClick} treeHeight={this.state.treeHeight} showOuter={isOuter} validate={this.state.validate} selectNode={this.state.node} /></div>
             <div id="rightPane">
               <SplitPane defaultSize="70%" split="horizontal" onChange={(size) => { this.resizePane(size) }}>
-                <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} openModal={this.openModal} viewerHeight={this.state.viewerHeight} validate={this.state.validate} onSegmentClick={this.onSegmentClick} schemaLoading={this.state.schemaLoading} onCtrlNumberClick={this.onCtrlNumberClick}/></div>
+                <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedServerNode={this.state.snode} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} openModal={this.openModal} viewerHeight={this.state.viewerHeight} validate={this.state.validate} onSegmentClick={this.onSegmentClick} schemaLoading={this.state.schemaLoading} onCtrlNumberClick={this.onCtrlNumberClick}/></div>
                 <div style={{ width: '100%' }}><BottomPane onViewerClick={this.onViewerClick} onValidateClick={this.onValidateClick} onSchemaLoad={this.onSchemaLoad} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight} selectedPath={this.state.path} /></div>
               </SplitPane>
             </div>

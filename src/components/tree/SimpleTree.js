@@ -14,6 +14,10 @@ class SimpleTree extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.selected !== nextProps.selected
+    }
+
     componentDidUpdate() {
         if (this.props.selected === this.props.node.path) {
             ReactDOM.findDOMNode(this).scrollIntoView(true);
@@ -53,8 +57,9 @@ class SimpleTree extends Component {
             
         }
         
-        let error = Store.lookupErrorPath(this.props.node.spath) ? 'fa fa-times fa-stack-1x text-danger' : 'fa';
-
+        //let error = Store.lookupErrorPath(this.props.node.spath) ? 'fa fa-times fa-stack-1x text-danger' : 'fa';
+        let error = 'fa';
+        
         let root;
         if (this.props.node.title) {
             root = <span onClick={this.toggle} className={classNames(classObj)}></span>;
@@ -69,7 +74,7 @@ class SimpleTree extends Component {
                     <i className={this.props.node.icon}></i>
                     <i className={error}></i>
                 </span>
-                <i className={classNames(selectedObj)} onClick={this.props.onTreeNodeSelect.bind(null,this.props.node.path)}>{this.props.node.title}</i>
+                <i className={classNames(selectedObj)} onClick={this.props.onTreeNodeSelect.bind(null,this.props.node.path,this.props.node.spath)}>{this.props.node.title}</i>
                 <ul className='SimpleTree' style={style}>
                     {childNodes}
                 </ul>

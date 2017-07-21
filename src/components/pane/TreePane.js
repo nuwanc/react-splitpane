@@ -92,13 +92,13 @@ class TreePane extends Component {
         }
     }
 
-    onTreeNodeSelect(node) {
+    onTreeNodeSelect(node,snode) {
         this.setState(() => {
             return {
                 selected: node
             };
         });
-        this.props.onTreeNodeClick(node);
+        this.props.onTreeNodeClick(node,snode);
     }
 
     render() {

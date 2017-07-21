@@ -113,7 +113,6 @@ class FindViewer extends Component {
         });
 
         Api.findInDocument(text, this.props.selectedNode, this.state.exact, this.state.matchCase).then((results) => {
-            console.log(results);
             this.setState(() => {
                 return {
                     results: results,
@@ -121,7 +120,6 @@ class FindViewer extends Component {
                 }
             });
         }).catch((results) => {
-            console.log(results);
             this.setState(() => {
                 return {
                     noResults: results,
