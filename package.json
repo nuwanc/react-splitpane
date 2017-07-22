@@ -2,6 +2,7 @@
   "name": "react-splitpane",
   "version": "0.1.0",
   "private": true,
+  "proxy" : "http://localhost:3004",
   "dependencies": {
     "axios": "^0.16.2",
     "bootstrap": "^3.3.7",
@@ -23,6 +24,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "json-server" : "json-server --watch db/db.json --port 3004"
+    "json-server" : "json-server --watch db/db.json --port 3004 --routes db/routes.json"
   }
 }

@@ -67,7 +67,7 @@ class ErrorViewer extends Component {
             }
         });
 
-        Api.fetchErrorData().then((errors) => {
+        Api.fetchErrorData(this.props.messageId).then((errors) => {
             Store.errors = errors;
             this.props.onValidateClick(true);
             this.setState(()=>{

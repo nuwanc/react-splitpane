@@ -15,7 +15,7 @@ class SimpleTree extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.props.selected !== nextProps.selected || nextProps.validate
+        return (this.props.selected !== nextProps.selected) || (nextProps.validate !== this.props.validate)
     }
 
     componentDidUpdate() {

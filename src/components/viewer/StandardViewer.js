@@ -21,7 +21,7 @@ class StandardViewer extends Component {
     }
 
     componentWillMount() {
-        Api.fetchSchemaData().then((schema)=>{
+        Api.fetchSchemaData(this.props.messageId).then((schema)=>{
             Store.schema = schema;
             this.setState(()=>{
                 return {

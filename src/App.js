@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Api.fetchMessageData().then((message) => {
+    Api.fetchMessageData(this.props.messageId).then((message) => {
       Store.message = message;
       this.setState(() => {
         return {
@@ -174,7 +174,7 @@ class App extends Component {
               <div id="rightPane">
                 <SplitPane defaultSize="70%" split="horizontal" onChange={(size) => { this.resizePane(size) }}>
                   <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedServerNode={this.state.snode} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} openModal={this.openModal} viewerHeight={this.state.viewerHeight} validate={this.state.validate} onSegmentClick={this.onSegmentClick} schemaLoading={this.state.schemaLoading} onCtrlNumberClick={this.onCtrlNumberClick}/></div>
-                  <div style={{ width: '100%' }}><BottomPane onViewerClick={this.onViewerClick} onValidateClick={this.onValidateClick} onSchemaLoad={this.onSchemaLoad} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight} selectedPath={this.state.path} /></div>
+                  <div style={{ width: '100%' }}><BottomPane onViewerClick={this.onViewerClick} onValidateClick={this.onValidateClick} onSchemaLoad={this.onSchemaLoad} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight} selectedPath={this.state.path} messageId={this.props.messageId}/></div>
                 </SplitPane>
               </div>
             </SplitPane>
@@ -190,7 +190,7 @@ class App extends Component {
             <div id="rightPane">
               <SplitPane defaultSize="70%" split="horizontal" onChange={(size) => { this.resizePane(size) }}>
                 <div style={{ width: '100%' }} id="docPane"><DocumentPane selectedNode={this.state.node} selectedServerNode={this.state.snode} selectedSegment={this.state.segment} tabToSelect={this.state.tabIndex} openModal={this.openModal} viewerHeight={this.state.viewerHeight} validate={this.state.validate} onSegmentClick={this.onSegmentClick} schemaLoading={this.state.schemaLoading} onCtrlNumberClick={this.onCtrlNumberClick}/></div>
-                <div style={{ width: '100%' }}><BottomPane onViewerClick={this.onViewerClick} onValidateClick={this.onValidateClick} onSchemaLoad={this.onSchemaLoad} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight} selectedPath={this.state.path} /></div>
+                <div style={{ width: '100%' }}><BottomPane onViewerClick={this.onViewerClick} onValidateClick={this.onValidateClick} onSchemaLoad={this.onSchemaLoad} selectedNode={this.state.node} openModal={this.openModal} viewerHeight={this.state.viewerHeight} selectedPath={this.state.path} messageId={this.props.messageId}/></div>
               </SplitPane>
             </div>
           </SplitPane>
