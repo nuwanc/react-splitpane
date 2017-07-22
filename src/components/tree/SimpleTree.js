@@ -15,7 +15,7 @@ class SimpleTree extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.props.selected !== nextProps.selected
+        return this.props.selected !== nextProps.selected || nextProps.validate
     }
 
     componentDidUpdate() {
@@ -57,8 +57,8 @@ class SimpleTree extends Component {
             
         }
         
-        //let error = Store.lookupErrorPath(this.props.node.spath) ? 'fa fa-times fa-stack-1x text-danger' : 'fa';
-        let error = 'fa';
+        let error = Store.lookupErrorPath(this.props.node.spath) ? 'fa fa-times fa-stack-1x text-danger' : 'fa';
+        //let error = 'fa';
         
         let root;
         if (this.props.node.title) {
