@@ -40,6 +40,7 @@ class App extends Component {
     this.onSegmentClick = this.onSegmentClick.bind(this);
     this.onSchemaLoad = this.onSchemaLoad.bind(this);
     this.onCtrlNumberClick = this.onCtrlNumberClick.bind(this);
+    this.onEscKeyDown = this.onEscKeyDown.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +52,21 @@ class App extends Component {
         }
       });
     })
+    window.addEventListener("keydown", this.onEscKeyDown);
+  }
+
+  componentWillUnmount() {
+        window.removeEventListener("keydown", this.onEscKeyDown);
+  }
+
+  onEscKeyDown(event) {
+    switch( event.keyCode ) {
+        case 27:
+            this.closeModal();
+            break;
+        default: 
+            break;
+    }
   }
 
   onTreeNodeClick(node,snode) {
