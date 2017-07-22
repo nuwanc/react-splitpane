@@ -44,8 +44,8 @@ class Schema extends Component {
 
         return (
             <div className="schema">
-                <h5>Location:{this.props.segment.path}</h5>
-                <div>Content:{this.props.segment.name}{elements}</div>
+                <h5><b>Location:</b>{this.props.segment.path}</h5>
+                <div><b>Content:</b>{this.props.segment.name}{elements}</div>
                 <LazyLoadTree node={node} root={false} toggleOnLoad={true} selectedElement={this.state.selectedElement}/>
             </div>
         );

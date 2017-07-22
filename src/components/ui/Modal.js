@@ -59,7 +59,7 @@ class Modal extends Component {
             }
             if (this.props.params['schema']) {
                 let segment = this.props.params['segment'];
-                title = "Specification for:"+segment.name;
+                title = "Specification for:"+segment.name+" - "+segment.schema.description;
                 content = this.showSchema(segment);
 
             }
@@ -71,7 +71,7 @@ class Modal extends Component {
                     <div className="modal-content">
                         <div className="modal-header">
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={e => this.close(e)}><span aria-hidden="true">&times;</span></button>
-                            <h6 className="modal-title">{title}</h6>
+                            <h4 className="modal-title">{title}</h4>
                         </div>
                         <div className="modal-body">
                             {content}
