@@ -28,6 +28,11 @@ function findInDocument(text, node, exact, matchCase) {
                             results.add(segment);
                         }
                     }
+                    if ( i === length - 1) {
+                        if (segment.name.match(regex) !== null) {
+                            results.add(segment);
+                        }
+                    }
                 }
             }
         }
